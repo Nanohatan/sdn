@@ -1,9 +1,8 @@
 {
-  "name": "docker-centos-hello",
+  "name": "sdn",
   "private": true,
   "version": "0.0.1",
-  "description": "Node.js Hello world app on CentOS using docker",
-  "author": "Daniel Gasienica <daniel@gasienica.ch>",
+  "description": "Node.js sdn app on CentOS using docker",
   "scripts": {
     "start": "node index.js"
   },
