@@ -6,16 +6,25 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="static/test.css">
     <title>Document</title>
+
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="static/test.css">
+
     <script src="https://code.jquery.com/jquery.min.js"></script>
-    <script type="text/javascript" src="views/js/jquery.periodicalupdater.js"></script>
     <script src="/socket.io/socket.io.js"></script>
+    
 </head>
 <body>
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <!-- Or if you want a more recent canary version -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/hls.js@canary"></script> -->
-    <video id="video" width=100% height="500" controls preload="none"></video>
+    <video id="video" width=100% height="450" controls preload="none"></video>
 
+<p> <button id="btn" style="width: 106px;" onclick="shioriFunction()">わからん</button></p>
+
+    <p id="demo"></p>
+    <ul id="video-time-list">
+    </ul>
 
 <div id="holder">
 	
@@ -31,11 +40,15 @@
 <div id="messageBox">
 
 </div>
+
+
 <button type="submit"  id="btn1" onclick="showl()"> Show All </button>
 	
 	
 	</div>
 
+
+<script src="static/test.js" type="text/javascript"></script>
 
 
     <script>
@@ -105,7 +118,7 @@ if(showlog == false){
   chat.scrollTop = chat.scrollHeight;
   
   var people = document.getElementById("people");
-  people.scrollTop = people.scrollHeight;
+  //people.scrollTop = people.scrollHeight;
   }
 }, 4);
 
@@ -117,7 +130,7 @@ function hidel(){
 var chat = document.getElementById("chat");
   chat.scrollTop = chat.scrollHeight;
   var people = document.getElementById("people");
-  people.scrollTop = people.scrollHeight;
+  //people.scrollTop = people.scrollHeight;
 showlog = false;
 }
 

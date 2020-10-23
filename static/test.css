@@ -1,3 +1,8 @@
+* {
+  margin: 0px;
+  paddinng: 0px;
+}
+
 body {
   background-color: lightblue;
 }
@@ -5,4 +10,70 @@ body {
 h1 {
   color: navy;
   margin-left: 20px;
+}
+
+.video {
+  width:50%;
+}
+
+#video-time-list {
+  height: 0px;
+  width: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+#demo {
+  width: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+p {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.checked {
+  margin-top: 0px;
+}
+
+/* Style the list items */
+ul li {
+  cursor: pointer;
+  position: relative;
+  padding: 12px 0 12px 40px;
+  margin: 10px 0 0 10px;
+  list-style-type: none;
+  background: #eee;
+  font-size: 18px;
+  transition: 0.2s;
+  
+  /* make the list items unselectable */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 200px;
+}
+
+
+/* When clicked on, add a background color and strike out text */
+ul li.checked {
+  background: #888;
+  color: #fff;
+}
+
+/* Add a "checked" mark when clicked on */
+ul li.checked::before {
+  content: '';
+  position: absolute;
+  border-color: #fff;
+  border-style: solid;
+  border-width: 0 2px 2px 0;
+  top: 10px;
+  left: 16px;
+  transform: rotate(45deg);
+  height: 5px;
+  width: 7px;
 }

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="static/test.css">
+    <title>Upload</title>
+</head>
+<body>
+    動画を選んでください．<br>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <input name="movie" type="file" accept="video/*"/>
+        <input type="submit" name="sub_buttono" value="Upload">
+    </form>
+    
+</body>
+</html>
