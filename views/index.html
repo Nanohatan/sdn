@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="static/test.css">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <script type="text/javascript" src="views/js/jquery.periodicalupdater.js"></script>
+</head>
+<body>
+    <h1>てすと</h1>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <!-- Or if you want a more recent canary version -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/hls.js@canary"></script> -->
+    <video id="video" width=100% height="500" controls preload="none"></video>
+    <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+
+    <ul id="messages"></ul>
+    <form>
+      <input id="input_msg" autocomplete="off" /><button>Send</button>
+    </form>
+
+    <script>
+    var socket = io();
+
+    var video = document.getElementById('video');
+    if(Hls.isSupported()) {
+        var hls = new Hls();
+        hls.loadSource('/video/omu_data/video.m3u8');
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MANIFEST_PARSED,function() {
+            video.play();
+        });
+    }
+
+    var fs = require('fs');
+    $(function() {
+        $('#send').click(
+            function (){
+                var input_message = document.getElementById("message").value;
+                var array = [];
+                console.log(imput_message);
+                if (input_message.length > 0) {
+                    array = data.split(/\r\n|\r|\n/);
+                    fs.writeFileSync("../data.txt", array.join("\r\n"));
+                }
+                
+            }
+    );
+    });     
+
+
+    $(function(){
+        $.PeriodicalUpdater('../data.txt',{
+              method: 'get',
+              minTimeout: 1000,
+              type: 'html',
+              multiplier:1,
+              maxCalls: 0
+            },
+        function(data){
+          $("#chat").text(data);
+        });
+      });
+
+    
+    </script>
+</body>
+</html>
