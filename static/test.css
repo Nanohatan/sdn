@@ -16,6 +16,20 @@ h1 {
   width:50%;
 }
 
+#holder {
+  display: inline;
+}
+
+#question{
+  margin-left: 30px;
+  border: 6px solid white;
+  width:400px;
+  height:140px;
+  background-color:#65ace4;
+  margin-top:10px;
+  border-radius: 10px;
+}
+
 #video-time-list {
   height: 0px;
   width: 0px;
@@ -32,6 +46,7 @@ h1 {
 p {
   margin-top: 0px;
   margin-bottom: 0px;
+  display: inline;
 }
 
 .checked {
@@ -42,8 +57,8 @@ p {
 ul li {
   cursor: pointer;
   position: relative;
-  padding: 12px 0 12px 40px;
-  margin: 10px 0 0 10px;
+  padding: 10px 0 12px 40px;
+  margin: 0px 0 0 20px;
   list-style-type: none;
   background: #eee;
   font-size: 18px;

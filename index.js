@@ -34,6 +34,9 @@ app.get('/test', function (req, res) {
     res.sendfile('static/test.html');
 });
 
+app.get('/top', function (req, res) {
+    res.sendfile('static/top.html');
+});
 
 io.sockets.on("connection", function(socket){
 	//connection stuff
