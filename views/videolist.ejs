@@ -18,7 +18,8 @@
 
 <% userlist.forEach(function(item){ %>
       <li>
-        <a href = "video/"+ <%= item.id %> > <%= item.id %> </a>
+        <% var url = "video/"+ item.id %>
+        <a href = <% url %> > <%= item.id %> </a>
         </li>
     <% }) %>
 </body>
