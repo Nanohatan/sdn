@@ -90,7 +90,6 @@ const storage = multer.diskStorage({
     puid = puid.generate();
     var dir = 'uploads/' + puid
 
-    console.log(puid.generate());
     const connectOption = {
           useNewUrlParser: true,
           useUnifiedTopology: true,
