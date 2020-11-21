@@ -40,6 +40,10 @@ app.get('/test', function (req, res) {
     res.sendfile('static/test.html');
 });
 
+app.get('/video/:id', function (req, res) {
+    res.render('index',{id:req.params.id});
+});
+
 
 //app.get('/:id', function (req, res) {
 //    res.send('respond user Info userid:' + req.params.id);
