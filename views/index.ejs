@@ -62,7 +62,7 @@
         var hls = new Hls();
         var url = "../uploads/" + <%= id %> + "/playlist.m3u8";
         console.log(url);
-        hls.loadSource(<%= place %>);
+        hls.loadSource(" <%= place %> ");
         hls.attachMedia(video);
         hls.on(Hls.Events.MANIFEST_PARSED,function() {
             video.play();
