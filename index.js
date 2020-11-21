@@ -56,9 +56,10 @@ app.get('/video/:id', function (req, res) {
 app.get('/userlist', function(req, res) {
     MongoClient.connect(url, connectOption, function(err, client) {
         const col = client.db(dbName).collection('movies');
-        col.find({},{}, function(e,docs){
-            res.render('userlist', {
-                "userlist" : docs
+	col.find().toArray(function(err, items) {
+	    console.log(items);
+            res.render('videolist', {
+                "userlist" : items
             });
         });
     });
