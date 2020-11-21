@@ -12,6 +12,8 @@ const { chdir } = require('process');
 let execSync = require('child_process').execSync;
 app.use(express.json());
 
+var Puid = require('puid');
+var puid;
 
 
 app.set('view engine', 'ejs');
@@ -35,9 +37,9 @@ app.get('/test', function (req, res) {
 });
 
 
-app.get('/:id', function (req, res) {
-    res.send('respond user Info userid:' + req.params.id);
-});
+//app.get('/:id', function (req, res) {
+//    res.send('respond user Info userid:' + req.params.id);
+//});
 
 app.get('/top', function (req, res) {
     res.sendfile('static/top.html');
@@ -79,7 +81,9 @@ io.sockets.on("connection", function(socket){
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     // console.log(typeof(JSON.stringify(file.originalname)));
-    var dir = 'uploads/' + JSON.parse(JSON.stringify(file)).originalname.split(".")[0];
+    puid = new Puid();
+    console.log(puid.generate());
+    var dir = 'uploads/' + puid.generate();
     // var dir = 'uploads/' + JSON.stringify(file.originalname);
     var fs = require('fs');
     if (!fs.existsSync(dir)) {
