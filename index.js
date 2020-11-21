@@ -29,6 +29,7 @@ app.set('view engine', 'ejs');
 app.use('/video', express.static('video'));
 app.use('/static', express.static('static'));
 app.use('/views', express.static('views'));
+app.use('/uploads', express.static('uploads'));
 
 
 memers = []; //users array
