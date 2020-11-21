@@ -1,14 +1,14 @@
 var video = document.getElementById('video');
 var w_time = 0;
-if(Hls.isSupported()) {
-  var hls = new Hls();
-// rewrite your self
-  hls.loadSource('video/capi/video.m3u8');
-  hls.attachMedia(video);
-  hls.on(Hls.Events.MANIFEST_PARSED,function() {
-   video.play();
-   });
-}
+// if(Hls.isSupported()) {
+//   var hls = new Hls();
+// // rewrite your self
+//   hls.loadSource('video/capi/video.m3u8');
+//   hls.attachMedia(video);
+//   hls.on(Hls.Events.MANIFEST_PARSED,function() {
+//    video.play();
+//    });
+// }
 
 function setTime(t) {
    video.currentTime = t;
