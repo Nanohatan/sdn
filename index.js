@@ -27,7 +27,7 @@ server.listen(process.env.PORT || 8080);
 console.log("Meme Server Is Up"); 
 
 app.get('/', function (req, res) {
-    res.sendfile('static/index.html');
+    res.render('index');
 });
 
 app.get('/test', function (req, res) {
