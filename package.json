@@ -11,7 +11,20 @@
     "connect-busboy": "0.0.2",
     "ejs": "^3.1.5",
     "express": "3.2.4",
+    "mongodb": "^3.6.3",
     "multer": "^1.4.2",
     "socket.io": "^2.3.0"
-  }
+  },
+  "main": "index.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nanohatan/sdn.git"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nanohatan/sdn/issues"
+  },
+  "homepage": "https://github.com/Nanohatan/sdn#readme"
 }

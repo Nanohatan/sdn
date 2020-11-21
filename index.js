@@ -34,6 +34,11 @@ app.get('/test', function (req, res) {
     res.sendfile('static/test.html');
 });
 
+
+app.get('/:id', function (req, res) {
+    res.send('respond user Info userid:' + req.params.id);
+});
+
 app.get('/top', function (req, res) {
     res.sendfile('static/top.html');
 });
