@@ -49,6 +49,22 @@ app.get('/video/:id', function (req, res) {
 //    res.send('respond user Info userid:' + req.params.id);
 //});
 
+router.get('/userlist', function(req, res) {
+    const col = client.db(dbName).collection("movies");
+
+    col.find({},{}, function(e,docs){
+        res.render('userlist', {
+                    "userlist" : docs
+                });
+    });
+    // var db = req.db;
+    // col.find({},{},function(e,docs){
+    //     res.render('userlist', {
+    //         "userlist" : docs
+    //     });
+    // });
+});
+
 app.get('/top', function (req, res) {
     res.sendfile('static/top.html');
 });
@@ -138,7 +154,7 @@ app.post('/upload', upload.single('movie'), function (req, res, next) {
   createSegments(__dirname, req);
   console.log('createSegments END');
   // console.log(`req.body: ${JSON.stringify(req.file)}`);
-  res.redirect("/upload");
+  res.redirect("/userlist");
 });
 
 
