@@ -61,7 +61,8 @@
     var video = document.getElementById('video');
     if(Hls.isSupported()) {
         var hls = new Hls();
-        hls.loadSource(<%= id %> + "/playlist.m3u8");
+        var url = "uploads" + <%= id %> + "/playlist.m3u8"
+        hls.loadSource(url);
         hls.attachMedia(video);
         hls.on(Hls.Events.MANIFEST_PARSED,function() {
             video.play();
