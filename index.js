@@ -50,12 +50,13 @@ app.get('/video/:id', function (req, res) {
 //});
 
 router.get('/userlist', function(req, res) {
-    const col = client.db(dbName).collection("movies");
-
-    col.find({},{}, function(e,docs){
-        res.render('userlist', {
-                    "userlist" : docs
-                });
+    MongoClient.connect(url, connectOption, function(err, client) {
+        const col = client.db(dbName).collection('movies');
+        col.find({},{}, function(e,docs){
+            res.render('userlist', {
+                "userlist" : docs
+            });
+        });
     });
     // var db = req.db;
     // col.find({},{},function(e,docs){
