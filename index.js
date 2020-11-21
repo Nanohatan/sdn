@@ -58,7 +58,8 @@ app.get('/userlist', function(req, res) {
     MongoClient.connect(url, connectOption, function(err, client) {
         const col = client.db(dbName).collection('movies');
 	col.find().toArray(function(err, items) {
-	    console.log(items);
+	    var url = "../"+items.place+"/playlist.m3u8";
+	    console.log(url);
             res.render('videolist', {
                 "userlist" : items
             });
