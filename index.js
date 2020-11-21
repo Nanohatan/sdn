@@ -15,6 +15,10 @@ app.use(express.json());
 var Puid = require('puid');
 var puid;
 
+const MongoClient = require('mongodb').MongoClient;
+const test = require('assert');
+const url = 'mongodb://localhost:27017';
+const dbName = 'test_kanon';
 
 app.set('view engine', 'ejs');
 
@@ -81,9 +85,22 @@ io.sockets.on("connection", function(socket){
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     // console.log(typeof(JSON.stringify(file.originalname)));
+
     puid = new Puid();
+    puid = puid.generate();
+    var dir = 'uploads/' + puid
+
     console.log(puid.generate());
-    var dir = 'uploads/' + puid.generate();
+    const connectOption = {
+          useNewUrlParser: true,
+          useUnifiedTopology: true,
+    }
+    MongoClient.connect(url, connectOption, function(err, client) {
+        const col = client.db(dbName).collection('movies');
+        col.insert([{id:puid,place:dir}], {w:1}, function(err, result) {
+            test.equal(null, err);
+        });
+    });
     // var dir = 'uploads/' + JSON.stringify(file.originalname);
     var fs = require('fs');
     if (!fs.existsSync(dir)) {
