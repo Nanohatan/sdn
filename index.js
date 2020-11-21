@@ -46,7 +46,7 @@ app.get('/test', function (req, res) {
 });
 
 app.get('/video/:id', function (req, res) {
-    var url = "../uplaods/"+req.params.id+"/playlist.m3u8";
+    var url = "../uploads/"+req.params.id+"/playlist.m3u8";
     res.render('index',{id:req.params.id, place:url});
 });
 
