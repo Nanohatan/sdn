@@ -46,7 +46,8 @@ app.get('/test', function (req, res) {
 });
 
 app.get('/video/:id', function (req, res) {
-    res.render('index',{id:req.params.id});
+    var url = "../uplaods/"+req.params.id+"/playlist.m3u8";
+    res.render('index',{id:req.params.id, place:url});
 });
 
 
@@ -58,7 +59,6 @@ app.get('/userlist', function(req, res) {
     MongoClient.connect(url, connectOption, function(err, client) {
         const col = client.db(dbName).collection('movies');
 	col.find().toArray(function(err, items) {
-	    var url = "../"+items.place+"/playlist.m3u8";
 	    console.log(url);
             res.render('videolist', {
                 "userlist" : items
