@@ -19,6 +19,10 @@ const MongoClient = require('mongodb').MongoClient;
 const test = require('assert');
 const url = 'mongodb://localhost:27017';
 const dbName = 'test_kanon';
+const connectOption = {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+}
 
 app.set('view engine', 'ejs');
 
@@ -49,7 +53,7 @@ app.get('/video/:id', function (req, res) {
 //    res.send('respond user Info userid:' + req.params.id);
 //});
 
-router.get('/userlist', function(req, res) {
+app.get('/userlist', function(req, res) {
     MongoClient.connect(url, connectOption, function(err, client) {
         const col = client.db(dbName).collection('movies');
         col.find({},{}, function(e,docs){
