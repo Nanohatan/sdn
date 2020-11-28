@@ -10,8 +10,11 @@ const path = require("path");
 // const Makedir = require("make-dir");
 const { chdir } = require('process');
 let execSync = require('child_process').execSync;
-app.use(express.json());
+//app.use(express.json());
 
+app.use('/auth',express.static('static/auth'))
+var auth = require('./auth.js')
+app.use('/auth', auth);
 var Puid = require('puid');
 var puid;
 
@@ -38,7 +41,8 @@ server.listen(process.env.PORT || 8080);
 console.log("Meme Server Is Up"); 
 
 app.get('/', function (req, res) {
-    res.render('index');
+    //res.render('index');
+    res.send('/');
 });
 
 app.get('/test', function (req, res) {

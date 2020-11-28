@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>  
+<html>
+<head>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script defer src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/8.0.1/firebase-firestore.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/8.0.1/firebase-analytics.js"></script>
+</head>
+
+<body>  
+<h2>Login or Sing Up</h2>
+<div class="userInfoContainer">
+    <input id="txtEmail" type="email" placeholder="academic email only"> 
+    <input id="txtPassword" type="password" placeholder="more than 8 characters' password" pattern=".{8,}" title="Eight or more characters">
+
+    <button id="btnLogin" class="btn btn-action">
+      Login
+    </button>
+
+    <button  id="btnSignUp" class="btn btn-secondary">
+      Sign Up
+    </button>
+
+    <p id="message"></p>
+</div>
+
+<script defer src="auth.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</body>
+</html>
+
