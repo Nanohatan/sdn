@@ -64,7 +64,8 @@ const data={
 console.log(data);
  const Url = 'http://192.168.98.25:8080/auth/post'
  $.post(Url,data,function(data,status){
-   console.log(`${data} and status is  ${status}`)		
+   console.log(`${data} and status is  ${status}`)
+   window.location.replace('http://192.168.98.25:8080/auth/login')		
  });
  }
  });
