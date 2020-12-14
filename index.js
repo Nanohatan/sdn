@@ -1,4 +1,5 @@
 var express = require('express');
+var bodyParser = require('body-parser');
 var app = express();
 var fs = require('fs');
 var server = require("http").createServer(app);
@@ -12,9 +13,13 @@ const { chdir } = require('process');
 let execSync = require('child_process').execSync;
 //app.use(express.json());
 
+//using auth
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
 app.use('/auth',express.static('static/auth'))
 var auth = require('./auth.js')
 app.use('/auth', auth);
+
 var Puid = require('puid');
 var puid;
 

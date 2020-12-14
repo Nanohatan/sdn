@@ -8,9 +8,12 @@
     "start": "node index.js"
   },
   "dependencies": {
+    "body-parser": "^1.19.0",
     "connect-busboy": "0.0.2",
+    "cookie-parser": "^1.4.5",
     "ejs": "^3.1.5",
     "express": "^4.0.0",
+    "express-session": "^1.17.1",
     "mongodb": "^3.6.3",
     "multer": "^1.4.2",
     "puid": "^1.0.7",

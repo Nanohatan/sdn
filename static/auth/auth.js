@@ -61,7 +61,8 @@ const data={
   uid : uid,
   email　: email
 }
- const Url = 'http://92.168.98.25:8080/auth/post'
+console.log(data);
+ const Url = 'http://192.168.98.25:8080/auth/post'
  $.post(Url,data,function(data,status){
    console.log(`${data} and status is  ${status}`)		
  });

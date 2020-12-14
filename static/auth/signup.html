@@ -1,0 +1,28 @@
+<DOCTYPE html>
+<html>
+<head>
+<title>singup page</title>
+</head>
+<body>
+
+<h1>sing up!</h1>
+<form action="/auth/createAccount" method="POST">
+    <select name="role" id="role">
+        <option value="teacher">Teacher</option>
+        <option value="student">Student</option>
+    </select>
+
+    <input type="text" name="userName" id="userName" placeholder="your name">
+
+    <input type="password" id="pass" name="password" minlength="8" required placeholder="Password (8 characters minimum):">
+
+    <input type="submit" value="Submit">
+</form>
+<script>
+    console.log(document.getElementById('role').value)
+</script>
+
+
+</body>
+</html>
+
