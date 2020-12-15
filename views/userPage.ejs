@@ -6,63 +6,77 @@
 </head>
 <body>
 <h1 style="color: #5e9ca0;"> <%= userName %> &nbsp;<span style="color: #2b2301;">page!</span></h1>
-<h2 style="color: #2e6c80;">your role: <%= role %> </h2>
+<h2 style="color: #2e6c80;">your role: 
+
+<% if (role) { %>
+  Teacher
+<% } else { %>
+  Student
+<% } %> </h2>
 
 <div class="navbar">
     <a href="#" class="active">Home</a>
     <a href="#">Serch video</a>
-    <% if (role=="teacher") { %>
+    <% if (role) { %>
         <a href="#">Upload video</a>
     <% } %>
 </div>
 
 <p>&nbsp;</p>
+
 <table style="border-collapse: collapse; width: 100%; height: 108px;" border="1">
 <tbody>
 <tr style="height: 18px;">
-<td style="width: 20%; height: 18px; text-align: center;">Mon</td>
-<td style="width: 20%; height: 18px; text-align: center;">Tue</td>
-<td style="width: 20%; height: 18px; text-align: center;">Wed</td>
-<td style="width: 20%; height: 18px; text-align: center;">Thurs</td>
-<td style="width: 20%; height: 18px; text-align: center;">Fri</td>
+<td style="width: 10%; text-align: center; height: 18px;">&nbsp;</td>
+<td style="width: 15%; height: 18px; text-align: center;">Mon</td>
+<td style="width: 15%; height: 18px; text-align: center;">Tue</td>
+<td style="width: 15%; height: 18px; text-align: center;">Wed</td>
+<td style="width: 15%; height: 18px; text-align: center;">Thurs</td>
+<td style="width: 15%; height: 18px; text-align: center;">Fri</td>
 </tr>
 <tr style="height: 18px;">
-<td style="width: 20%; height: 18px;">&nbsp;</td>
-<td style="width: 20%; height: 18px;">&nbsp;</td>
-<td style="width: 20%; height: 18px;">&nbsp;</td>
-<td style="width: 20%; height: 18px;">&nbsp;</td>
-<td style="width: 20%; height: 18px;">&nbsp;</td>
+<td style="width: 10%; height: 18px;">1</td>
+<td style="width: 15%; height: 18px;">&nbsp;</td>
+<td style="width: 15%; height: 18px;">&nbsp;</td>
+<td style="width: 15%; height: 18px;">&nbsp;</td>
+<td style="width: 15%; height: 18px;">&nbsp;</td>
+<td style="width: 15%; height: 18px;">&nbsp;</td>
 </tr>
 <tr style="height: 18px;">
-<td style="width: 20%; height: 18px;">&nbsp;</td>
-<td style="width: 20%; height: 18px;">&nbsp;</td>
-<td style="width: 20%; height: 18px;">&nbsp;</td>
-<td style="width: 20%; height: 18px;">&nbsp;</td>
-<td style="width: 20%; height: 18px;">&nbsp;</td>
+<td style="width: 10%; height: 18px;">2</td>
+<td style="width: 15%; height: 18px;">&nbsp;</td>
+<td style="width: 15%; height: 18px;">&nbsp;</td>
+<td style="width: 15%; height: 18px;">&nbsp;</td>
+<td style="width: 15%; height: 18px;">&nbsp;</td>
+<td style="width: 15%; height: 18px;">&nbsp;</td>
 </tr>
 <tr style="height: 18px;">
-<td style="width: 20%; height: 18px;">&nbsp;</td>
-<td style="width: 20%; height: 18px;">&nbsp;</td>
-<td style="width: 20%; height: 18px;">&nbsp;</td>
-<td style="width: 20%; height: 18px;">&nbsp;</td>
-<td style="width: 20%; height: 18px;">&nbsp;</td>
+<td style="width: 10%; height: 18px;">3</td>
+<td style="width: 15%; height: 18px;">&nbsp;</td>
+<td style="width: 15%; height: 18px;">&nbsp;</td>
+<td style="width: 15%; height: 18px;">&nbsp;</td>
+<td style="width: 15%; height: 18px;">&nbsp;</td>
+<td style="width: 15%; height: 18px;">&nbsp;</td>
 </tr>
 <tr style="height: 18px;">
-<td style="width: 20%; height: 18px;">&nbsp;</td>
-<td style="width: 20%; height: 18px;">&nbsp;</td>
-<td style="width: 20%; height: 18px;">&nbsp;</td>
-<td style="width: 20%; height: 18px;">&nbsp;</td>
-<td style="width: 20%; height: 18px;">&nbsp;</td>
+<td style="width: 10%; height: 18px;">4</td>
+<td style="width: 15%; height: 18px;">&nbsp;</td>
+<td style="width: 15%; height: 18px;">&nbsp;</td>
+<td style="width: 15%; height: 18px;">&nbsp;</td>
+<td style="width: 15%; height: 18px;">&nbsp;</td>
+<td style="width: 15%; height: 18px;">&nbsp;</td>
 </tr>
 <tr style="height: 18px;">
-<td style="width: 20%; height: 18px;">&nbsp;</td>
-<td style="width: 20%; height: 18px;">&nbsp;</td>
-<td style="width: 20%; height: 18px;">&nbsp;</td>
-<td style="width: 20%; height: 18px;">&nbsp;</td>
-<td style="width: 20%; height: 18px;">&nbsp;</td>
+<td style="width: 10%; height: 18px;">5</td>
+<td style="width: 15%; height: 18px;">&nbsp;</td>
+<td style="width: 15%; height: 18px;">&nbsp;</td>
+<td style="width: 15%; height: 18px;">&nbsp;</td>
+<td style="width: 15%; height: 18px;">&nbsp;</td>
+<td style="width: 15%; height: 18px;">&nbsp;</td>
 </tr>
 </tbody>
 </table>
+
 <p>&nbsp;</p>
 </body>
 </html>
