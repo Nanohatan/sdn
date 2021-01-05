@@ -4,9 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="static/test.css">
+    <link rel="stylesheet" href="http://192.168.98.25:8080/static/css/navibar.css">
+    <link rel="stylesheet" href="http://192.168.98.25:8080/static/css/upload.css">
     <title>Upload</title>
 </head>
 <body>
+    <div class="navbar">
+        <a href="auth/login" >時間割</a>
+        <a href="#">授業検索</a>
+    </div>
+
+
+    <div class="container" style="margin-top: 100px;">
+        <h3>動画アップロード</h3>
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <label for="lecture_name">講義名:</label>
+            <input type="text" name="lecture_name" id="lecture_name">
+    
+            <label for="lecture_time">講義回次 (1-15):</label>
+            <input type="number" name="lecture_time" id="lecture_time" min="1" max="15"  value="1">
+
+            <span>
+                <select id="day" name="day">
+                  <option selected>月</option>
+                  <option>火</option>
+                  <option>水</option>
+                  <option>木</option>
+                  <option>金</option>
+                </select>
+                <label for="day">曜日</label>
+                
+                <select id="period" name="period">
+                  <option selected>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </select>
+                <label for="period">限目</label>
+            </span>
+            
+            <br>
+            <label for="movie">アップロードする動画を選択してください</label>
+            <input name="movie" type="file" id="movie" accept="video/*"/>
+            <input type="submit" name="sub_buttono" value="Upload">
+        </form>
+        <img id="seesaa_img" src="http://192.168.98.25:8080/static/img/ryukyudog.png" alt="seesaa">
+    </div>
+
+
+
     動画を選んでください．<br>
     <form action="/upload" method="POST" enctype="multipart/form-data">
         <input name="movie" type="file" accept="video/*"/>
