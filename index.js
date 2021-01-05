@@ -19,6 +19,7 @@ app.use(cookieParser());
 app.use('/auth',express.static('static/auth'))
 var auth = require('./auth.js')
 app.use('/auth', auth);
+app.use('/search',require('./video_search.js'))
 
 var Puid = require('puid');
 var puid;
@@ -47,7 +48,7 @@ console.log("Meme Server Is Up");
 
 app.get('/', function (req, res) {
     //res.render('index');
-    res.send('/');
+    res.sendfile('static/home.html');
 });
 
 app.get('/test', function (req, res) {
