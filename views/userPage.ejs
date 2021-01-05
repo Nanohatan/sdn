@@ -2,80 +2,112 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Page Title</title>
+    <meta charset="utf-8" />
+    <title>user page</title>
+    <link rel="stylesheet" href="http://192.168.98.25:8080/static/css/navibar.css">
 </head>
+<style>
+    body{
+        margin: 0;
+        background-color: #f3b707;
+    }
+    
+    #schedule{
+        background-color: #fae092;
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+    #schedule td, #schedule th{
+        border: 1px solid #0ba3e4;
+        padding: 8px;
+        height: 20px;
+    }
+    #schedule th{
+        background-color:#0ba3e4 ;
+    }
+
+    .jikanwari_table{
+        position: relative;
+        margin: auto;
+        padding: 30px; 
+        width: 80%;
+    }
+    .jikanwari_table img{
+        position: absolute;
+        top: -20px;
+        left: 0px;
+        width: 20%;
+        transform: rotate(180deg)
+    }
+    tr {
+        text-align: center;
+    }
+
+</style>
 <body>
-<h1 style="color: #5e9ca0;"> <%= userName %> &nbsp;<span style="color: #2b2301;">page!</span></h1>
-<h2 style="color: #2e6c80;">your role: 
-
+    <div class="navbar">
+        <a href="#" >時間割</a>
+        <a href="/search">授業検索</a>
+        <% if (role) { %>
+            <a href="/upload">アップロード</a>
+        <% } %>
+    </div>
+    
+<h1 > <%= userName %> &nbsp;<span style="color: #2b2301;">の時間割</span></h1>
 <% if (role) { %>
-  Teacher
+    <h5 >教師としてログインしています</h5>
 <% } else { %>
-  Student
-<% } %> </h2>
-
-<div class="navbar">
-    <a href="#" class="active">Home</a>
-    <a href="#">Serch video</a>
-    <% if (role) { %>
-        <a href="#">Upload video</a>
-    <% } %>
-</div>
+    <h5 >生徒としてログインしています</h5>
+<% } %>  
 
 <p>&nbsp;</p>
-
-<table style="border-collapse: collapse; width: 100%; height: 108px;" border="1">
-<tbody>
-<tr style="height: 18px;">
-<td style="width: 10%; text-align: center; height: 18px;">&nbsp;</td>
-<td style="width: 15%; height: 18px; text-align: center;">Mon</td>
-<td style="width: 15%; height: 18px; text-align: center;">Tue</td>
-<td style="width: 15%; height: 18px; text-align: center;">Wed</td>
-<td style="width: 15%; height: 18px; text-align: center;">Thurs</td>
-<td style="width: 15%; height: 18px; text-align: center;">Fri</td>
-</tr>
-<tr style="height: 18px;">
-<td style="width: 10%; height: 18px;">1</td>
-<td style="width: 15%; height: 18px;">&nbsp;</td>
-<td style="width: 15%; height: 18px;">&nbsp;</td>
-<td style="width: 15%; height: 18px;">&nbsp;</td>
-<td style="width: 15%; height: 18px;">&nbsp;</td>
-<td style="width: 15%; height: 18px;">&nbsp;</td>
-</tr>
-<tr style="height: 18px;">
-<td style="width: 10%; height: 18px;">2</td>
-<td style="width: 15%; height: 18px;">&nbsp;</td>
-<td style="width: 15%; height: 18px;">&nbsp;</td>
-<td style="width: 15%; height: 18px;">&nbsp;</td>
-<td style="width: 15%; height: 18px;">&nbsp;</td>
-<td style="width: 15%; height: 18px;">&nbsp;</td>
-</tr>
-<tr style="height: 18px;">
-<td style="width: 10%; height: 18px;">3</td>
-<td style="width: 15%; height: 18px;">&nbsp;</td>
-<td style="width: 15%; height: 18px;">&nbsp;</td>
-<td style="width: 15%; height: 18px;">&nbsp;</td>
-<td style="width: 15%; height: 18px;">&nbsp;</td>
-<td style="width: 15%; height: 18px;">&nbsp;</td>
-</tr>
-<tr style="height: 18px;">
-<td style="width: 10%; height: 18px;">4</td>
-<td style="width: 15%; height: 18px;">&nbsp;</td>
-<td style="width: 15%; height: 18px;">&nbsp;</td>
-<td style="width: 15%; height: 18px;">&nbsp;</td>
-<td style="width: 15%; height: 18px;">&nbsp;</td>
-<td style="width: 15%; height: 18px;">&nbsp;</td>
-</tr>
-<tr style="height: 18px;">
-<td style="width: 10%; height: 18px;">5</td>
-<td style="width: 15%; height: 18px;">&nbsp;</td>
-<td style="width: 15%; height: 18px;">&nbsp;</td>
-<td style="width: 15%; height: 18px;">&nbsp;</td>
-<td style="width: 15%; height: 18px;">&nbsp;</td>
-<td style="width: 15%; height: 18px;">&nbsp;</td>
-</tr>
-</tbody>
-</table>
+<div class="jikanwari_table">
+    <img src="http://192.168.98.25:8080/static/img/hibiscus.png" alt="flower">
+    <table id="schedule" >
+        <tr>
+            <th>月曜日</th>
+            <th>火曜日</th>
+            <th>水曜日</th>
+            <th>木曜日</th>
+            <th>金曜日</th>
+        </tr>
+        <tr>
+            <td>大学英語</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+</div>
 
 <p>&nbsp;</p>
 </body>
