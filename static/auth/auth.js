@@ -17,7 +17,6 @@ firebase.initializeApp(firebaseConfig);
 const txtEmail= document.getElementById('txtEmail');
 const txtPassword = document.getElementById('txtPassword');
 const btnLogin = document.getElementById('btnLogin');
-const btnSignUp = document.getElementById('btnSignUp');
 var message = document.getElementById('message');
 
 function emailIsValid (email) {
@@ -36,21 +35,6 @@ btnLogin.addEventListener('click',e => {
   );
 });
 
-btnSignUp.addEventListener('click', e => {
-  const email = txtEmail.value;
-  const pass = txtPassword.value;
-  const auth = firebase.auth();
-  if (emailIsValid(email)){
-  const promise = auth.createUserWithEmailAndPassword(email,pass);
-    promise.catch(
-	e => {console.log(e.message)
-	message.textContent=e.message;
-	});
-  }else{
-  alert("please write valid email");
-     console.log("invalid email");
-}
-       });
 
 firebase.auth().onAuthStateChanged(function(user) {
 if (user) {
