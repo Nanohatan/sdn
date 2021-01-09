@@ -20,6 +20,7 @@ app.use('/auth',express.static('static/auth'))
 var auth = require('./auth.js')
 app.use('/auth', auth);
 app.use('/search',require('./video_search.js'))
+app.use('/movie_upload',require('./movie_upload.js'))
 
 var Puid = require('puid');
 var puid;
@@ -167,6 +168,7 @@ app.use('/upload/', function(req, res, next) {
 
 app.post('/upload', upload.single('movie'), function (req, res, next) {
   console.log('post upload');
+  console.log(req.body);
   console.log('req filepath:', req.file.path)
   // var req = JSON.stringify(req);
   // console.log('req.file:',req);
