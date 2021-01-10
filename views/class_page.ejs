@@ -1,0 +1,276 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>授業動画</title>
+</head>
+<style>
+    body{
+        margin: 0;
+        background-color: #f3b707;
+    }
+    .navbar{
+        overflow: hidden;
+        background-color: #da060d;
+    }
+    .navbar a{
+
+        text-align: center;
+        padding: 10px 16px;
+        float: left;
+        font-size: 30px;
+    }
+    .navbar a:hover{
+      background-color: #0ba3e4;
+      color: black;
+    }
+    
+    #schedule{
+        background-color: #fae092;
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+    #schedule td, #schedule th{
+        border: 1px solid #0ba3e4;
+        padding: 8px;
+        height: 20px;
+    }
+    #schedule th{
+        background-color:#0ba3e4 ;
+    }
+
+    .jikanwari_table{
+        position: relative;
+        margin: auto;
+        padding: 30px; 
+        width: 80%;
+    }
+    .jikanwari_table img{
+        position: absolute;
+        top: -20px;
+        left: 0px;
+        width: 20%;
+        transform: rotate(180deg)
+    }
+    tr {
+        text-align: center;
+    }
+
+</style>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <div class="navbar">
+        <a href="#" >時間割</a>
+        <a href="#">授業検索</a>
+        <% if (role) { %>
+            <a href="#">アップロード</a>
+        <% } %>
+    </div>
+    
+<h1><%= className %></h1>
+<div class="row">
+    <div class="video_display column" style="border-style: solid; border-color: black; ">
+      <h2><%= videoNumber %> <%= videoTitle %></h2>
+          <video id="video_play" controls preload="none"></video>
+    </div>
+    <div class="chat_display column" style="border-style: solid; border-color: red; ">
+        <h2>chat here</h2>
+        <div class="chats" style="height: 500px; margin: 30px; border-style: solid; border-color:red">
+            <div class="topic">
+                <div class="topic-type">
+                    <p>しおり</p></div>
+                <div class="topic-message"><p>コメント</p></div>
+            </div>
+
+            <div class="topic">
+                <div class="topic-type"><p>その他</p></div>
+                <div class="topic-message"><p>雑談</p></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="reaction-bar">
+    <div class="video-progress"><div class="progress"></div></div>
+
+<!--     コメント+しおり機能予定地 -->
+    <form action="/" method="GET">
+      <label for="reaction-type">
+        <select class="select-css" name="reaction_type" id="reaction-type" onchange="changeButtonName()">
+            <option selected value="other">その他</option>
+            <option value="shiori">しおり</option>
+        </select>
+    </label>
+    <div class="reaction-message">
+        <input type="text" name="msg" >
+        <input id="reaction-submit-botton" type="submit" value="チャットを送信" style="width: 20%; right:5%;">
+    </div>
+    </form>
+    <script>
+      function changeButtonName(){
+        var sel = document.getElementById('reaction-type');
+        var b = document.getElementById('reaction-submit-botton');
+        console.log(sel.value,b.value);
+        if (sel.value=="shiori"){
+          b.value="しおりを挿入";
+        }else{
+          b.value="チャットを送信";
+        }
+      }
+    </script>
+</div>
+<script>
+  var video = document.getElementById('video_play');
+        if (Hls.isSupported()) {
+            var hls = new Hls();
+            hls.loadSource(" <%= place %> ");
+            hls.attachMedia(video);
+            hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                video.play();
+            });
+        }
+</script>
+<style>
+.row {
+  display: flex;
+}
+.column {
+  flex: 50%;
+  padding: 10px;
+  height: 800px;
+}
+.topic {
+    display: flex;
+    margin: 10px;
+    height: 80px;
+    border-style: solid; 
+    border-color: blue; 
+}
+.topic-type{
+    height: 50%;
+    width: 20%;
+    margin: 10px;
+    border-style: solid; 
+    border-color: blue;
+}
+.topic-message{
+    margin: 10px;
+    height: 60% ;
+    width: 80%;
+    border-style: solid; 
+    border-color: green;
+}
+.reaction-bar{
+    background-color:rgb(255,0,0,0.3);;
+    height: 20%;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+.video-progress{
+    margin: 10px 0px;
+    height: 10%;
+    background-color:rgba(11, 163, 228,0.2);
+}
+#video_play {
+  height: 500px; 
+  width:100%; 
+  border-style: solid; 
+  border-color: black;
+}
+.progress{
+    width: 30%;
+    height: 100%;
+    background-color:rgb(11, 163, 228,0.8);
+}
+input{
+    position: absolute;
+    bottom: 0px;
+    font-size: 20px;
+    height: 40%;
+    width: 60%;
+    background-color: rgb(255,255,255,0.5);
+}
+
+/*以下のcssはselect-cssのプラグイン*/
+.select-css {
+  display: block;
+  font-size: 16px;
+  font-family: sans-serif;
+  font-weight: 700;
+  color: #444;
+  line-height: 1.3;
+  padding: .6em 1.4em .5em .8em;
+  width: 20%;
+  max-width: 100%; /* useful when width is set to anything other than 100% */
+  box-sizing: border-box;
+  margin: 0;
+  border: 1px solid #aaa;
+  box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
+  border-radius: .5em;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #fff;
+  /* note: bg image below uses 2 urls. The first is an svg data uri for the arrow icon, and the second is the gradient. 
+    for the icon, if you want to change the color, be sure to use `%23` instead of `#`, since it's a url. You can also swap in a different svg icon or an external image reference
+    
+  */
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'),
+    linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%);
+  background-repeat: no-repeat, repeat;
+  /* arrow icon position (1em from the right, 50% vertical) , then gradient position*/
+  background-position: right .7em top 50%, 0 0;
+  /* icon size, then gradient */
+  background-size: .65em auto, 100%;
+}
+/* Hide arrow icon in IE browsers */
+.select-css::-ms-expand {
+  display: none;
+}
+/* Hover style */
+.select-css:hover {
+  border-color: #888;
+}
+/* Focus style */
+.select-css:focus {
+  border-color: #aaa;
+  /* It'd be nice to use -webkit-focus-ring-color here but it doesn't work on box-shadow */
+  box-shadow: 0 0 1px 3px rgba(59, 153, 252, .7);
+  box-shadow: 0 0 0 3px -moz-mac-focusring;
+  color: #222; 
+  outline: none;
+}
+
+/* Set options to normal weight */
+.select-css option {
+  font-weight:normal;
+}
+
+/* Support for rtl text, explicit support for Arabic and Hebrew */
+*[dir="rtl"] .select-css, :root:lang(ar) .select-css, :root:lang(iw) .select-css {
+  background-position: left .7em top 50%, 0 0;
+  padding: .6em .8em .5em 1.4em;
+}
+
+/* Disabled styles */
+.select-css:disabled, .select-css[aria-disabled=true] {
+  color: graytext;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22graytext%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'),
+    linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%);
+}
+
+.select-css:disabled:hover, .select-css[aria-disabled=true] {
+  border-color: #aaa;
+}
+
+
+</style>
+
+
+
+<p>&nbsp;</p>
+</body>
+</html>
