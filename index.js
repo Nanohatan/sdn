@@ -59,7 +59,8 @@ app.get('/test', function (req, res) {
 app.get('/video/:id', function (req, res) {
     var url = "/uploads/"+req.params.id+"/playlist.m3u8";
 //    var url = "/video/omu_data/video.m3u8"
-    res.render('index',{id:req.params.id, place:url});
+  //res.render('index',{id:req.params.id, place:url});
+  res.render('class_page',{role:true,className:"dbから授業名をとる予定",videoTitle:"タイトルがくる予定",videoNumber:0, place:url});
 });
 
 
