@@ -57,10 +57,18 @@ app.get('/test', function (req, res) {
 });
 
 app.get('/video/:id', function (req, res) {
-    var url = "/uploads/"+req.params.id+"/playlist.m3u8";
-//    var url = "/video/omu_data/video.m3u8"
-  //res.render('index',{id:req.params.id, place:url});
-  res.render('class_page',{role:true,className:"dbから授業名をとる予定",videoTitle:"タイトルがくる予定",videoNumber:0, place:url});
+    var sorce_url = "/uploads/"+req.params.id+"/playlist.m3u8";
+MongoClient.connect(url, function(err, db) {
+  if (err) throw err;
+  var dbo = db.db("movieInfo");
+  var query = { movie_id: req.params.id };
+  dbo.collection("movies").find(query).toArray(function(err, result) {
+    if (err) throw err;
+    console.log(result);
+    db.close();
+    res.render('class_page',{role:false,className:result[0].lecture_name,videoTitle:result[0].lecture_name,videoNumber:result[0].lecture_time, place:sorce_url});
+  });
+});
 });
 
 
