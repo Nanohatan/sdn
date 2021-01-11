@@ -17,6 +17,24 @@ MongoClient.connect(url, function(err, db) {
   });
 });
 });
+router.get('/testGet',function(req,res){
+res.send("hallo");
+});
 
+router.get('/chats',function(req,res){
+var chat_id=req.query.id;
+console.log(chat_id);
+MongoClient.connect(url, function(err, db) {
+  if (err) throw err;
+  var dbo = db.db("chatInfo");
+  var query = {parent_id:chat_id};
+  dbo.collection("chats").find(query, { projection: { _id: 0} }).toArray(function(err, result) {
+    if (err) throw err;
+    db.close();
+    console.log(result);
+    res.send(result);
+  });
+});
+});
 module.exports = router;
 
