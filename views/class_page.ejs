@@ -77,7 +77,7 @@
     </div>
     <div class="chat_display column" style="border-style: solid; border-color: red; ">
         <h2>chat here</h2>
-        <div class="chats" style="height: 500px; margin: 30px; border-style: solid; border-color:red">
+        <div class="chats" style="height: 500px; border-style: solid; border-color:red">
             <div class="topic">
                 <div class="topic-type">
                     <p>しおり</p></div>
@@ -121,6 +121,8 @@
       }
     </script>
 </div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+
 <script>
   var video = document.getElementById('video_play');
         if (Hls.isSupported()) {
@@ -131,6 +133,40 @@
                 video.play();
             });
         }
+   var url=window.location.href;
+   var url_array=url.split("/");
+   var id=url_array[url_array.length - 1]
+let cDiv=document.getElementsByClassName("chats")[0];
+
+$.ajax({
+    url : 'http://192.168.98.25:8080/search/chats',
+    data:{"id":id},
+    type: 'GET',
+    success: function(data){
+      console.log("call",data); 
+      data.forEach(function(jd){
+        console.log(jd);
+        let newDiv=document.createElement('div');
+        newDiv.className="topic";
+        cDiv.appendChild(newDiv);
+        
+        let typeDiv=document.createElement('div');
+        typeDiv.className="topic-type";
+        let typePara=document.createElement('p');
+typePara.textContent=jd.msg_type;
+typeDiv.appendChild(typePara);
+newDiv.appendChild(typeDiv);
+let msgDiv=document.createElement('div');
+msgDiv.className="topic-message";
+let msgPara=document.createElement('p');
+msgPara.textContent=jd.msg;
+msgDiv.appendChild(msgPara);
+newDiv.appendChild(msgDiv);
+
+      })
+
+        }
+    });
 </script>
 <style>
 .row {
@@ -142,12 +178,17 @@
   height: 800px;
 }
 .topic {
-    display: flex;
-    margin: 10px;
-    height: 80px;
-    border-style: solid; 
-    border-color: blue; 
+  display: flex;
+  background-color: rgba(255,255,255,0.5);
+  margin: 10px;
+  height: 80px;
+  transition: 0.3s;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); 
 }
+.topic:hover{
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
 .topic-type{
     height: 50%;
     width: 20%;
