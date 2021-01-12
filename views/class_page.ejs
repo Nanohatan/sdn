@@ -157,7 +157,7 @@
         }
     });
 
-    socket.on('chat message', function(msg) {
+    socket.on('chat message', function(msg,reaction) {
         let newDiv = document.createElement('div');
         newDiv.className = "topic";
         cDiv.appendChild(newDiv);
@@ -165,7 +165,7 @@
         let typeDiv = document.createElement('div');
         typeDiv.className = "topic-type";
         let typePara = document.createElement('p');
-        typePara.textContent = jd.msg_type;
+        typePara.textContent = reaction;
         typeDiv.appendChild(typePara);
         newDiv.appendChild(typeDiv);
         let msgDiv = document.createElement('div');
