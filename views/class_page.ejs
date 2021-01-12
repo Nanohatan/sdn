@@ -147,13 +147,34 @@
     var socket = io();
     var form = document.getElementById('form');
     var input = document.getElementById('input');
+    var reaction = document.getElementById('reaction-type');
 
     form.addEventListener('submit', function(e) {
         e.preventDefault();
-        if (input.value) {
-            socket.emit('chat message', input.value);
+        if (input.value && reaction.value) {
+            socket.emit('chat message', input.value, reaction.value);
             input.value = '';
         }
+    });
+
+    socket.on('chat message', function(msg) {
+        let newDiv = document.createElement('div');
+        newDiv.className = "topic";
+        cDiv.appendChild(newDiv);
+
+        let typeDiv = document.createElement('div');
+        typeDiv.className = "topic-type";
+        let typePara = document.createElement('p');
+        typePara.textContent = jd.msg_type;
+        typeDiv.appendChild(typePara);
+        newDiv.appendChild(typeDiv);
+        let msgDiv = document.createElement('div');
+        msgDiv.className = "topic-message";
+        let msgPara = document.createElement('p');
+        msgPara.textContent = msg;
+        msgDiv.appendChild(msgPara);
+        newDiv.appendChild(msgDiv);
+        window.scrollTo(0, document.body.scrollHeight);
     });
 
 

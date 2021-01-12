@@ -110,7 +110,8 @@ app.get('/top', function (req, res) {
 
 io.on('connection', (socket) => {
     console.log('a user connected');
-    socket.on('chat message', (msg) => {
+    socket.on('chat message', (msg,reaction) => {
+        io.emit('chat message', msg, reaction);
         console.log('message: ' + msg);
     });
 });
