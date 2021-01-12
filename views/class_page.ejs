@@ -104,7 +104,7 @@
     </div>
 
     <!--     コメント+しおり機能予定地 -->
-    <form action="/" method="GET">
+    <form id="form" method="GET">
         <label for="reaction-type">
             <select class="select-css" name="reaction_type" id="reaction-type" onchange="changeButtonName()">
                 <option selected value="other">その他</option>
@@ -145,6 +145,17 @@
 
 
     var socket = io();
+    var form = document.getElementById('form');
+    var input = document.getElementById('reaction-submit-botton');
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        if (input.value) {
+            socket.emit('chat message', input.value);
+            input.value = '';
+        }
+    });
+
 
 
     var url = window.location.href;
