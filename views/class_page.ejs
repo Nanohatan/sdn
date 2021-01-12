@@ -144,19 +144,24 @@
     }
 
 
+    // 1/12 書きました！
+    // soket.ioでの動作
     var socket = io();
     var form = document.getElementById('form');
     var input = document.getElementById('input');
     var reaction = document.getElementById('reaction-type');
 
+    //「送信する」ボタンが押された時の動作
     form.addEventListener('submit', function(e) {
         e.preventDefault();
         if (input.value && reaction.value) {
+            // index.jsのsocket.on('chat message')に移動
             socket.emit('chat message', input.value, reaction.value);
             input.value = '';
         }
     });
-
+    
+    // 全体に向けて更新されたチャットを追加
     socket.on('chat message', function(msg,reaction) {
         let newDiv = document.createElement('div');
         newDiv.className = "topic";
