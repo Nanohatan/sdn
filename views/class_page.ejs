@@ -112,7 +112,7 @@
             </select>
         </label>
         <div class="reaction-message">
-            <input type="text" name="msg">
+            <input id="input" type="text" name="msg">
             <input id="reaction-submit-botton" type="submit" value="チャットを送信" style="width: 20%; right:5%;">
         </div>
     </form>
@@ -146,7 +146,7 @@
 
     var socket = io();
     var form = document.getElementById('form');
-    var input = document.getElementById('reaction-submit-botton');
+    var input = document.getElementById('input');
 
     form.addEventListener('submit', function(e) {
         e.preventDefault();
