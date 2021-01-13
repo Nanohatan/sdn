@@ -101,6 +101,7 @@
 <div class="reaction-bar">
     <div class="video-progress">
         <div id="progress"></div>
+        <div id="pointbox"></div>
     </div>
 
     <!--     コメント+しおり機能予定地 -->
@@ -296,6 +297,17 @@
         width: 0%;
         height: 100%;
         background-color: rgb(11, 163, 228, 0.8);
+        position:relative;
+    }
+
+    #pointbox{
+        position:relative;
+        display: flex;
+    }
+    #pointbox img{
+        position:absolute;
+        bottom: 1px;
+        width: 40px;
     }
 
     input {
@@ -384,8 +396,5 @@
 
 
 </style>
-
-
-<p>&nbsp;</p>
 </body>
 </html>
