@@ -114,7 +114,7 @@
         </label>
         <div class="reaction-message">
             <input id="input" type="text" name="msg">
-            <input id="reaction-submit-botton" type="submit" value="チャットを送信" onclick="shioriFunction()" style="width: 20%; right:5%;">
+            <input id="reaction-submit-botton" type="submit" value="チャットを送信" style="width: 20%; right:5%;">
         </div>
     </form>
     <script>
@@ -155,6 +155,10 @@
     //「送信する」ボタンが押された時の動作
     form.addEventListener('submit', function(e) {
         e.preventDefault();
+        // チャットの種類が「しおり」だったらしおりを挟む動作を入れる
+        if (reaction.value == "shiori") {
+            shioriFunction()
+        }
         if (input.value && reaction.value) {
             // index.jsのsocket.on('chat message')に移動
             socket.emit('chat message', input.value, reaction.value);
