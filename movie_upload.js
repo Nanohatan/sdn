@@ -49,7 +49,7 @@ var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/";
 
 router.post('/', upload.single('movie'),function(req, res,next) {
-  res.sendfile('static/video_search.html');
+  res.sendfile('static/upload.html');
  // console.log(req.body,req.file);
 
 MongoClient.connect(url, function(err, db) {
