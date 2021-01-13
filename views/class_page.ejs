@@ -114,7 +114,7 @@
         </label>
         <div class="reaction-message">
             <input id="input" type="text" name="msg">
-            <input id="reaction-submit-botton" type="submit" value="チャットを送信" style="width: 20%; right:5%;">
+            <input id="reaction-submit-botton" type="submit" value="チャットを送信" onclick="shioriFunction()" style="width: 20%; right:5%;">
         </div>
     </form>
     <script>
@@ -132,6 +132,7 @@
 </div>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>
+<script src="../static/shiori.js" type="text/javascript"></script>
 <script>
     // 動画のload場所（基本変更しない）
     var video = document.getElementById('video_play');
