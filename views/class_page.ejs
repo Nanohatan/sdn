@@ -100,7 +100,7 @@
 </div>
 <div class="reaction-bar">
     <div class="video-progress">
-        <div class="progress"></div>
+        <div id="progress"></div>
     </div>
 
     <!--     コメント+しおり機能予定地 -->
@@ -216,6 +216,20 @@
 
         }
     });
+
+    video.ontimeupdate = function(){
+        var percentage = ( video.currentTime / video.duration ) * 100;
+        $("#progress").css("width", percentage+"%");
+        console.log(percentage);
+    };
+    $("#progress").on("click", function(e){
+        var offset = $(this).offset();
+        var left = (e.pageX - offset.left);
+        var totalWidth = $("#progress").width();
+        var percentage = ( left / totalWidth );
+        var vidTime = video.duration * percentage;
+        video.currentTime = vidTime;
+    });
 </script>
 <style>
     .row {
@@ -278,7 +292,7 @@
         border-color: black;
     }
 
-    .progress {
+    #progress {
         width: 30%;
         height: 100%;
         background-color: rgb(11, 163, 228, 0.8);
