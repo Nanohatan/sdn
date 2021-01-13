@@ -67,7 +67,6 @@
 </style>
 <body>
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-<script src="../static/shiori.js" type="text/javascript"></script>
 <div class="navbar">
     <a href="/auth/login">時間割</a>
     <a href="/search">授業検索</a>
@@ -232,6 +231,33 @@
         var vidTime = video.duration * percentage;
         video.currentTime = vidTime;
     });
+
+    function setTime(t) {
+        video.currentTime = t;
+    }
+
+    function shioriFunction() {
+
+
+        const video = document.getElementById('video_play');
+        var fullTime = video.duration; // 動画全体の時間
+        var nowTime = video.currentTime; // 現在の再生時間
+        var setPos = (nowTime/fullTime)*100-1.5; // 全体に対する現在の位置
+
+        var node = document.createElement("img");
+        node.src = "/images/aicon.png";
+        node.style.cssText = "left:"+setPos+"%";
+        node.alt = nowTime;
+        node.className = 'point';
+
+        document.getElementById("pointbox").appendChild(node);
+    }
+
+    var point = document.querySelector('#pointbox');
+    point.addEventListener('click', function(ev) {
+        setTime(ev.target.alt);
+
+    }, false);
 </script>
 <style>
     .row {
