@@ -129,8 +129,8 @@
                 newDiv.className = "topic";
                 newDiv.id = "123";
                 newDiv.onclick = function(ev) {
-                    console.log("やった");
-                    console.log(ev);
+                    var el = document.getElementsByClassName("chats");
+                    el.remove();
                 };
                 cDiv.appendChild(newDiv);
                 let typeDiv = document.createElement('div');
