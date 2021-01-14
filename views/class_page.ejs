@@ -182,12 +182,13 @@
 
     //しおり属性のチャットをクリックしたときの挙動
     var shiori_chat = document.querySelector('.chats');
-    console.log(shiori_chat);
 
     function shiori_thread(shiori_chat) {
         console.log(shiori_chat)
     }
-    shiori_chat.addEventListener('click', shiori_thread(shiori_chat));
+    shiori_chat.addEventListener('click', function (ev) {
+        console.log(ev)
+    }, false);
 
 
 
