@@ -127,11 +127,13 @@
                 let newDiv = document.createElement('div');
                 newDiv.className = "topic";
                 newDiv.id = "123";
-                newDiv.onclick = function(ev) {
-                    var el = document.querySelector('.chats')
-                    el.innerHTML = "";
-                    shiori_thread();
-                };
+                if (id.msg_type == "shiori") {
+                    newDiv.onclick = function(ev) {
+                        var el = document.querySelector('.chats')
+                        el.innerHTML = "";
+                        shiori_thread();
+                    };
+                }
                 cDiv.appendChild(newDiv);
                 let typeDiv = document.createElement('div');
                 typeDiv.className = "topic-type";
@@ -190,11 +192,6 @@
         let newDiv = document.createElement('div');
         newDiv.className = "topic";
         newDiv.id = "123";
-        newDiv.onclick = function(ev) {
-            var el = document.querySelector('.chats')
-            el.innerHTML = "";
-            shiori_thread();
-        };
         cDiv.appendChild(newDiv);
         let typeDiv = document.createElement('div');
         typeDiv.className = "topic-type";
