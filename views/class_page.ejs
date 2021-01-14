@@ -124,7 +124,6 @@
         success: function (data) {
             console.log("call", data);
             data.forEach(function (jd) {
-                console.log(jd);
                 let newDiv = document.createElement('div');
                 newDiv.className = "topic";
                 newDiv.id = "123";
@@ -185,9 +184,30 @@
     point.addEventListener('click', function (ev) {
         setTime(ev.target.alt);
     }, false);
-    
+
     function shiori_thread() {
         console.log("きてる");
+        let newDiv = document.createElement('div');
+        newDiv.className = "topic";
+        newDiv.id = "123";
+        newDiv.onclick = function(ev) {
+            var el = document.querySelector('.chats')
+            el.innerHTML = "";
+            shiori_thread();
+        };
+        cDiv.appendChild(newDiv);
+        let typeDiv = document.createElement('div');
+        typeDiv.className = "topic-type";
+        let typePara = document.createElement('p');
+        typePara.textContent = "しおりん";
+        typeDiv.appendChild(typePara);
+        newDiv.appendChild(typeDiv);
+        let msgDiv = document.createElement('div');
+        msgDiv.className = "topic-message";
+        let msgPara = document.createElement('p');
+        msgPara.textContent = "きてるじゃん！やったね！";
+        msgDiv.appendChild(msgPara);
+        newDiv.appendChild(msgDiv);
     };
 
     //しおり属性のチャットをクリックしたときの挙動
