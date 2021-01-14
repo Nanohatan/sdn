@@ -188,7 +188,9 @@
     }
     shiori_chat.addEventListener('click', function (ev) {
         var li = ev.path;
-        var num = li.indexOf("div.topic")
+        console.log(li);
+        var num = li.indexOf("div.topic");
+        console.log(num);
         console.log(ev.path[num]);
     }, false);
 
