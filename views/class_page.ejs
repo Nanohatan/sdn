@@ -130,7 +130,8 @@
                 newDiv.id = "123";
                 newDiv.onclick = function(ev) {
                     var el = document.querySelector('.chats')
-                    el.remove();
+                    var matches = el.querySelectorAll("topic");
+                    matches.remove();
                 };
                 cDiv.appendChild(newDiv);
                 let typeDiv = document.createElement('div');
