@@ -131,6 +131,7 @@
                 newDiv.onclick = function(ev) {
                     var el = document.querySelector('.chats')
                     el.innerHTML = "";
+                    shiori_thread();
                 };
                 cDiv.appendChild(newDiv);
                 let typeDiv = document.createElement('div');
@@ -184,7 +185,10 @@
     point.addEventListener('click', function (ev) {
         setTime(ev.target.alt);
     }, false);
-
+    
+    function shiori_thread() {
+        console.log("きてる");
+    };
 
     //しおり属性のチャットをクリックしたときの挙動
 
