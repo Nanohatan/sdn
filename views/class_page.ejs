@@ -131,6 +131,7 @@
                 newDiv.onclick = function(ev) {
                     var el = document.querySelector('.chats')
                     var matches = el.querySelectorAll(".topic");
+                    console.log(matches);
                     matches.remove();
                 };
                 cDiv.appendChild(newDiv);
