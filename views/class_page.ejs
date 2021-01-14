@@ -94,6 +94,10 @@
         }
     });
 
+    function shiori_thread(shiori_chat) {
+        console.log(shiori_chat)
+    }
+
     // 全体に向けて更新されたチャットを追加
     socket.on('chat message', function (msg, reaction) {
         let newDiv = document.createElement('div');
@@ -128,7 +132,7 @@
                 let newDiv = document.createElement('div');
                 newDiv.className = "topic";
                 newDiv.id = "123";
-                newDiv.onclick = new Function(shiori_thread(id.msg_type));
+                newDiv.onclick = Function(shiori_thread(id.msg_type));
                 cDiv.appendChild(newDiv);
                 let typeDiv = document.createElement('div');
                 typeDiv.className = "topic-type";
@@ -186,9 +190,6 @@
     //しおり属性のチャットをクリックしたときの挙動
     var shiori_chat = document.querySelector('.chats');
 
-    function shiori_thread(shiori_chat) {
-        console.log(shiori_chat)
-    }
     shiori_chat.addEventListener('click', function (ev) {
         var li = ev.path[0];
         console.log(li);
