@@ -15,6 +15,7 @@
     height: 80px;
     transition: 0.3s;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    z-index: 1;
 }
 
 .topic:hover {
@@ -27,6 +28,7 @@
     margin: 10px;
     border-style: solid;
     border-color: blue;
+    z-index: 2;
 }
 
 .topic-message {
