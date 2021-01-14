@@ -63,122 +63,134 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script>
-// 動画のload場所（基本変更しない）
-var video = document.getElementById('video_play');
-if (Hls.isSupported()) {
-    var hls = new Hls();
-    hls.loadSource(" <%= place %> ");
-    hls.attachMedia(video);
-    hls.on(Hls.Events.MANIFEST_PARSED, function () {
-        video.play();
+    // 動画のload場所（基本変更しない）
+    var video = document.getElementById('video_play');
+    if (Hls.isSupported()) {
+        var hls = new Hls();
+        hls.loadSource(" <%= place %> ");
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MANIFEST_PARSED, function () {
+            video.play();
+        });
+    }
+
+    // 1/12 書きました！
+    // soket.ioでの動作
+    var socket = io();
+    var form = document.getElementById('form');
+    var input = document.getElementById('input');
+    var reaction = document.getElementById('reaction-type');
+    //「送信する」ボタンが押された時の動作
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        // チャットの種類が「しおり」だったらしおりを挟む動作を入れる
+        if (reaction.value == "shiori") {
+            shioriFunction()
+        }
+        if (input.value && reaction.value) {
+            // index.jsのsocket.on('chat message')に移動
+            socket.emit('chat message', input.value, reaction.value);
+            input.value = '';
+        }
     });
-}
 
-// 1/12 書きました！
-// soket.ioでの動作
-var socket = io();
-var form = document.getElementById('form');
-var input = document.getElementById('input');
-var reaction = document.getElementById('reaction-type');
-//「送信する」ボタンが押された時の動作
-form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    // チャットの種類が「しおり」だったらしおりを挟む動作を入れる
-    if (reaction.value == "shiori") {
-        shioriFunction()
+    // 全体に向けて更新されたチャットを追加
+    socket.on('chat message', function (msg, reaction) {
+        let newDiv = document.createElement('div');
+        newDiv.className = "topic";
+        cDiv.appendChild(newDiv);
+        let typeDiv = document.createElement('div');
+        typeDiv.className = "topic-type";
+        let typePara = document.createElement('p');
+        typePara.textContent = reaction;
+        typeDiv.appendChild(typePara);
+        newDiv.appendChild(typeDiv);
+        let msgDiv = document.createElement('div');
+        msgDiv.className = "topic-message";
+        let msgPara = document.createElement('p');
+        msgPara.textContent = msg;
+        msgDiv.appendChild(msgPara);
+        newDiv.appendChild(msgDiv);
+    });
+    var url = window.location.href;
+    var url_array = url.split("/");
+    var id = url_array[url_array.length - 1]
+    let cDiv = document.getElementsByClassName("chats")[0];
+    $.ajax({
+        url: 'http://192.168.98.25:8080/search/chats',
+        data: {"id": id},
+        type: 'GET',
+        success: function (data) {
+            console.log("call", data);
+            data.forEach(function (jd) {
+                console.log(jd);
+                let newDiv = document.createElement('div');
+                newDiv.className = "topic";
+                cDiv.appendChild(newDiv);
+                let typeDiv = document.createElement('div');
+                typeDiv.className = "topic-type";
+                let typePara = document.createElement('p');
+                typePara.textContent = jd.msg_type;
+                typeDiv.appendChild(typePara);
+                newDiv.appendChild(typeDiv);
+                let msgDiv = document.createElement('div');
+                msgDiv.className = "topic-message";
+                let msgPara = document.createElement('p');
+                msgPara.textContent = jd.msg;
+                msgDiv.appendChild(msgPara);
+                newDiv.appendChild(msgDiv);
+            })
+        }
+    });
+
+    video.ontimeupdate = function () {
+        var percentage = (video.currentTime / video.duration) * 100;
+        $("#progress").css("width", percentage + "%");
+        console.log(percentage);
+    };
+    $("#progress").on("click", function (e) {
+        var offset = $(this).offset();
+        var left = (e.pageX - offset.left);
+        var totalWidth = $("#progress").width();
+        var percentage = (left / totalWidth);
+        var vidTime = video.duration * percentage;
+        video.currentTime = vidTime;
+    });
+
+    function setTime(t) {
+        video.currentTime = t;
     }
-    if (input.value && reaction.value) {
-        // index.jsのsocket.on('chat message')に移動
-        socket.emit('chat message', input.value, reaction.value);
-        input.value = '';
+
+    function shioriFunction() {
+        const video = document.getElementById('video_play');
+        var fullTime = video.duration; // 動画全体の時間
+        var nowTime = video.currentTime; // 現在の再生時間
+        var setPos = (nowTime / fullTime) * 100 - 1.5; // 全体に対する現在の位置
+        var node = document.createElement("img");
+        node.src = "../static/aicon.png";
+        node.style.cssText = "left:" + setPos + "%";
+        node.alt = nowTime;
+        node.className = 'point';
+        document.getElementById("pointbox").appendChild(node);
     }
-});
-    
-// 全体に向けて更新されたチャットを追加
-socket.on('chat message', function(msg,reaction) {
-    let newDiv = document.createElement('div');
-    newDiv.className = "topic";
-    cDiv.appendChild(newDiv);
-    let typeDiv = document.createElement('div');
-    typeDiv.className = "topic-type";
-    let typePara = document.createElement('p');
-    typePara.textContent = reaction;
-    typeDiv.appendChild(typePara);
-    newDiv.appendChild(typeDiv);
-    let msgDiv = document.createElement('div');
-    msgDiv.className = "topic-message";
-    let msgPara = document.createElement('p');
-    msgPara.textContent = msg;
-    msgDiv.appendChild(msgPara);
-    newDiv.appendChild(msgDiv);
-});
-var url = window.location.href;
-var url_array = url.split("/");
-var id = url_array[url_array.length - 1]
-let cDiv = document.getElementsByClassName("chats")[0];
-$.ajax({
-    url: 'http://192.168.98.25:8080/search/chats',
-    data: {"id": id},
-    type: 'GET',
-    success: function (data) {
-        console.log("call", data);
-        data.forEach(function (jd) {
-            console.log(jd);
-            let newDiv = document.createElement('div');
-            newDiv.className = "topic";
-            cDiv.appendChild(newDiv);
-            let typeDiv = document.createElement('div');
-            typeDiv.className = "topic-type";
-            let typePara = document.createElement('p');
-            typePara.textContent = jd.msg_type;
-            typeDiv.appendChild(typePara);
-            newDiv.appendChild(typeDiv);
-            let msgDiv = document.createElement('div');
-            msgDiv.className = "topic-message";
-            let msgPara = document.createElement('p');
-            msgPara.textContent = jd.msg;
-            msgDiv.appendChild(msgPara);
-            newDiv.appendChild(msgDiv);
-        })
+
+    var point = document.querySelector('#pointbox');
+    point.addEventListener('click', function (ev) {
+        setTime(ev.target.alt);
+    }, false);
+
+
+    //しおり属性のチャットをクリックしたときの挙動
+    var shiori_chat = document.getElementById('topic');
+
+    function shiori_thread(shiori_chat) {
+        console.log(shiori_chat)
     }
-});
+    shiori_chat.addEventListener('click', shiori_thread(shiori_chat));
 
-video.ontimeupdate = function(){
-    var percentage = ( video.currentTime / video.duration ) * 100;
-    $("#progress").css("width", percentage+"%");
-    console.log(percentage);
-};
-$("#progress").on("click", function(e){
-    var offset = $(this).offset();
-    var left = (e.pageX - offset.left);
-    var totalWidth = $("#progress").width();
-    var percentage = ( left / totalWidth );
-    var vidTime = video.duration * percentage;
-    video.currentTime = vidTime;
-});
 
-function setTime(t) {
-    video.currentTime = t;
-}
 
-function shioriFunction() {
-    const video = document.getElementById('video_play');
-    var fullTime = video.duration; // 動画全体の時間
-    var nowTime = video.currentTime; // 現在の再生時間
-    var setPos = (nowTime/fullTime)*100-1.5; // 全体に対する現在の位置
-    var node = document.createElement("img");
-    node.src = "../static/aicon.png";
-    node.style.cssText = "left:"+setPos+"%";
-    node.alt = nowTime;
-    node.className = 'point';
-    document.getElementById("pointbox").appendChild(node);
-}
-var point = document.querySelector('#pointbox');
-point.addEventListener('click', function(ev) {
-    setTime(ev.target.alt);
-}, false);
 
-var socket = io();
 </script>
 
 </body>
