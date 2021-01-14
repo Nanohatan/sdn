@@ -127,7 +127,10 @@
                 console.log(jd);
                 let newDiv = document.createElement('div');
                 newDiv.className = "topic";
-                newDiv.id = id.id;
+                newDiv.id = "123";
+                if (id.msg_type == "shiori") {
+                    newDiv.onclick = new shiori_thread(id.msg_type);
+                };
                 cDiv.appendChild(newDiv);
                 let typeDiv = document.createElement('div');
                 typeDiv.className = "topic-type";
