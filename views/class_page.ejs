@@ -129,12 +129,10 @@
                 newDiv.id = "123";
                 console.log(id);
                 console.log(id.msg_type == "shiori");
-                if (id.msg_type == "shiori") {
-                    newDiv.onclick = function(ev) {
-                        var el = document.querySelector('.chats')
-                        el.innerHTML = "";
-                        shiori_thread();
-                    };
+                newDiv.onclick = function(ev) {
+                    var el = document.querySelector('.chats')
+                    el.innerHTML = "";
+                    shiori_thread();
                 };
                 cDiv.appendChild(newDiv);
                 let typeDiv = document.createElement('div');
