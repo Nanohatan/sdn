@@ -88,8 +88,11 @@
             shioriFunction()
         }
         if (input.value && reaction.value) {
+            var url = window.location.href;
+var url_array = url.split("/");
+var id = url_array[url_array.length - 1]
             // index.jsのsocket.on('chat message')に移動
-            socket.emit('chat message', input.value, reaction.value);
+            socket.emit('chat message', input.value, reaction.value,id);
             input.value = '';
         }
     });

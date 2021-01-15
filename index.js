@@ -80,9 +80,21 @@ app.get('/top', function (req, res) {
 
 io.on('connection', (socket) => {
     console.log('a user connected');
-    socket.on('chat message', (msg,reaction) => {
+    socket.on('chat message', (msg,reaction,id) => {
         io.emit('chat message', msg, reaction);
-        console.log('message: ' + msg + reaction);
+        console.log('message: ' + msg + reaction+id);
+MongoClient.connect(url, function (err, db) {
+    if (err) throw err;
+    var dbo = db.db("chatInfo");
+        puid = new Puid();
+        puid = puid.generate();    
+var chat_obj = {parent_id:id, its_id:puid, msg:msg, isWatchByTeacher:false, rating:0,msg_type:reaction};
+    dbo.collection("chats").insertOne(chat_obj, function(err, res) {
+        if (err) throw err;
+        console.log("1 document inserted");
+        db.close();
+    });
+});
     });
 });
 
