@@ -25,18 +25,7 @@
     </div>
     <div class="chat_display column" style="border-style: solid; border-color: red; ">
         <h2>chat here</h2>
-        <div class="chats" style="height: 500px; border-style: solid; border-color:red">
-            <div class="topic">
-                <div class="topic-type">
-                    <p>しおり</p></div>
-                <div class="topic-message"><p>コメント</p></div>
-            </div>
-
-            <div class="topic">
-                <div class="topic-type"><p>その他</p></div>
-                <div class="topic-message"><p>雑談</p></div>
-            </div>
-
+        <div class="chats" id="chats" style="height: 500px; border-style: solid; border-color:red">
         </div>
     </div>
 </div>
@@ -98,11 +87,11 @@ var id = url_array[url_array.length - 1]
     });
 
     // 全体に向けて更新されたチャットを追加
-    socket.on('chat message', function (msg, reaction) {
+    socket.on('chat message', function (msg, reaction,its_id) {
         let newDiv = document.createElement('div');
         newDiv.className = "topic";
         newDiv.id = id._id;
-        newDiv.id = "123";
+        newDiv.id = its_id;
         if (reaction == "shiori") {
             newDiv.onclick = function(ev) {
                 var el = document.querySelector('.chats')
@@ -137,7 +126,7 @@ var id = url_array[url_array.length - 1]
             data.forEach(function (jd) {
                 let newDiv = document.createElement('div');
                 newDiv.className = "topic";
-                newDiv.id = "123";
+                newDiv.id = jd.its_id;
                 if (jd.msg_type == "shiori") {
                     newDiv.onclick = function(ev) {
                         var el = document.querySelector('.chats')
@@ -162,10 +151,47 @@ var id = url_array[url_array.length - 1]
         }
     });
 
+socket.on('reload signal', function () {
+  const chats = document.getElementById("chats");
+  chats.innerHTML = '';
+    $.ajax({
+        url: 'http://192.168.98.25:8080/search/chats',
+        data: {"id": id},
+        type: 'GET',
+        success: function (data) {
+            console.log("call", data);
+            data.forEach(function (jd) {
+                let newDiv = document.createElement('div');
+                newDiv.className = "topic";
+                newDiv.id = jd.its_id;
+                if (jd.msg_type == "shiori") {
+                    newDiv.onclick = function(ev) {
+                        var el = document.querySelector('.chats')
+                        el.innerHTML = "";
+                        shiori_thread();
+                    };
+                };
+                cDiv.appendChild(newDiv);
+                let typeDiv = document.createElement('div');
+                typeDiv.className = "topic-type";
+                let typePara = document.createElement('p');
+                typePara.textContent = jd.msg_type;
+                typeDiv.appendChild(typePara);
+                newDiv.appendChild(typeDiv);
+                let msgDiv = document.createElement('div');
+                msgDiv.className = "topic-message";
+                let msgPara = document.createElement('p');
+                msgPara.textContent = jd.msg;
+                msgDiv.appendChild(msgPara);
+                newDiv.appendChild(msgDiv);
+            })
+        }
+    });
+});
+
     video.ontimeupdate = function () {
         var percentage = (video.currentTime / video.duration) * 100;
         $("#progress").css("width", percentage + "%");
-        console.log(percentage);
     };
     $("#progress").on("click", function (e) {
         var offset = $(this).offset();
