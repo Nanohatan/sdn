@@ -152,43 +152,6 @@ var id = url_array[url_array.length - 1]
         }
     });
 
-socket.on('reload signal', function () {
-  const chats = document.getElementById("chats");
-  chats.innerHTML = '';
-    $.ajax({
-        url: 'http://192.168.98.25:8080/search/chats',
-        data: {"id": id},
-        type: 'GET',
-        success: function (data) {
-            console.log("call", data);
-            data.forEach(function (jd) {
-                let newDiv = document.createElement('div');
-                newDiv.className = "topic";
-                newDiv.id = jd.its_id;
-                if (jd.msg_type == "shiori") {
-                    newDiv.onclick = function(ev) {
-                        var el = document.querySelector('.chats')
-                        el.innerHTML = "";
-                        shiori_thread();
-                    };
-                };
-                cDiv.appendChild(newDiv);
-                let typeDiv = document.createElement('div');
-                typeDiv.className = "topic-type";
-                let typePara = document.createElement('p');
-                typePara.textContent = jd.msg_type;
-                typeDiv.appendChild(typePara);
-                newDiv.appendChild(typeDiv);
-                let msgDiv = document.createElement('div');
-                msgDiv.className = "topic-message";
-                let msgPara = document.createElement('p');
-                msgPara.textContent = jd.msg;
-                msgDiv.appendChild(msgPara);
-                newDiv.appendChild(msgDiv);
-            })
-        }
-    });
-});
 
     video.ontimeupdate = function () {
         var percentage = (video.currentTime / video.duration) * 100;
@@ -226,7 +189,6 @@ socket.on('reload signal', function () {
     }, false);
 
     function shiori_thread() {
-        console.log("きてる");
         let newDiv = document.createElement('div');
         newDiv.className = "topic";
         newDiv.id = "123";
@@ -244,13 +206,6 @@ socket.on('reload signal', function () {
         msgDiv.appendChild(msgPara);
         newDiv.appendChild(msgDiv);
     };
-
-    //しおり属性のチャットをクリックしたときの挙動
-
-    cDiv.addEventListener('click', function (ev) {
-        var li = ev.path;
-        console.log(li);
-    }, false);
 
 </script>
 
