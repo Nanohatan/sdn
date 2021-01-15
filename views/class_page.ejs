@@ -127,7 +127,12 @@ var id = url_array[url_array.length - 1]
                 let newDiv = document.createElement('div');
                 newDiv.className = "topic";
                 newDiv.id = jd.its_id;
+                let typeDiv = document.createElement('div');
                 if (jd.msg_type == "shiori") {
+                  newDiv.className = "topic shiori";
+                  var img = document.createElement('img');
+                  img.src="http://192.168.98.25:8080/static/img/talk_icon_before.svg";
+                  typeDiv.appendChild(img);
                     newDiv.onclick = function(ev) {
                         var el = document.querySelector('.chats')
                         el.innerHTML = "";
@@ -135,11 +140,7 @@ var id = url_array[url_array.length - 1]
                     };
                 };
                 cDiv.appendChild(newDiv);
-                let typeDiv = document.createElement('div');
                 typeDiv.className = "topic-type";
-                let typePara = document.createElement('p');
-                typePara.textContent = jd.msg_type;
-                typeDiv.appendChild(typePara);
                 newDiv.appendChild(typeDiv);
                 let msgDiv = document.createElement('div');
                 msgDiv.className = "topic-message";
@@ -250,9 +251,6 @@ socket.on('reload signal', function () {
         var li = ev.path;
         console.log(li);
     }, false);
-
-
-
 
 </script>
 
