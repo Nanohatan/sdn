@@ -78,36 +78,6 @@ app.get('/top', function (req, res) {
     res.sendfile('static/top.html');
 });
 
-// io.sockets.on("connection", function (socket) {
-//     //connection stuff
-//     memeConnections.push(socket);
-//     io.sockets.emit("new memer"); //checks if anyone is online
-//
-//     console.log("Memers connected: %s", memeConnections.length);
-//
-//
-//     // disconnection stuff
-//     socket.on("disconnect", function (data) {
-//
-//         memers.splice(memers.indexOf(socket.username), 1); //accessing the array memers
-//
-//         io.sockets.emit("memer left"); //checks if memer left
-//
-//         memeConnections.splice(memeConnections.indexOf(socket), 1);
-//         console.log("Memers disconnected: %s ", memeConnections.length);
-//     });
-//
-//     //send dem meme messages
-//     socket.on("send meme message", function (data) {
-//         console.log(data);// shows what the memers typed in console
-//         io.sockets.emit("new meme message", {msg: data});
-//
-//
-//     });
-//
-//
-// });
-
 io.on('connection', (socket) => {
     console.log('a user connected');
     socket.on('chat message', (msg,reaction) => {
