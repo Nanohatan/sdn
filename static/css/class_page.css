@@ -7,6 +7,11 @@
     padding: 10px;
     height: 800px;
 }
+.topic-type img {
+    width: 100%;
+    height:auto;
+}
+
 
 .topic {
     display: flex;
@@ -22,11 +27,9 @@
 }
 
 .topic-type {
-    height: 50%;
-    width: 20%;
+    height: 70%;
+    width: 10%;
     margin: 10px;
-    border-style: solid;
-    border-color: blue;
 }
 
 .topic-message {
