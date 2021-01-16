@@ -112,19 +112,19 @@
                     callChatInfoAndCreateChat(newDiv.id);
                     changeParentsID(newDiv.id,sub);
             }, false);
-            
-            cDiv.appendChild(newDiv);
-            typeDiv.className = "topic-type";
-            let typePara = document.createElement('p');
-            typeDiv.appendChild(typePara);
-            newDiv.appendChild(typeDiv);
-            let msgDiv = document.createElement('div');
-            msgDiv.className = "topic-message";
-            let msgPara = document.createElement('p');
-            msgPara.textContent = msg;
-            msgDiv.appendChild(msgPara);
-            newDiv.appendChild(msgDiv);
         };
+                    
+        cDiv.appendChild(newDiv);
+        typeDiv.className = "topic-type";
+        let typePara = document.createElement('p');
+        typeDiv.appendChild(typePara);
+        newDiv.appendChild(typeDiv);
+        let msgDiv = document.createElement('div');
+        msgDiv.className = "topic-message";
+        let msgPara = document.createElement('p');
+        msgPara.textContent = msg;
+        msgDiv.appendChild(msgPara);
+        newDiv.appendChild(msgDiv);
     });
 
     var url = window.location.href;
