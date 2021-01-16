@@ -5,6 +5,7 @@
   <title>動画検索</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="http://192.168.98.25:8080/static/css/navibar.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <style>
     #search_box{
@@ -21,27 +22,6 @@
       button {
         font-size: 30px;
       }
-
-</style>
-
-<body>
-
-<!-- navigation bar -->
-<div class="navbar">
-  <a href="/auth/login" >時間割</a>
-  <a href="/search/">授業検索</a>
-</div>
-
-<!-- input for serching -->
-<div id="search_box">
-  <h1>講義検索</h1>
-  <form action="">
-    <input type="text" id="video_search" name="video_search" >
-    <button type="button" id="button"><i class="fa fa-search"></i></button>
-  </form>
-</div>
-<div class="class-list">
-<style>
   .class-list{
     border-style: dashed;
     border-color: black;
@@ -55,6 +35,24 @@
     background-color: #E6F2FF;
 }
 </style>
+
+<body>
+
+<!-- navigation bar -->
+<div class="navbar">
+  <a href="/auth/login" >時間割</a>
+  <a href="/search/">授業検索</a>
+</div>
+
+<!-- input for serching -->
+<div id="search_box">
+  <h1>講義検索</h1>
+  <form >
+    <input type="text" id="video_search" name="video_search" >
+    <button type="button" id="button"><i class="fa fa-search"></i></button>
+  </form>
+</div>
+<div class="class-list">
 </div>
 
 
@@ -65,26 +63,20 @@ create_list(classes);
 
 
 //検索ボタンがクリックされたら文字列を含む講義名のみ表示する．
-document.getElementById("button").onclick = function() {
+//document.getElementById("button").onclick = function() {
+$('#button').on('click', function(){
+  $('.class-list').empty();  
   str = document.getElementById("video_search").value;
   jobj = [];
-  let parent = document.getElementById('class-list');
-  //子要素取得
-  let children = document.getElementsByClassName('class-video');
-  //子要素数取得
-  let len = children.length;
-  for (var i = 0; i < len; i++) {
-    parent.removeChild(children[0]);
-  };
   classes.forEach(function(cl){
     console.log(cl);
     console.log(str);
-    if ( cl.match(str)) {
+    if ( cl.includes(str)) {
       jobj.push(cl);
     };
   });
   create_list(jobj);
-};
+});
 
 function create_list(jobj){
   jobj.forEach(function(jd){
