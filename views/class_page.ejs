@@ -82,7 +82,8 @@
             var url_array = url.split("/");
             var id = url_array[url_array.length - 1]
             // index.jsのsocket.on('chat message')に移動
-            socket.emit('chat message', input.value, reaction.value, sub.id);
+            if (sub.id==id){const isParent=true;}
+            socket.emit('chat message', input.value, reaction.value, sub.id,isParent);
             input.value = '';
         }
     });
@@ -95,13 +96,13 @@
 
 
         // 全体に向けて更新されたチャットを追加
-socket.on('chat message', function (msg, reaction, its_id) {
+socket.on('chat message', function (msg, reaction, its_id,isParent) {
     let newDiv = document.createElement('div');
     newDiv.className = "topic";
     newDiv.id = id._id;
     newDiv.id = its_id;
     let typeDiv = document.createElement('div');
-    if (reaction == "shiori") {
+    if (reaction == "shiori" && isParent) {
         newDiv.className = "topic shiori";
         var img = document.createElement('img');
         img.src = "http://192.168.98.25:8080/static/img/talk_icon_before.svg";
@@ -184,7 +185,7 @@ socket.on('chat message', function (msg, reaction, its_id) {
             let typeDiv = document.createElement('div');
             let msgDiv = document.createElement('div');
             let msgPara = document.createElement('p');
-            if (jd.msg_type == "shiori") {
+            if (jd.msg_type == "shiori" && jd.isParents) {
                 newDiv.className = "topic shiori";
                 var img = document.createElement('img');
                 img.src = "http://192.168.98.25:8080/static/img/talk_icon_before.svg";
