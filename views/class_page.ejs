@@ -93,6 +93,10 @@ var id = url_array[url_array.length - 1]
         newDiv.id = id._id;
         newDiv.id = its_id;
         if (reaction == "shiori") {
+            newDiv.className = "topic shiori";
+            var img = document.createElement('img');
+            img.src="http://192.168.98.25:8080/static/img/talk_icon_before.svg";
+            typeDiv.appendChild(img);
             newDiv.onclick = function(ev) {
                 var el = document.querySelector('.chats')
                 el.innerHTML = "";
