@@ -6,7 +6,7 @@ var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/";
 
 router.get('/', function(req, res) {
-  //res.sendfile('static/video_search.html');
+  res.sendfile('static/video_search.html');
   MongoClient.connect(url, function(err, db) {
     if (err) throw err;
     var dbo = db.db("movieInfo");
