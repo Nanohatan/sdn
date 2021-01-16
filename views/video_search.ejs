@@ -37,7 +37,7 @@
   <h1>講義検索</h1>
   <form action="">
     <input type="text" id="video_search" name="video_search" >
-    <button type="submit" id="button"><i class="fa fa-search"></i></button>
+    <button type="button" id="button"><i class="fa fa-search"></i></button>
   </form>
 </div>
 <div class="class-list">
@@ -65,9 +65,19 @@ create_list(classes);
 
 //検索ボタンがクリックされたら文字列を含む講義名のみ表示する．
 document.getElementById("button").onclick = function() {
-  str = '/'+document.getElementById("video_search").value+'/';
-  jobj = []
+  str = document.getElementById("video_search").value;
+  jobj = [];
+  let parent = document.getElementById('class-list');
+  //子要素取得
+  let children = document.getElementsByClassName('class-video');
+  //子要素数取得
+  let len = children.length;
+  for (var i = 0; i < len; i++) {
+    parent.removeChild(children[0]);
+  };
   classes.forEach(function(cl){
+    console.log(cl);
+    console.log(str);
     if ( cl.match(str)) {
       jobj.push(cl);
     };
