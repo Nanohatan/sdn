@@ -10,7 +10,7 @@ router.get('/', function(req, res) {
 MongoClient.connect(url, function(err, db) {
   if (err) throw err;
   var dbo = db.db("movieInfo");
-  dbo.collection("movies").find({}, { projection: { _id: 0} }).limit(5).toArray(function(err, result) {
+  dbo.collection("movies").distinct("class_name").toArray(function(err, result) {
     if (err) throw err;
     db.close();
     res.render("video_search", {"jd":result})
