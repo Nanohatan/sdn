@@ -10,10 +10,13 @@ router.get('/', function(req, res) {
 MongoClient.connect(url, function(err, db) {
   if (err) throw err;
   var dbo = db.db("movieInfo");
-  classes = dbo.collection("movies").distinct("class_name")
-  if (err) throw err;
-    db.close();
-  res.render("video_search", {"jd":classes})
+  dbo.collection("movies").find().distinct("class_name", function(err, result){
+    if (err){
+      db.close();
+      console.log(err);
+    }
+    res.render('video_search', {"class_name":result})
+  });
 });
 });
 router.get('/testGet',function(req,res){
