@@ -10,12 +10,18 @@ router.get('/', function(req, res) {
   MongoClient.connect(url, function(err, db) {
     if (err) throw err;
     var dbo = db.db("movieInfo");
+    var classes = [];
     dbo.collection("movies").distinct("class_name", function(err, result){
       if (err){
         db.close();
         console.log(err);
-      }
-      res.render('video_search', {"class_name":result});
+      }else{
+        var match = result.split(",");
+        for (var i in match){
+          classes.push(i);
+        };
+      };
+      res.render('video_search', {"class_name": classes});
     });
   });
 });
