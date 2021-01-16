@@ -58,8 +58,8 @@
 
 
 <script>
-console.log(<%-JSON.stringify(jd)%>);
-var jobj=<%-JSON.stringify(jd)%>; 
+console.log(<%-class_name%>);
+var jobj=<%-class_name%>
 console.log(jobj);
 jobj.forEach(function(jd){
   let currentDiv=document.getElementsByClassName("class-list")[0];
@@ -70,9 +70,9 @@ jobj.forEach(function(jd){
   newDiv.className ="class-video";
 
   currentDiv.appendChild(newDiv);
-  newa.href="search/class/"+jd.class_name;
+  newa.href="search/class/"+jd;
   newDiv.appendChild(newa);
-  newPara.textContent=jd.class_anme;
+  newPara.textContent=jd;
   newa.appendChild(newh2);
   newa.appendChild(newPara);
 })
