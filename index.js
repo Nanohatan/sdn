@@ -79,12 +79,15 @@ app.get('/top', function (req, res) {
 });
 
 io.on('connection', (socket) => {
+    socket.on('join', function(id) {
+        socket.join(id);
+    });
+
     console.log('a user connected');
     socket.on('chat message', (msg, reaction, id) => {
         puid = new Puid();
         puid = puid.generate();
         // io.emit('chat message', msg, reaction, puid);
-        socket.join(id);
         socket.to(id).emit('chat message', msg, reaction, puid);
         // io.emit('reload signal');
         console.log('message: ' + msg + reaction + id);

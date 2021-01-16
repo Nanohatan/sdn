@@ -86,6 +86,12 @@
         }
     });
 
+    var url = window.location.href;
+    var url_array = url.split("/");
+    var id = url_array[url_array.length - 1]
+    socket.emit('join', id);
+
+
     // 全体に向けて更新されたチャットを追加
     socket.on('chat message', function (msg, reaction, its_id) {
         let newDiv = document.createElement('div');
