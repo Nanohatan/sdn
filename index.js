@@ -89,7 +89,7 @@ io.on('connection', (socket) => {
         puid = new Puid();
         puid = puid.generate();
         // io.emit('chat message', msg, reaction, puid);
-        socket.to(id).emit('chat message', msg, reaction, puid);
+        io.to(id).emit('chat message', msg, reaction, puid);
         // io.emit('reload signal');
         console.log('message: ' + msg + reaction + id);
         MongoClient.connect(url, function (err, db) {
