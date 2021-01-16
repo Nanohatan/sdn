@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>user page</title>
+    <link rel="stylesheet" href="http://192.168.98.25:8080/static/css/navibar.css">
+</head>
+<style>
+    body{
+        margin: 0;
+        background-color: #f3b707;
+    }
+    
+    #schedule{
+        background-color: #fae092;
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+    #schedule td, #schedule th{
+        border: 1px solid #0ba3e4;
+        padding: 8px;
+        height: 20px;
+    }
+    #schedule th{
+        background-color:#0ba3e4 ;
+    }
+
+    .jikanwari_table{
+        position: relative;
+        margin: auto;
+        padding: 30px; 
+        width: 80%;
+    }
+    .jikanwari_table img{
+        position: absolute;
+        top: -20px;
+        left: 0px;
+        width: 20%;
+        transform: rotate(180deg)
+    }
+    tr {
+        text-align: center;
+    }
+    tr td a {
+        position: relative;
+    }
+
+</style>
+<body>
+    <div class="navbar">
+        <a href="#" >時間割</a>
+        <a href="/search">授業検索</a>
+        <% if (role) { %>
+            <a href="/upload">アップロード</a>
+        <% } %>
+    </div>
+    
+<h1 > <%= userName %> &nbsp;<span style="color: #2b2301;">の時間割</span></h1>
+<% if (role) { %>
+    <h5 >教師としてログインしています</h5>
+<% } else { %>
+    <h5 >生徒としてログインしています</h5>
+<% } %>  
+
+<p>&nbsp;</p>
+<div class="jikanwari_table">
+    <img src="http://192.168.98.25:8080/static/img/hibiscus.png" alt="flower">
+    <table id="schedule" >
+        <tr>
+            <th>月曜日</th>
+            <th>火曜日</th>
+            <th>水曜日</th>
+            <th>木曜日</th>
+            <th>金曜日</th>
+        </tr>
+        <tr>
+            <td><a href="/search/class/大学英語">大学英語</a></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+</div>
+
+<p>&nbsp;</p>
+</body>
+</html>
