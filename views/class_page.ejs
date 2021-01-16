@@ -124,144 +124,146 @@
             msgDiv.appendChild(msgPara);
             newDiv.appendChild(msgDiv);
         }
-        var url = window.location.href;
-        var url_array = url.split("/");
-        var id = url_array[url_array.length - 1]
-        let cDiv = document.getElementsByClassName("chats")[0];
+        ;
+    });
+    var url = window.location.href;
+    var url_array = url.split("/");
+    var id = url_array[url_array.length - 1]
+    let cDiv = document.getElementsByClassName("chats")[0];
+    $.ajax({
+        url: 'http://192.168.98.25:8080/search/chats',
+        data: {"id": id},
+        type: 'GET',
+        success: function (data) {
+            console.log("call", data);
+            data.forEach(function (jd) {
+                let newDiv = document.createElement('div');
+                newDiv.className = "topic";
+                newDiv.id = jd.its_id;
+                let typeDiv = document.createElement('div');
+                if (jd.msg_type == "shiori") {
+                    newDiv.className = "topic shiori";
+                    var img = document.createElement('img');
+                    img.src = "http://192.168.98.25:8080/static/img/talk_icon_before.svg";
+                    typeDiv.appendChild(img);
+                    newDiv.onclick = function (ev) {
+                        var el = document.querySelector('.chats')
+                        el.innerHTML = "";
+                        shiori_thread();
+                    };
+                }
+                ;
+                cDiv.appendChild(newDiv);
+                typeDiv.className = "topic-type";
+                newDiv.appendChild(typeDiv);
+                let msgDiv = document.createElement('div');
+                msgDiv.className = "topic-message";
+                let msgPara = document.createElement('p');
+                msgPara.textContent = jd.msg;
+                msgDiv.appendChild(msgPara);
+                newDiv.appendChild(msgDiv);
+            })
+            createChatFromJsondata(data);
+        }
+    });
+
+
+    video.ontimeupdate = function () {
+        var percentage = (video.currentTime / video.duration) * 100;
+        $("#progress").css("width", percentage + "%");
+    };
+    $("#progress").on("click", function (e) {
+        var offset = $(this).offset();
+        var left = (e.pageX - offset.left);
+        var totalWidth = $("#progress").width();
+        var percentage = (left / totalWidth);
+        var vidTime = video.duration * percentage;
+        video.currentTime = vidTime;
+    });
+
+    function setTime(t) {
+        video.currentTime = t;
+    }
+
+    function shioriFunction() {
+        const video = document.getElementById('video_play');
+        var fullTime = video.duration; // 動画全体の時間
+        var nowTime = video.currentTime; // 現在の再生時間
+        var setPos = (nowTime / fullTime) * 100 - 1.5; // 全体に対する現在の位置
+        var node = document.createElement("img");
+        node.src = "../static/aicon.png";
+        node.style.cssText = "left:" + setPos + "%";
+        node.alt = nowTime;
+        node.className = 'point';
+        document.getElementById("pointbox").appendChild(node);
+    }
+
+    var point = document.querySelector('#pointbox');
+    point.addEventListener('click', function (ev) {
+        setTime(ev.target.alt);
+    }, false);
+
+    function shiori_thread() {
+        let newDiv = document.createElement('div');
+        newDiv.className = "topic";
+        newDiv.id = "123";
+        cDiv.appendChild(newDiv);
+        let typeDiv = document.createElement('div');
+        typeDiv.className = "topic-type";
+        let typePara = document.createElement('p');
+        typePara.textContent = "しおりん";
+        typeDiv.appendChild(typePara);
+        newDiv.appendChild(typeDiv);
+        let msgDiv = document.createElement('div');
+        msgDiv.className = "topic-message";
+        let msgPara = document.createElement('p');
+        msgPara.textContent = "きてるじゃん！やったね！";
+        msgDiv.appendChild(msgPara);
+        newDiv.appendChild(msgDiv);
+    };
+
+    function createChatFromJsondata(data) {
+        data.forEach(function (jd) {
+            let newDiv = document.createElement('div');
+            newDiv.className = "topic";
+            newDiv.id = jd.its_id;
+            let typeDiv = document.createElement('div');
+            let msgDiv = document.createElement('div');
+            let msgPara = document.createElement('p');
+            if (jd.msg_type == "shiori") {
+                newDiv.className = "topic shiori";
+                var img = document.createElement('img');
+                img.src = "http://192.168.98.25:8080/static/img/talk_icon_before.svg";
+                typeDiv.appendChild(img);
+                newDiv.addEventListener("click", function () {
+                    var el = document.querySelector('.chats')
+                    el.innerHTML = "";
+                    callChatInfoAndCreateChat(newDiv.id);
+                }, false);
+            }
+            ;
+
+            typeDiv.className = "topic-type";
+            msgDiv.className = "topic-message";
+            msgPara.textContent = jd.msg;
+            cDiv.appendChild(newDiv);
+            newDiv.appendChild(typeDiv);
+            msgDiv.appendChild(msgPara);
+            newDiv.appendChild(msgDiv);
+        })
+    }
+
+    function callChatInfoAndCreateChat(id) {
         $.ajax({
             url: 'http://192.168.98.25:8080/search/chats',
             data: {"id": id},
             type: 'GET',
             success: function (data) {
                 console.log("call", data);
-                data.forEach(function (jd) {
-                    let newDiv = document.createElement('div');
-                    newDiv.className = "topic";
-                    newDiv.id = jd.its_id;
-                    let typeDiv = document.createElement('div');
-                    if (jd.msg_type == "shiori") {
-                        newDiv.className = "topic shiori";
-                        var img = document.createElement('img');
-                        img.src = "http://192.168.98.25:8080/static/img/talk_icon_before.svg";
-                        typeDiv.appendChild(img);
-                        newDiv.onclick = function (ev) {
-                            var el = document.querySelector('.chats')
-                            el.innerHTML = "";
-                            shiori_thread();
-                        };
-                    }
-                    ;
-                    cDiv.appendChild(newDiv);
-                    typeDiv.className = "topic-type";
-                    newDiv.appendChild(typeDiv);
-                    let msgDiv = document.createElement('div');
-                    msgDiv.className = "topic-message";
-                    let msgPara = document.createElement('p');
-                    msgPara.textContent = jd.msg;
-                    msgDiv.appendChild(msgPara);
-                    newDiv.appendChild(msgDiv);
-                })
                 createChatFromJsondata(data);
             }
         });
-
-
-        video.ontimeupdate = function () {
-            var percentage = (video.currentTime / video.duration) * 100;
-            $("#progress").css("width", percentage + "%");
-        };
-        $("#progress").on("click", function (e) {
-            var offset = $(this).offset();
-            var left = (e.pageX - offset.left);
-            var totalWidth = $("#progress").width();
-            var percentage = (left / totalWidth);
-            var vidTime = video.duration * percentage;
-            video.currentTime = vidTime;
-        });
-
-        function setTime(t) {
-            video.currentTime = t;
-        }
-
-        function shioriFunction() {
-            const video = document.getElementById('video_play');
-            var fullTime = video.duration; // 動画全体の時間
-            var nowTime = video.currentTime; // 現在の再生時間
-            var setPos = (nowTime / fullTime) * 100 - 1.5; // 全体に対する現在の位置
-            var node = document.createElement("img");
-            node.src = "../static/aicon.png";
-            node.style.cssText = "left:" + setPos + "%";
-            node.alt = nowTime;
-            node.className = 'point';
-            document.getElementById("pointbox").appendChild(node);
-        }
-
-        var point = document.querySelector('#pointbox');
-        point.addEventListener('click', function (ev) {
-            setTime(ev.target.alt);
-        }, false);
-
-        function shiori_thread() {
-            let newDiv = document.createElement('div');
-            newDiv.className = "topic";
-            newDiv.id = "123";
-            cDiv.appendChild(newDiv);
-            let typeDiv = document.createElement('div');
-            typeDiv.className = "topic-type";
-            let typePara = document.createElement('p');
-            typePara.textContent = "しおりん";
-            typeDiv.appendChild(typePara);
-            newDiv.appendChild(typeDiv);
-            let msgDiv = document.createElement('div');
-            msgDiv.className = "topic-message";
-            let msgPara = document.createElement('p');
-            msgPara.textContent = "きてるじゃん！やったね！";
-            msgDiv.appendChild(msgPara);
-            newDiv.appendChild(msgDiv);
-        };
-
-        function createChatFromJsondata(data) {
-            data.forEach(function (jd) {
-                let newDiv = document.createElement('div');
-                newDiv.className = "topic";
-                newDiv.id = jd.its_id;
-                let typeDiv = document.createElement('div');
-                let msgDiv = document.createElement('div');
-                let msgPara = document.createElement('p');
-                if (jd.msg_type == "shiori") {
-                    newDiv.className = "topic shiori";
-                    var img = document.createElement('img');
-                    img.src = "http://192.168.98.25:8080/static/img/talk_icon_before.svg";
-                    typeDiv.appendChild(img);
-                    newDiv.addEventListener("click", function () {
-                        var el = document.querySelector('.chats')
-                        el.innerHTML = "";
-                        callChatInfoAndCreateChat(newDiv.id);
-                    }, false);
-                }
-                ;
-
-                typeDiv.className = "topic-type";
-                msgDiv.className = "topic-message";
-                msgPara.textContent = jd.msg;
-                cDiv.appendChild(newDiv);
-                newDiv.appendChild(typeDiv);
-                msgDiv.appendChild(msgPara);
-                newDiv.appendChild(msgDiv);
-            })
-        }
-
-        function callChatInfoAndCreateChat(id) {
-            $.ajax({
-                url: 'http://192.168.98.25:8080/search/chats',
-                data: {"id": id},
-                type: 'GET',
-                success: function (data) {
-                    console.log("call", data);
-                    createChatFromJsondata(data);
-                }
-            });
-        }
+    }
 </script>
 
 </body>
