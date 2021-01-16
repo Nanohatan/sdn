@@ -7,16 +7,19 @@ var url = "mongodb://localhost:27017/";
 
 router.get('/', function(req, res) {
   //res.sendfile('static/video_search.html');
-MongoClient.connect(url, function(err, db) {
-  if (err) throw err;
-  var dbo = db.db("movieInfo");
-  dbo.collection("movies").find({}, { projection: { _id: 0} }).limit(5).toArray(function(err, result) {
+  MongoClient.connect(url, function(err, db) {
     if (err) throw err;
-    db.close();
-    res.render("video_search", {"jd":result})
+    var dbo = db.db("movieInfo");
+    dbo.collection("movies").distinct("class_name", function(err, result){
+      if (err){
+        db.close();
+        console.log(err);
+      };
+      res.render('video_search', {"class_name": result});
+    });
   });
 });
-});
+
 router.get('/testGet',function(req,res){
 res.send("hallo");
 });
