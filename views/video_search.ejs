@@ -34,10 +34,10 @@
 
 <!-- input for serching -->
 <div id="search_box">
-  <h1>動画検索</h1>
+  <h1>講義検索</h1>
   <form action="">
     <input type="text" id="video_search" name="video_search" >
-    <button type="submit"><i class="fa fa-search"></i></button>
+    <button type="submit" id="button"><i class="fa fa-search"></i></button>
   </form>
 </div>
 <div class="class-list">
@@ -59,26 +59,40 @@
 
 
 <script>
-var jobj = <%- JSON.stringify(class_name) %>
-console.log(jobj);
-jobj.forEach(function(jd){
-  let currentDiv=document.getElementsByClassName("class-list")[0];
-  let newDiv=document.createElement('div');
-  let newa=document.createElement('a');
-  let newh2=document.createElement('h2');
-  let newPara=document.createElement('p');
-  newDiv.className ="class-video";
-
-  currentDiv.appendChild(newDiv);
-  newa.href="search/class/"+jd;
-  newDiv.appendChild(newa);
-  newPara.textContent=jd;
-  newa.appendChild(newh2);
-  newa.appendChild(newPara);
-})
+var classes = <%- JSON.stringify(class_name) %>
+console.log(classes);
+create_list(classes);
 
 
+//検索ボタンがクリックされたら文字列を含む講義名のみ表示する．
+document.getElementById("button").onclick = function() {
+  str = '/'+document.getElementById("video_search").value+'/';
+  jobj = []
+  classes.forEach(function(cl){
+    if ( cl.match(str)) {
+      jobj.push(cl);
+    };
+  });
+  create_list(jobj);
+};
 
+function create_list(jobj){
+  jobj.forEach(function(jd){
+    let currentDiv=document.getElementsByClassName("class-list")[0];
+    let newDiv=document.createElement('div');
+    let newa=document.createElement('a');
+    let newh2=document.createElement('h2');
+    let newPara=document.createElement('p');
+    newDiv.className ="class-video";
+
+    currentDiv.appendChild(newDiv);
+    newa.href="search/class/"+jd;
+    newDiv.appendChild(newa);
+    newPara.textContent=jd;
+    newa.appendChild(newh2);
+    newa.appendChild(newPara);
+  });
+}
 </script>
 
 
