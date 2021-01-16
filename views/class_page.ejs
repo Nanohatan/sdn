@@ -106,14 +106,13 @@
             var img = document.createElement('img');
             img.src = "http://192.168.98.25:8080/static/img/talk_icon_before.svg";
             typeDiv.appendChild(img);
-            newDiv.onclick = function (ev) {
-                document.getElementById("chats").addEventListener("click", shiori_thread);//後で書き換える
-                newDiv.onclick = function (ev) {
+            newDiv.addEventListener("click", function () {
                     var el = document.querySelector('.chats')
                     el.innerHTML = "";
-                    shiori_thread();
-                };
-            };
+                    callChatInfoAndCreateChat(newDiv.id);
+                    changeParentsID(newDiv.id,sub);
+            }, false);
+            
             cDiv.appendChild(newDiv);
             typeDiv.className = "topic-type";
             let typePara = document.createElement('p');
