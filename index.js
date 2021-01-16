@@ -81,6 +81,7 @@ app.get('/top', function (req, res) {
 io.on('connection', (socket) => {
     socket.on('join', function(id) {
         socket.join(id);
+        console.log(id+"に参加しました");
     });
 
     console.log('a user connected');
