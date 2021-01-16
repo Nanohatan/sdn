@@ -38,3 +38,18 @@ MongoClient.connect(url, function(err, db) {
 });
 module.exports = router;
 
+router.get('/class/:name', function(req, res) {
+  //res.sendfile('static/video_search.html');
+  class_name = req.params.name
+  MongoClient.connect(url, function(err, db) {
+    if (err) throw err;
+    var dbo = db.db("movieInfo");
+    var query = {movie_id: class_name};
+    dbo.collection("movies").find(query).toArray(function(err, result) {
+      if (err) throw err;
+      db.close();
+      //授業名をclass_nameで渡す． パラメータで渡された科目の講義の情報をjdで渡す．
+      res.render("class_list_page", {"jd":result, "classs_name":class_name});
+    });
+  });
+});
