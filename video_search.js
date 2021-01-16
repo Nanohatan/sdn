@@ -49,7 +49,7 @@ router.get('/class/:name', function(req, res) {
       if (err) throw err;
       db.close();
       //授業名をclass_nameで渡す． パラメータで渡された科目の講義の情報をjdで渡す．
-      res.render("class_list_page", {"jd":result, "classs_name":c_name});
+      res.render("class_list_page", {"jd":result, "class_name":c_name});
     });
   });
 });
