@@ -96,6 +96,7 @@
     socket.emit('join', id);
 
 
+
         // 全体に向けて更新されたチャットを追加
 socket.on('chat message', function (msg, reaction, its_id,isParent) {
     let newDiv = document.createElement('div');
@@ -126,6 +127,7 @@ socket.on('chat message', function (msg, reaction, its_id,isParent) {
         msgPara.textContent = msg;
         msgDiv.appendChild(msgPara);
         newDiv.appendChild(msgDiv);
+
     });
     
 
