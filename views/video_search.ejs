@@ -70,10 +70,9 @@ jobj.forEach(function(jd){
   newDiv.className ="class-video";
 
   currentDiv.appendChild(newDiv);
-  newa.href="video/"+jd.movie_id
+  newa.href="search/class/"+jd.class_name;
   newDiv.appendChild(newa);
-  newh2.textContent="第"+jd.lecture_time+"回目";
-  newPara.textContent=jd.lecture_name;
+  newPara.textContent=jd.class_anme;
   newa.appendChild(newh2);
   newa.appendChild(newPara);
 })
