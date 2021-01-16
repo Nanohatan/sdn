@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title><%- class_name %>講義一覧</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://192.168.98.25:8080/static/css/navibar.css">
+</head>
+<style>
+    #search_box{
+        text-align: center;
+    }
+
+    input {
+        width: 50%;
+        padding: 10px 20px;
+        margin: 10px 0;
+        box-sizing: border-box;
+        font-size: 15px;
+    }
+    button {
+        font-size: 30px;
+    }
+
+</style>
+
+<body>
+
+<!-- navigation bar -->
+<div class="navbar">
+    <a href="auth/login" >時間割</a>
+    <a href="#">授業検索</a>
+</div>
+
+<!-- input for serching -->
+<div id="search_box">
+    <h1><%- class_name %></h1>
+    <form action="">
+        <input type="text" id="video_search" name="video_search" >
+        <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+</div>
+
+<!-- class list-->
+<div class="class-list">
+    <div class="class-video">
+        <h2>第N回目</h2><p>ここに動画タイトル、url</p>
+    </div>
+
+    <style>
+    .class-list{
+        border-style: dashed;
+        border-color: black;
+    }
+
+    .class-video{
+        margin: 10px;
+        height: 20%;
+        border-style: dashed;
+        border-color: green;
+    }
+    </style>
+</div>
+
+
+<script>
+    console.log(<%-JSON.stringify(jd)%>);
+    var jobj=<%-JSON.stringify(jd)%>; 
+    console.log(jobj);
+    jobj.forEach(function(jd){
+        let currentDiv=document.getElementsByClassName("class-list")[0];
+        let newDiv=document.createElement('div');
+        let newa=document.createElement('a');
+        let newh2=document.createElement('h2');
+        let newPara=document.createElement('p');
+        newDiv.className ="class-video";
+
+        currentDiv.appendChild(newDiv);
+        newa.href="video/"+jd.movie_id
+        newDiv.appendChild(newa);
+        newh2.textContent="第"+jd.lecture_time+"回目";
+        newPara.textContent=jd.lecture_name;
+        newa.appendChild(newh2);
+        newa.appendChild(newPara);
+    })
+</script>
+</body>
+</html>
+

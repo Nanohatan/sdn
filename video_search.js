@@ -38,3 +38,16 @@ MongoClient.connect(url, function(err, db) {
 });
 module.exports = router;
 
+router.get('/class/:name', function(req, res) {
+  //res.sendfile('static/video_search.html');
+  class_name = req.params.name
+  MongoClient.connect(url, function(err, db) {
+    if (err) throw err;
+    var dbo = db.db("movieInfo");
+    dbo.collection("movies").find({}, { projection: { _id: 0} }).limit(5).toArray(function(err, result) {
+      if (err) throw err;
+      db.close();
+      res.render("class_list_page", {"jd":result, "classs_name":class_name})
+    });
+  });
+});
