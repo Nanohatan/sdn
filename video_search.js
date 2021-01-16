@@ -6,11 +6,7 @@ var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/";
 
 router.get('/', function(req, res) {
-<<<<<<< Updated upstream
   //res.sendfile('static/video_search.html');
-=======
-  // res.sendfile('static/video_search.html');
->>>>>>> Stashed changes
   MongoClient.connect(url, function(err, db) {
     if (err) throw err;
     var dbo = db.db("movieInfo");
