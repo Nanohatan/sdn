@@ -92,8 +92,6 @@ io.on('connection', (socket) => {
 
     console.log('a user connected');
     socket.join("first");
-    socket.join("first");
-    socket.join("first");
     console.log(socket.rooms);
     socket.on('chat message', (msg, reaction, id, isParent, shiori_time, nowTime) => {
         puid = new Puid();
