@@ -103,11 +103,11 @@
 
     // 全体に向けて更新されたチャットを追加
     socket.on('chat message', function (msg, reaction, its_id, isParent, time) {
-        createChatFromData(msg, reaction, its_id, isParent);
+        createChatFromData(msg, reaction, its_id, isParent, time);
         console.log("きてる");
     });
 
-    function createChatFromData(msg, reaction, its_id, isParent) {
+    function createChatFromData(msg, reaction, its_id, isParent, time) {
         let newDiv = document.createElement('div');
         newDiv.className = "topic";
         newDiv.id = id._id;
