@@ -25,19 +25,23 @@ res.send("hallo");
 });
 
 router.get('/chats',function(req,res){
-var chat_id=req.query.id;
-console.log(chat_id);
-MongoClient.connect(url, function(err, db) {
-  if (err) throw err;
-  var dbo = db.db("chatInfo");
-  var query = {parent_id:chat_id};
-  dbo.collection("chats").find(query, { projection: { _id: 0} }).toArray(function(err, result) {
+const chat_id=req.query.id;
+const isWatchByTeacher= (req.cookies.isTeacher == 'true');
+console.log(chat_id+isWatchByTeacher);
+  MongoClient.connect(url, function(err, db) {
     if (err) throw err;
-    db.close();
-    console.log(result);
-    res.send(result);
+    var dbo = db.db("chatInfo");
+    var query = {};
+    if (isWatchByTeacher){//先生verはisWatchByTeacherがtrueの物飲みとってくる
+      query = {parent_id:chat_id,isWatchByTeacher:isWatchByTeacher};
+    }else{query = {parent_id:chat_id};}//生徒ver isWatchByTeacherに関わらす、関連するチャットをとってくる
+    dbo.collection("chats").find(query, { projection: { _id: 0} }).toArray(function(err, result) {
+      if (err) throw err;
+      db.close();
+      console.log(result);
+      res.send(result);
+    });
   });
-});
 });
 module.exports = router;
 
@@ -53,5 +57,6 @@ router.get('/class/:name', function(req, res) {
       //授業名をclass_nameで渡す． パラメータで渡された科目の講義の情報をjdで渡す．
       res.render("class_list_page", {"jd":result, "class_name":c_name, "role":req.cookies.isTeacher});
     });
+
   });
 });
