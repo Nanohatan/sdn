@@ -113,8 +113,6 @@ socket.on('chat message', function (msg, reaction, its_id,isParent) {
             img.src = "http://192.168.98.25:8080/static/img/talk_icon_before.svg";
             typeDiv.appendChild(img);
             newDiv.addEventListener("click", function () {
-                    var el = document.querySelector('.chats')
-                    el.innerHTML = "";
                     callChatInfoAndCreateChat(newDiv.id);
                     changeParentsID(newDiv.id,sub);
             }, false);
@@ -189,6 +187,8 @@ socket.on('chat message', function (msg, reaction, its_id,isParent) {
     }
 
     function callChatInfoAndCreateChat(id) {
+        var el = document.querySelector('.chats')
+        el.innerHTML = "";
         $.ajax({
             url: 'http://192.168.98.25:8080/search/chats',
             data: {"id": id},
