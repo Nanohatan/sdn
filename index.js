@@ -68,7 +68,8 @@ app.get('/video/:id', function (req, res) {
                 className: result[0].lecture_name,
                 videoTitle: result[0].lecture_name,
                 videoNumber: result[0].lecture_time,
-                place: sorce_url
+                place: sorce_url,
+                movie_id: req.params.id
             });
         });
     });
@@ -85,11 +86,11 @@ io.on('connection', (socket) => {
     });
 
     console.log('a user connected');
-    socket.on('chat message', (msg, reaction, id) => {
+    socket.on('chat message', (msg, reaction, id, isParent) => {
         puid = new Puid();
         puid = puid.generate();
         // io.emit('chat message', msg, reaction, puid);
-        io.to(id).emit('chat message', msg, reaction, puid);
+        io.to(id).emit('chat message', msg, reaction, puid,isParent);
         // io.emit('reload signal');
         console.log('message: ' + msg + reaction + id);
         MongoClient.connect(url, function (err, db) {
@@ -101,7 +102,8 @@ io.on('connection', (socket) => {
                 msg: msg,
                 isWatchByTeacher: false,
                 rating: 0,
-                msg_type: reaction
+                msg_type: reaction,
+                isParent: isParent
             };
             dbo.collection("chats").insertOne(chat_obj, function (err, res) {
                 if (err) throw err;
