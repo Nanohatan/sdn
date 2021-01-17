@@ -124,6 +124,7 @@ io.on('connection', (socket) => {
                 db.close();
             });
         });
+        socket.join(join_id);
     });
 });
 
