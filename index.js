@@ -90,7 +90,8 @@ io.on('connection', (socket) => {
     socket.on('chat message', (msg, reaction, id, isParent, shiori_time, nowTime) => {
         puid = new Puid();
         puid = puid.generate();
-        socket.join(join_id);
+        console.log(join_id);
+        console.log(socket.rooms);
         socket.leave(join_id);
         join_id = id;
         socket.join(join_id);
