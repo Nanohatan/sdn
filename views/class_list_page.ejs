@@ -68,7 +68,7 @@
 
     <script>
         var classes = [];
-        classes.push("\"<%- class_name %>\"");
+        classes.push(<%- class_name %>);
         var lectures = <%- JSON.stringify(jd) %>;
         console.log(classes);
         create_list(classes);
