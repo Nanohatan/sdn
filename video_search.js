@@ -26,9 +26,8 @@ res.send("hallo");
 
 router.get('/chats',function(req,res){
 const chat_id=req.query.id;
-const isWatchByTeacher=req.cookies.isTeacher;
-console.log(isWatchByTeacher)
-console.log(chat_id);
+const isWatchByTeacher= (req.cookies.isTeacher == 'true');
+console.log(chat_id+isWatchByTeacher);
   MongoClient.connect(url, function(err, db) {
     if (err) throw err;
     var dbo = db.db("chatInfo");
