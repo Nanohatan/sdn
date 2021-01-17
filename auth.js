@@ -84,10 +84,6 @@ router.post('/signup',function(req,res){
       db.close();
     });
   });
-
-
-
-  res.render("userPage.ejs", {"role": req.body.role,"userName": req.body.userName})
 })
 
 module.exports = router;
