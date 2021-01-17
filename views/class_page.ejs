@@ -24,7 +24,8 @@
         <video id="video_play" controls preload="none"></video>
     </div>
     <div class="chat_display column" style="border-style: solid; border-color: red; ">
-        <h2 onclick="callChatInfoAndCreateChat('<%= movie_id %>')" id="<%= movie_id %>">←戻る</h2>
+        <h2 onclick="clickModoru('<%= movie_id %>')" id="<%= movie_id %>">←戻る</h2>
+        <script>function clickModoru(id){callChatInfoAndCreateChat(id); changeParentsID(id);}</script>
         <div class="chats" id="chats" style="height: 500px; border-style: solid; border-color:red; overflow: scroll;">
         </div>
     </div>
@@ -138,6 +139,7 @@
     var url_array = url.split("/");
     var id = url_array[url_array.length - 1]
     let cDiv = document.getElementsByClassName("chats")[0];
+    //ページについたとき、表示されるチャット
     $.ajax({
         url: 'http://192.168.98.25:8080/search/chats',
         data: {"id": id},
