@@ -25,19 +25,21 @@ res.send("hallo");
 });
 
 router.get('/chats',function(req,res){
-var chat_id=req.query.id;
+const chat_id=req.query.id;
+const isWatchByTeacher=req.cookies.isTeacher;
+console.log(isWatchByTeacher)
 console.log(chat_id);
-MongoClient.connect(url, function(err, db) {
-  if (err) throw err;
-  var dbo = db.db("chatInfo");
-  var query = {parent_id:chat_id};
-  dbo.collection("chats").find(query, { projection: { _id: 0} }).toArray(function(err, result) {
+  MongoClient.connect(url, function(err, db) {
     if (err) throw err;
-    db.close();
-    console.log(result);
-    res.send(result);
+    var dbo = db.db("chatInfo");
+    var query = {parent_id:chat_id,isWatchByTeacher:isWatchByTeacher};
+    dbo.collection("chats").find(query, { projection: { _id: 0} }).toArray(function(err, result) {
+      if (err) throw err;
+      db.close();
+      console.log(result);
+      res.send(result);
+    });
   });
-});
 });
 module.exports = router;
 
