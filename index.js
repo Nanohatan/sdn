@@ -79,8 +79,10 @@ app.get('/top', function (req, res) {
 });
 
 io.on('connection', (socket) => {
+    var join_id;
     socket.on('join', function(id) {
-        socket.join(id);
+        join_id = id;
+        socket.join(join_id);
         console.log(id+"に参加しました");
     });
 
@@ -88,12 +90,13 @@ io.on('connection', (socket) => {
     socket.on('chat message', (msg, reaction, id, isParent) => {
         puid = new Puid();
         puid = puid.generate();
-        socket.join(id);
+        socket.leave(join_id);
+        join_id = id;
+        socket.join(join_id);
         console.log(socket.rooms);
         io.to(id).emit('chat message', msg, reaction, puid, isParent);
         console.log('message: ' + msg + reaction + id);
         console.log(socket.rooms);
-        socket.leave(id);
         MongoClient.connect(url, function (err, db) {
             if (err) throw err;
             var dbo = db.db("chatInfo");
