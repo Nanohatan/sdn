@@ -101,6 +101,7 @@
     var url_array = url.split("/");
     var id = url_array[url_array.length - 1]
     sub.id = id;
+    console.log("これね！！！"+id);
     socket.emit('join', id);
 
 
