@@ -51,20 +51,18 @@ var url = "mongodb://localhost:27017/";
 router.post('/', upload.single('movie'),function(req, res,next) {
   res.sendfile('static/upload.html');
  // console.log(req.body,req.file);
-
-MongoClient.connect(url, function(err, db) {
-  if (err) throw err;
-  var dbo = db.db("movieInfo");
-  var obj = {movie_id:req.file.movie_id, lecture_name:req.body.lecture_name, lecture_time:req.body.lecture_time,day:req.body.day ,period:req.body.period};
-  //var obj = { lecture_name:"Company Inc", lecture_time:0,day:"monday" ,period:2};
-  dbo.collection("movies").insertOne(obj, function(err, res) {
+  MongoClient.connect(url, function(err, db) {
     if (err) throw err;
-    console.log("1 document inserted");
-    db.close();
+    var dbo = db.db("movieInfo");
+    var obj = {movie_id:req.file.movie_id, lecture_name:req.body.lecture_name, lecture_time:req.body.lecture_time,day:req.body.day ,period:req.body.period, class_name:req.body.class_name};
+    //var obj = { lecture_name:"Company Inc", lecture_time:0,day:"monday" ,period:2};
+    dbo.collection("movies").insertOne(obj, function(err, res) {
+      if (err) throw err;
+      console.log("1 document inserted");
+      db.close();
+    });
+    createSegments(__dirname, req);
   });
-  createSegments(__dirname, req);
-});
-
 });
 
 //functions
