@@ -25,18 +25,19 @@ router.get('/login', function(req, res) {
     MongoClient.connect(url, function(err, db) {
       if (err) throw err;
       var dbo = db.db("userInfo");
-        dbo.collection("users").findOne({uid:req.cookies.uid}, function(err, result) {
-	  if (err) throw err;
-          if (result==undefined){
-            res.redirect('/auth')
-          }else {
-
+      dbo.collection("users").findOne({uid:req.cookies.uid}, function(err, result) {
+	      if (err) throw err;
+        if (result==undefined){
+          res.redirect('/auth')
+        }else {
           n=result.name;
           r=result.isTeacher;
-	  console.log(result.name);
-	  db.close();
-          res.render("userPage.ejs", {"role": r,"userName":n})}
-        });
+          res.cookie("isTeacher",r)
+          console.log(result.name);
+          db.close();
+          res.render("userPage.ejs", {"role": r,"userName":n})
+        }
+      });
     });
     //res.render("userPage.ejs", {"role": r,"userName":n})
   }
@@ -46,12 +47,8 @@ router.post('/post', urlencodedParser, function (req, res) {
 //crate user account
  console.log(req.body)
  //set cookie
-// res.cookie("email", req.body.email)
+ res.cookie("isTeacher",req.body.role)
  res.cookie("uid", req.body.uid)
-
- //insert db (uid,role,email)
-
-
  res.send('post');
 });
 
@@ -63,6 +60,32 @@ router.post('/createAccount',function(req,res){
 
 
   res.render("userPage.ejs", {"role": req.body.role,"userName": req.body.userName})
+})
+
+router.post('/signup', urlencodedParser,function(req,res){
+  console.log(req.body);
+  const userObj ={
+    uid:"test_uid",
+    isTeacher:req.body.isTeacher,
+    name: req.body.name,
+    email: req.body.email,
+    password:req.body.pwd
+  }
+  MongoClient.connect(url, function(err, db) {
+    if (err) throw err;
+    var dbo = db.db("userInfo");
+    dbo.collection("users").findOne({ email: userObj.email}, function(err, result) {
+      if (err) throw err;
+      if (result==undefined){
+        dbo.collection("users").insertOne(userObj, function(err, res) {
+          if (err) throw err;
+          console.log("user document inserted");
+          db.close();
+        });
+      }
+      db.close();
+    });
+  });
 })
 
 module.exports = router;
