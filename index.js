@@ -52,7 +52,7 @@ app.get('/test', function (req, res) {
 });
 
 app.get('/video/:id', function (req, res) {
-    console.log('/video/:id'+req.cookeis.isTeacher);
+    console.log(req.cookies.isTeacher);
     var sorce_url = "/uploads/" + req.params.id + "/playlist.m3u8";
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;

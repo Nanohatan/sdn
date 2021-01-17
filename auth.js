@@ -30,11 +30,13 @@ router.get('/login', function(req, res) {
         if (result==undefined){
           res.redirect('/auth')
         }else {
-        n=result.name;
-        r=result.isTeacher;
-	      console.log(result.name);
-	      db.close();
-        res.render("userPage.ejs", {"role": r,"userName":n})}
+          n=result.name;
+          r=result.isTeacher;
+          res.cookie("isTeacher",r)
+          console.log(result.name);
+          db.close();
+          res.render("userPage.ejs", {"role": r,"userName":n})
+        }
       });
     });
     //res.render("userPage.ejs", {"role": r,"userName":n})
@@ -79,7 +81,6 @@ router.post('/signup', urlencodedParser,function(req,res){
           if (err) throw err;
           console.log("user document inserted");
           db.close();
-          res.send("success");
         });
       }
       db.close();
