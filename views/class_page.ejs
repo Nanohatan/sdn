@@ -100,13 +100,13 @@
         }
     });
 
+
+    var url = window.location.href;
+    var url_array = url.split("/");
+    var id = url_array[url_array.length - 1]
     window.addEventListener('DOMContentLoaded', function () {
-        var url = window.location.href;
-        var url_array = url.split("/");
-        var id = url_array[url_array.length - 1]
-        sub.id = id;
         console.log("これね！！！" + id);
-        socket.emit('join', id);
+        // socket.emit('join', id);
         socket.emit('join', id);
     });
 
@@ -114,6 +114,8 @@
     // 全体に向けて更新されたチャットを追加
     socket.on('chat message', function (msg, reaction, its_id, isParent, shiori_time, nowTime) {
         createChatFromData(msg, reaction, its_id, isParent, shiori_time, nowTime);
+        callChatInfoAndCreateChat();
+        changeParentsID(its_id);
         console.log("ブラウザにきてるんだ……");
     });
 
