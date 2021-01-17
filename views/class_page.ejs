@@ -83,13 +83,15 @@
             var url = window.location.href;
             var url_array = url.split("/");
             var id = url_array[url_array.length - 1]
+            const video = document.getElementById('video_play');
             // index.jsのsocket.on('chat message')に移動
             var isParent = false;
             if (sub.id == id) {
                 isParent = true;
             }
-            var time = shiori_time.style.width;
-            socket.emit('chat message', input.value, reaction.value, sub.id, isParent, time);
+            var shiori_time = shiori_time.style.width;
+            var nowTime = video.currentTime;
+            socket.emit('chat message', input.value, reaction.value, sub.id, isParent, shiori_time, nowTime);
             input.value = '';
         }
     });
@@ -102,12 +104,12 @@
 
 
     // 全体に向けて更新されたチャットを追加
-    socket.on('chat message', function (msg, reaction, its_id, isParent, time) {
-        createChatFromData(msg, reaction, its_id, isParent, time);
+    socket.on('chat message', function (msg, reaction, its_id, isParent, shiori_time, nowTime) {
+        createChatFromData(msg, reaction, its_id, isParent, shiori_time, nowTime);
         console.log("きてる");
     });
 
-    function createChatFromData(msg, reaction, its_id, isParent, time) {
+    function createChatFromData(msg, reaction, its_id, isParent, shiori_time, nowTime) {
         let newDiv = document.createElement('div');
         newDiv.className = "topic";
         newDiv.id = id._id;
