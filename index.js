@@ -96,7 +96,7 @@ io.on('connection', (socket) => {
         puid = new Puid();
         puid = puid.generate();
         console.log(join_id);
-        console.log(socket.rooms.get(join_id));
+        console.log(socket.rooms);
         // socket.leave(join_id);
         join_id = id;
         socket.join(join_id);
