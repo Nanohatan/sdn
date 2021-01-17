@@ -96,6 +96,7 @@
     socket.emit('join', id);
 
 
+
         // 全体に向けて更新されたチャットを追加
 socket.on('chat message', function (msg, reaction, its_id,isParent) {
     createChatFromData(msg,reaction,its_id,isParent);
@@ -130,7 +131,7 @@ socket.on('chat message', function (msg, reaction, its_id,isParent) {
         msgDiv.appendChild(msgPara);
         newDiv.appendChild(msgDiv);
     }
-    
+
 
     var url = window.location.href;
     var url_array = url.split("/");
