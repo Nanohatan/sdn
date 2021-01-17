@@ -125,6 +125,7 @@
                 callChatInfoAndCreateChat(newDiv.id);
                 changeParentsID(newDiv.id, sub);
             }, false);
+
             var node = document.createElement("img");
             node.src = "../static/aicon.png";
             node.style.cssText = "left:" + shiori_time + "%";
@@ -175,6 +176,7 @@
     });
 
     function setTime(t) {
+        console.log(t);
         video.currentTime = t;
     }
 
