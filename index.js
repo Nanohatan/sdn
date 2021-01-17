@@ -92,13 +92,12 @@ io.on('connection', (socket) => {
     });
 
     console.log('a user connected');
-    console.log(socket.rooms);
     socket.on('chat message', (msg, reaction, id, isParent, shiori_time, nowTime) => {
         puid = new Puid();
         puid = puid.generate();
         console.log(join_id);
         console.log(socket.rooms);
-        socket.leave(join_id);
+        // socket.leave(join_id);
         join_id = id;
         socket.join(join_id);
         console.log("きてうる！！！！！！！！！！！！！！！！！！！！");
