@@ -81,6 +81,7 @@ app.get('/top', function (req, res) {
 io.on('connection', (socket) => {
     var join_id;
     socket.on('join', function(id) {
+        console.log(socket.rooms);
         join_id = "first";
         socket.join(join_id);
         socket.join(join_id);
@@ -90,7 +91,6 @@ io.on('connection', (socket) => {
     });
 
     console.log('a user connected');
-    console.log(socket.rooms);
     socket.on('chat message', (msg, reaction, id, isParent, shiori_time, nowTime) => {
         puid = new Puid();
         puid = puid.generate();
