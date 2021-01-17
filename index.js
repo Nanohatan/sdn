@@ -81,14 +81,11 @@ app.get('/top', function (req, res) {
 io.on('connection', (socket) => {
     var join_id;
     socket.on('join', function(id) {
-        join_id = "first";
+        join_id = id;
         console.log(join_id)
         socket.join(join_id);
-        console.log(socket.rooms);
         socket.join(join_id);
-        console.log(socket.rooms);
-        socket.leave(socket.id);
-        console.log(socket.rooms);
+
     });
 
     console.log('a user connected');
@@ -99,6 +96,7 @@ io.on('connection', (socket) => {
         console.log(socket.rooms);
         socket.leave(join_id);
         join_id = id;
+        socket.join(join_id);
         socket.join(join_id);
         console.log("きてうる！！！！！！！！！！！！！！！！！！！！");
         console.log(join_id)
