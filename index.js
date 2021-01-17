@@ -54,6 +54,8 @@ app.get('/test', function (req, res) {
 });
 
 app.get('/video/:id', function (req, res) {
+    console.log(req.cookeis.isTeacher);
+    const isTeacher=req.cookeis.isTeacher;
     var sorce_url = "/uploads/" + req.params.id + "/playlist.m3u8";
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
@@ -64,7 +66,7 @@ app.get('/video/:id', function (req, res) {
             console.log(result);
             db.close();
             res.render('class_page', {
-                role: false,
+                role: isTeacher,
                 className: result[0].lecture_name,
                 videoTitle: result[0].lecture_name,
                 videoNumber: result[0].lecture_time,
