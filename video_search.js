@@ -31,7 +31,10 @@ console.log(chat_id+isWatchByTeacher);
   MongoClient.connect(url, function(err, db) {
     if (err) throw err;
     var dbo = db.db("chatInfo");
-    var query = {parent_id:chat_id,isWatchByTeacher:isWatchByTeacher};
+    var query = {};
+    if (isWatchByTeacher){//先生verはisWatchByTeacherがtrueの物飲みとってくる
+      query = {parent_id:chat_id,isWatchByTeacher:isWatchByTeacher};
+    }else{query = {parent_id:chat_id};}//生徒ver isWatchByTeacherに関わらす、関連するチャットをとってくる
     dbo.collection("chats").find(query, { projection: { _id: 0} }).toArray(function(err, result) {
       if (err) throw err;
       db.close();
