@@ -53,6 +53,7 @@ app.get('/test', function (req, res) {
 
 app.get('/video/:id', function (req, res) {
     console.log(req.cookies.isTeacher);
+    console.log('Signed Cookies: ', req.signedCookies)
     var sorce_url = "/uploads/" + req.params.id + "/playlist.m3u8";
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
