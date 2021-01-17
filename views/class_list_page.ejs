@@ -39,7 +39,7 @@
         <h1><%- class_name %></h1>
         <form action="">
             <input type="text" id="video_search" name="video_search" >
-            <button type="submit"><i class="fa fa-search"></i></button>
+            <button id="button"><i class="fa fa-search"></i></button>
         </form>
     </div>
     <button type="button">時間割に追加</button>
@@ -66,25 +66,47 @@
     </div>
 
     <script>
-        console.log(<%-JSON.stringify(jd)%>);
-        var jobj=<%-JSON.stringify(jd)%>; 
-        console.log(jobj);
-        jobj.forEach(function(jd){
-            let currentDiv=document.getElementsByClassName("class-list")[0];
-            let newDiv=document.createElement('div');
-            let newa=document.createElement('a');
-            let newh2=document.createElement('h2');
-            let newPara=document.createElement('p');
-            newDiv.className ="class-video";
-
-            currentDiv.appendChild(newDiv);
-            newa.href="/video/"+jd.movie_id
-            newDiv.appendChild(newa);
-            newh2.textContent="第"+jd.lecture_time+"回目";
-            newPara.textContent=jd.lecture_name;
-            newa.appendChild(newh2);
-            newa.appendChild(newPara);
-        })
+        var classes = [];
+        classes.push("<%- class_name %>");
+        var lectures = <%- JSON.stringify(jd) %>;
+        console.log(classes);
+        create_list(lectures);
+        
+        
+        //検索ボタンがクリックされたら文字列を含む講義名のみ表示する．
+        $('#button').on('click', function(){
+            $('.class-list').empty();  
+            str = document.getElementById("video_search").value;
+            jobj = [];
+            lectures.forEach(function(lec){
+                console.log(lec);
+                console.log(str);
+                if ( lec.lecture_name.includes(str) || lec.lecture_time.toString().includes(str)) {
+                    console.log(lec); 
+                    jobj.push(lec);
+                };
+            });
+            create_list(jobj);
+        });
+        
+        function create_list(jobj){
+            jobj.forEach(function(jd){
+                let currentDiv=document.getElementsByClassName("class-list")[0];
+                let newDiv=document.createElement('div');
+                let newa=document.createElement('a');
+                let newh2=document.createElement('h2');
+                let newPara=document.createElement('p');
+                newDiv.className ="class-video";
+        
+                currentDiv.appendChild(newDiv);
+                newa.href="/video/"+jd.movie_id
+                newDiv.appendChild(newa);
+                newh2.textContent="第"+jd.lecture_time+"回目";
+                newPara.textContent=jd.lecture_name;
+                newa.appendChild(newh2);
+                newa.appendChild(newPara);
+            });
+        }
     </script>
 </body>
 </html>
