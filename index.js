@@ -120,11 +120,10 @@ io.on('connection', (socket) => {
 
 
 app.use('/upload/', function (req, res, next) {
-    res.sendfile('static/upload.html'); // the uploaded file object
     if (!req.cookies.isTeacher){
         res.redirect("/home");
     }else{
-        res.sendfile('static/upload.html'); // the uploaded file object
+        res.sendfile('upload', {req.query.class_name}); // the uploaded file object
     }
     // res.send('<form action="/upload" method="POST" enctype="multipart/form-data">'+
     // '<input name="movie" type="file"/>'+
