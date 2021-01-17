@@ -104,8 +104,7 @@ io.on('connection', (socket) => {
         console.log("きてうる！！！！！！！！！！！！！！！！！！！！");
         console.log(join_id)
         console.log(socket.rooms);
-        console.log(socket.rooms[0] == null)
-        io.to(id).emit('chat message', msg, reaction, puid, isParent ,shiori_time, nowTime);
+        io.to(join_id).emit('chat message', msg, reaction, puid, isParent ,shiori_time, nowTime);
         MongoClient.connect(url, function (err, db) {
             if (err) throw err;
             var dbo = db.db("chatInfo");
