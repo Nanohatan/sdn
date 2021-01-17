@@ -84,7 +84,6 @@ io.on('connection', (socket) => {
         join_id = "first";
         console.log(join_id)
         socket.join(join_id);
-        socket.join(join_id);
 
     });
 
@@ -96,7 +95,6 @@ io.on('connection', (socket) => {
         console.log(socket.rooms);
         socket.leave(join_id);
         join_id = id;
-        socket.join(join_id);
         socket.join(join_id);
         console.log("きてうる！！！！！！！！！！！！！！！！！！！！");
         console.log(join_id)
