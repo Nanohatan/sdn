@@ -115,8 +115,6 @@
     // 全体に向けて更新されたチャットを追加
     socket.on('chat message', function (msg, reaction, its_id, isParent, shiori_time, nowTime) {
         createChatFromData(msg, reaction, its_id, isParent, shiori_time, nowTime);
-        callChatInfoAndCreateChat(its_id);
-        changeParentsID(its_id);
         console.log("ブラウザにきてるんだ……");
     });
 
