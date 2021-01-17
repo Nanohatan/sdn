@@ -81,7 +81,7 @@ app.get('/top', function (req, res) {
 io.on('connection', (socket) => {
     var join_id;
     socket.on('join', function(id) {
-        join_id = id;
+        join_id = "first";
         console.log(join_id)
         socket.join(join_id);
         socket.join(join_id);
