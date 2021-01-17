@@ -79,11 +79,6 @@ app.get('/top', function (req, res) {
 });
 
 io.on('connection', (socket) => {
-    socket.on('join', function(id) {
-        socket.join(id);
-        console.log(id+"に参加しました");
-    });
-
     console.log('a user connected');
     socket.on('chat message', (msg, reaction, id, isParent) => {
         puid = new Puid();
@@ -91,6 +86,7 @@ io.on('connection', (socket) => {
         socket.join(id);
         console.log(socket.rooms);
         io.to(id).emit('chat message', msg, reaction, puid, isParent);
+        soket.leave(id);
         console.log('message: ' + msg + reaction + id);
         MongoClient.connect(url, function (err, db) {
             if (err) throw err;
