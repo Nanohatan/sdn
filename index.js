@@ -88,6 +88,7 @@ io.on('connection', (socket) => {
 
     console.log('a user connected');
     socket.on('chat message', (msg, reaction, id, isParent, shiori_time, nowTime) => {
+        console.log(nowTime);
         puid = new Puid();
         puid = puid.generate();
         socket.leave(join_id);
