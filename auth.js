@@ -60,18 +60,19 @@ router.post('/createAccount',function(req,res){
   res.render("userPage.ejs", {"role": req.body.role,"userName": req.body.userName})
 })
 
-router.post('/signup',function(req,res){
+router.post('/signup', urlencodedParser,function(req,res){
+  console.log(req.body);
   const userObj ={
     uid:"test_uid",
-    isTeacher:req.isTeacher,
-    name: req.name,
-    email: req.email,
-    password:req.pwd
+    isTeacher:req.body.isTeacher,
+    name: req.body.name,
+    email: req.body.email,
+    password:req.body.pwd
   }
   MongoClient.connect(url, function(err, db) {
     if (err) throw err;
     var dbo = db.db("userInfo");
-    dbo.collection("users").findOne({ email: req.email}, function(err, result) {
+    dbo.collection("users").findOne({ email: userObj.email}, function(err, result) {
       if (err) throw err;
       if (result==undefined){
         dbo.collection("users").insertOne(userObj, function(err, res) {
