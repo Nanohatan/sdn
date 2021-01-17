@@ -84,6 +84,7 @@ io.on('connection', (socket) => {
         join_id = id;
         socket.join(join_id);
         console.log(id+"に参加しました");
+        console.log(socket.rooms);
     });
 
     console.log('a user connected');
