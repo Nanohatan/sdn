@@ -81,7 +81,8 @@ app.get('/top', function (req, res) {
 io.on('connection', (socket) => {
     var join_id;
     socket.on('join', function(id) {
-        join_id = String.valueOf(id);
+        join_id = id;
+        console.log(socket.id);
         console.log(join_id)
         socket.join(join_id);
         console.log(id+"に参加しました");
