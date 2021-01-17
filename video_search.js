@@ -42,7 +42,6 @@ MongoClient.connect(url, function(err, db) {
 module.exports = router;
 
 router.get('/class/:name', function(req, res) {
-  //res.sendfile('static/video_search.html');
   c_name = req.params.name
   MongoClient.connect(url, function(err, db) {
     if (err) throw err;
