@@ -71,6 +71,7 @@
     var input = document.getElementById('input');
     var reaction = document.getElementById('reaction-type');
     const sub = document.getElementById('reaction-submit-botton');
+    var shiori_time = document.getElementById('progress');
     //「送信する」ボタンが押された時の動作
     form.addEventListener('submit', function (e) {
         e.preventDefault();
@@ -87,7 +88,8 @@
             if (sub.id == id) {
                 isParent = true;
             }
-            socket.emit('chat message', input.value, reaction.value, sub.id, isParent);
+            var time = shiori_time.style.width;
+            socket.emit('chat message', input.value, reaction.value, sub.id, isParent, time);
             input.value = '';
         }
     });
@@ -100,7 +102,7 @@
 
 
     // 全体に向けて更新されたチャットを追加
-    socket.on('chat message', function (msg, reaction, its_id, isParent) {
+    socket.on('chat message', function (msg, reaction, its_id, isParent, time) {
         createChatFromData(msg, reaction, its_id, isParent);
         console.log("きてる");
     });
@@ -120,6 +122,12 @@
                 callChatInfoAndCreateChat(newDiv.id);
                 changeParentsID(newDiv.id, sub);
             }, false);
+            var node = document.createElement("img");
+            node.src = "../static/aicon.png";
+            node.style.cssText = "left:" + time + "%";
+            node.alt = nowTime;
+            node.className = 'point';
+            document.getElementById("pointbox").appendChild(node);
         };
         cDiv.appendChild(newDiv);
         typeDiv.className = "topic-type";

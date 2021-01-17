@@ -87,14 +87,14 @@ io.on('connection', (socket) => {
     });
 
     console.log('a user connected');
-    socket.on('chat message', (msg, reaction, id, isParent) => {
+    socket.on('chat message', (msg, reaction, id, isParent, time) => {
         puid = new Puid();
         puid = puid.generate();
         socket.leave(join_id);
         join_id = id;
         socket.join(join_id);
         console.log(socket.rooms);
-        io.to(id).emit('chat message', msg, reaction, puid, isParent);
+        io.to(id).emit('chat message', msg, reaction, puid, isParent ,time);
         console.log('message: ' + msg + reaction + id);
         console.log(socket.rooms);
         MongoClient.connect(url, function (err, db) {
@@ -107,7 +107,8 @@ io.on('connection', (socket) => {
                 isWatchByTeacher: false,
                 rating: 0,
                 msg_type: reaction,
-                isParent: isParent
+                isParent: isParent,
+                shiori_time: time
             };
             dbo.collection("chats").insertOne(chat_obj, function (err, res) {
                 if (err) throw err;
