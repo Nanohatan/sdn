@@ -43,18 +43,22 @@
         <h2 style="color: #FF7E2A;">同じ講義をとっている人と気軽にコミュニケーション！</h2>
         <h2 style="color: #FF7E2A;">先生に質問をするとこもできる！！</h2>
         <p>&nbsp;</p>
-        <a onclick="getChats('test_id')"  href="#" class="button">新規登録</a>
+        <a onclick="postData()"  href="#" class="button">新規登録</a>
         <a href="/auth" class="button">ログイン</a>
     </div>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 <script>
-  function getChats(id){
+  function postData(){
     console.log(id);
     $.ajax({
-        url : 'http://192.168.98.25:8080/search/chats',
-        data:{"id":id},
-        type: 'GET',
+        url : 'http://192.168.98.25:8080/auth/siginup',
+        data:{isTeacher:true,
+            name: "山田太郎",
+            email: "yamada@ie.u-ryukyu.ac.jp",
+            password:"12345678"
+        },
+        type: 'POST',
 
         success: function(data){
           console.log("call",data);
