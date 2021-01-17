@@ -152,6 +152,9 @@ const storage = multer.diskStorage({
 const upload = multer({storage: storage});
 
 app.use('/upload', function (req, res, next) {
+    if (req.query.class_name === "None"){
+        req.query.class_name = "";
+    }
     res.render('uploads', {"class_name":req.query.class_name});
     // res.sendfile('static/upload.html'); // the uploaded file object
     // res.send('<form action="/upload" method="POST" enctype="multipart/form-data">'+

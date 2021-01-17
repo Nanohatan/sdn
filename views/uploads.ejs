@@ -19,13 +19,13 @@
         <h3>動画アップロード</h3>
         <form action="/movie_upload" method="POST" enctype="multipart/form-data">
             <label for="class_name">科目名</label>
-            <input type="text" name="class_name" id="class_name" value="<%- class_name%>">
+            <input required type="text" name="class_name" id="class_name" value="<%- class_name%>" placeholder="科目名を入力してください．">
 
             <label for="lecture_name">講義名:</label>
-            <input type="text" name="lecture_name" id="lecture_name">
+            <input required type="text" name="lecture_name" id="lecture_name">
     
             <label for="lecture_time">講義回次 (1-15):</label>
-            <input type="number" name="lecture_time" id="lecture_time" min="1" max="15"  value="1">
+            <input required type="number" name="lecture_time" id="lecture_time" min="1" max="15"  value="1">
 
             <span>
                 <select id="day" name="day">
@@ -49,7 +49,7 @@
             
             <br>
             <label for="movie">アップロードする動画を選択してください</label>
-            <input name="movie" type="file" id="movie" accept="video/mp4,video/x-m4v,video/*"/>
+            <input required name="movie" type="file" id="movie" accept="video/mp4,video/x-m4v,video/*"/>
             <input type="submit">
         </form>
         <img id="seesaa_img" src="http://192.168.98.25:8080/static/img/ryukyudog.png" alt="seesaa">
