@@ -82,6 +82,7 @@ io.on('connection', (socket) => {
     var join_id;
     socket.on('join', function(id) {
         socket.leave(socket.id);
+        socket.leave("first");
         join_id = id;
         socket.join(join_id);
         console.log(socket.id);
