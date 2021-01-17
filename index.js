@@ -81,9 +81,11 @@ app.get('/top', function (req, res) {
 io.on('connection', (socket) => {
     var join_id;
     socket.on('join', function(id) {
+        console.log(socket.rooms);
         socket.leave(socket.id);
         join_id = id;
         socket.join(join_id);
+        console.log("??");
         console.log(socket.id);
         console.log(socket.rooms);
 
