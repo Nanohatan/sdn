@@ -153,7 +153,7 @@ app.use('/upload/', function (req, res, next) {
     if (!req.cookies.isTeacher){
         res.redirect("/home");
     }else{
-        res.render('upload', {"class_name":class_name}); // the uploaded file object
+        res.render('uploads', {"class_name":class_name}); // the uploaded file object
     }
     // res.send('<form action="/upload" method="POST" enctype="multipart/form-data">'+
     // '<input name="movie" type="file"/>'+
