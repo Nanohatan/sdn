@@ -199,6 +199,8 @@
 
     function createChatFromJsondata(data) {
         data.forEach(function (jd) {
+            console.log("each分！！！！！！！！！")
+            console.log(id)
             createChatFromData(jd.msg, jd.msg_type, jd.its_id, jd.isParent, id.shiori_time, id.video_time);
         })
     }
