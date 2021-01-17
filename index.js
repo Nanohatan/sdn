@@ -68,7 +68,8 @@ app.get('/video/:id', function (req, res) {
                 className: result[0].lecture_name,
                 videoTitle: result[0].lecture_name,
                 videoNumber: result[0].lecture_time,
-                place: sorce_url
+                place: sorce_url,
+                movie_id: req.params.id
             });
         });
     });
