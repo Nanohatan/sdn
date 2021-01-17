@@ -92,6 +92,7 @@ io.on('connection', (socket) => {
         console.log(socket.rooms);
         io.to(id).emit('chat message', msg, reaction, puid, isParent);
         console.log('message: ' + msg + reaction + id);
+        console.log(socket.rooms);
         socket.leave(id);
         MongoClient.connect(url, function (err, db) {
             if (err) throw err;
