@@ -79,8 +79,10 @@ app.get('/top', function (req, res) {
 });
 
 io.on('connection', (socket) => {
+    var join_id;
     socket.on('join', function(id) {
-        socket.join(id);
+        join_id = id;
+        socket.join(join_id);
         console.log(id+"に参加しました");
     });
 
@@ -88,8 +90,13 @@ io.on('connection', (socket) => {
     socket.on('chat message', (msg, reaction, id, isParent) => {
         puid = new Puid();
         puid = puid.generate();
-        io.to(id).emit('chat message', msg, reaction, puid,isParent);
+        socket.leave(join_id);
+        join_id = id;
+        socket.join(join_id);
+        console.log(socket.rooms);
+        io.to(id).emit('chat message', msg, reaction, puid, isParent);
         console.log('message: ' + msg + reaction + id);
+        console.log(socket.rooms);
         MongoClient.connect(url, function (err, db) {
             if (err) throw err;
             var dbo = db.db("chatInfo");
@@ -114,7 +121,11 @@ io.on('connection', (socket) => {
 
 app.use('/upload/', function (req, res, next) {
     res.sendfile('static/upload.html'); // the uploaded file object
-
+    if (!req.cookies.isTeacher){
+        res.redirect("/home");
+    }else{
+        res.sendfile('static/upload.html'); // the uploaded file object
+    }
     // res.send('<form action="/upload" method="POST" enctype="multipart/form-data">'+
     // '<input name="movie" type="file"/>'+
     // '<input type="submit" name="sub_buttono" value="Upload">'+'</form>');

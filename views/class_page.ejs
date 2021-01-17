@@ -83,9 +83,11 @@
             var url_array = url.split("/");
             var id = url_array[url_array.length - 1]
             // index.jsのsocket.on('chat message')に移動
-            var isParent=false;
-            if (sub.id==id){ isParent=true;}
-            socket.emit('chat message', input.value, reaction.value, sub.id,isParent);
+            var isParent = false;
+            if (sub.id == id) {
+                isParent = true;
+            }
+            socket.emit('chat message', input.value, reaction.value, sub.id, isParent);
             input.value = '';
         }
     });
@@ -93,16 +95,17 @@
     var url = window.location.href;
     var url_array = url.split("/");
     var id = url_array[url_array.length - 1]
-    sub.id=id;
+    sub.id = id;
     socket.emit('join', id);
 
 
+    // 全体に向けて更新されたチャットを追加
+    socket.on('chat message', function (msg, reaction, its_id, isParent) {
+        createChatFromData(msg, reaction, its_id, isParent);
+        console.log("きてる");
+    });
 
-        // 全体に向けて更新されたチャットを追加
-socket.on('chat message', function (msg, reaction, its_id,isParent) {
-    createChatFromData(msg,reaction,its_id,isParent);
-});
-    function createChatFromData(msg,reaction,its_id,isParent){
+    function createChatFromData(msg, reaction, its_id, isParent) {
         let newDiv = document.createElement('div');
         newDiv.className = "topic";
         newDiv.id = id._id;
@@ -114,8 +117,8 @@ socket.on('chat message', function (msg, reaction, its_id,isParent) {
             img.src = "http://192.168.98.25:8080/static/img/talk_icon_before.svg";
             typeDiv.appendChild(img);
             newDiv.addEventListener("click", function () {
-                    callChatInfoAndCreateChat(newDiv.id);
-                    changeParentsID(newDiv.id,sub);
+                callChatInfoAndCreateChat(newDiv.id);
+                changeParentsID(newDiv.id, sub);
             }, false);
         };
         cDiv.appendChild(newDiv);
@@ -184,7 +187,7 @@ socket.on('chat message', function (msg, reaction, its_id,isParent) {
 
     function createChatFromJsondata(data) {
         data.forEach(function (jd) {
-            createChatFromData(jd.msg,jd.msg_type,jd.its_id,jd.isParent);
+            createChatFromData(jd.msg, jd.msg_type, jd.its_id, jd.isParent);
         })
     }
 
@@ -202,8 +205,8 @@ socket.on('chat message', function (msg, reaction, its_id,isParent) {
         });
     }
 
-    function changeParentsID(p_id){
-        sub.id=p_id;
+    function changeParentsID(p_id) {
+        sub.id = p_id;
     }
 </script>
 
