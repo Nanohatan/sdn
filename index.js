@@ -52,8 +52,7 @@ app.get('/test', function (req, res) {
 });
 
 app.get('/video/:id', function (req, res) {
-    console.log(req.cookeis.isTeacher);
-    const isTeacher=req.cookeis.isTeacher;
+    console.log('/video/:id'+req.cookeis.isTeacher);
     var sorce_url = "/uploads/" + req.params.id + "/playlist.m3u8";
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
@@ -64,7 +63,7 @@ app.get('/video/:id', function (req, res) {
             console.log(result);
             db.close();
             res.render('class_page', {
-                role: isTeacher,
+                role: false,
                 className: result[0].lecture_name,
                 videoTitle: result[0].lecture_name,
                 videoNumber: result[0].lecture_time,
@@ -89,9 +88,7 @@ io.on('connection', (socket) => {
     socket.on('chat message', (msg, reaction, id, isParent) => {
         puid = new Puid();
         puid = puid.generate();
-        // io.emit('chat message', msg, reaction, puid);
         io.to(id).emit('chat message', msg, reaction, puid,isParent);
-        // io.emit('reload signal');
         console.log('message: ' + msg + reaction + id);
         MongoClient.connect(url, function (err, db) {
             if (err) throw err;
