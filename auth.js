@@ -32,13 +32,12 @@ router.get('/login', function(req, res) {
         }else {
           n=result.name;
           r=result.isTeacher;
-          schedule = result.class;
           i=result.uid;
           res.cookie("isTeacher",r);
           res.cookie("uid",i);
           console.log(result.name);
           db.close();
-          res.render("userPage.ejs", {"role": r,"userName":n, "schedule":schedule});
+          res.render("userPage.ejs", {"role": r,"userName":n, "schedule":result.class});
         }
       });
     });

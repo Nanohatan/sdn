@@ -125,11 +125,11 @@
         <tr>
         <% for (let j=1; j<8; j++){ %>
             <% schedule.forEach(function (sc) {%>
-                <% if (sc.day == i and sc.period == j) %>
+                <% if (sc.day == i and sc.period == j) {%>
                     <td><a href="/search/class/<%- sc.class_name %>"><%- sc.class_name %></a></td>
-                <% else %>
+                <%} else {%>
                     <td></td>
-            <% }); %>
+            <% }}); %>
         <% }; %>
         </tr>
     <% }; %>
