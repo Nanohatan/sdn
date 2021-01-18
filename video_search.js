@@ -59,6 +59,7 @@ router.get('/class/:name', function(req, res) {
     });
   });
 });
+
 router.post('/class/add_schedule/:name', function(req, res){
   user_id = req.cookies.uid;
   c_name = req.params.name;
