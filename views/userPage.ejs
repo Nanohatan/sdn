@@ -121,12 +121,15 @@
             <th>木曜日</th>
             <th>金曜日</th>
         </tr>
-    <% for (let i=1; i<6; i++){ %>
+    <% for (let i=1; i<8; i++){ %>
         <tr>
-        <% for (let j=1; j<8; j++){ %>
+        <% for (let j=1; j<6; j++){ %>
             <% schedule.forEach(function(sc){ %>
-                <% if (sc.day == i && sc.period == j) {contents = "<td><a href='/search/class/'"+sc.class_name+"> "+sc.class_name+"</a></td>"} else {contents = "<td></td>"} %>
-                <%- contests %>
+                <% if(sc.day==i && sc.period==j){ %>
+                    <td><a href="/search/class/<%- sc.class_name %>"> <%- sc.class_name %></a></td>
+                <% }else{ %>    
+                    <td></td>
+                <% } %>
             <% }); %>
         <% }; %>
         </tr>
