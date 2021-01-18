@@ -91,10 +91,15 @@ io.on('connection', (socket) => {
 
     });
 
+    socket.on("leave", id){
+        socket.leave(id);
+    }
+
     console.log('a user connected');
     socket.on('chat message', (msg, reaction, id, isParent, shiori_time, nowTime) => {
         puid = new Puid();
         puid = puid.generate();
+        socket.emit("leave",join_id);
         console.log(join_id);
         console.log(socket.rooms);
         socket.leave(join_id);
