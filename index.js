@@ -80,6 +80,8 @@ app.get('/top', function (req, res) {
 
 io.on('connection', (socket) => {
     var join_id;
+    const userId = await fetchUserId(socket);
+    console.log(userId)
     socket.on('join', function(id) {
         console.log(socket.rooms);
         socket.leave(socket.id);
