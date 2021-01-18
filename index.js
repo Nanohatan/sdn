@@ -80,6 +80,8 @@ app.get('/top', function (req, res) {
 
 io.on('connection', (socket) => {
     var join_id;
+    socket.join('some room');
+    console.log(socket.rooms);
     socket.on('join', function(id) {
         console.log(socket.rooms);
         socket.leave(socket.id);
