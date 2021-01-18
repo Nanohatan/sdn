@@ -72,8 +72,8 @@ router.post('/class/add_schedule/:name', function(req, res){
     dbo.collection('movies').findOne(query).toArray(function(err, result){
       if (err) throw err;
       result = JSON.stringify(result);
-      c_day = result.day;
-      c_period = result.period;
+      // c_day = result.day;
+      // c_period = result.period;
       });
     console.log(c_period);
     dbo = db.db('userInfo');
