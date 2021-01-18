@@ -61,7 +61,22 @@ router.get('/class/:name', function(req, res) {
 });
 router.post('/class/add_schedule/:name', function(req, res){
   user_id = req.cookies.uid;
-  // db.users.update({"_id":user_id}, {$push: {"class":{"day":1, "time":1, "class_name": "大学英語"}}})
-
+  c_name = req.params.name;
+  c_day = '';
+  c_period = '';
+  var query = {class_name: c_name};
+  var dbo = db.db('movieInfo');
+  db.collection('movies').find(query).toArray(function(err, result){
+    if (err) throw err;
+    db.close();
+    result = JSON.stringify(result);
+    c_day = result.day;
+    c_period = result.period;
+  });
+  console.log(c_period);
+  var dbo = db.db('userInfo');
+  db.collection('users').update({"_id":user_id}, {$push: {"class":{"day":c_day, "period":c_period, "class_name": c_name}}});
+  redirect_path = '/class/'+c_name;
+  res.redirect(redirect_path);
 });
 
