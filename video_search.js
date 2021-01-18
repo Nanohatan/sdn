@@ -60,6 +60,8 @@ router.get('/class/:name', function(req, res) {
   });
 });
 router.post('/class/add_schedule/:name', function(req, res){
-  
+  user_id = req.cookies.uid;
+  // db.users.update({"_id":user_id}, {$push: {"class":{"day":1, "time":1, "class_name": "大学英語"}}})
+
 });
 

@@ -121,6 +121,8 @@ io.on('connection', (socket) => {
 
 
 app.use('/upload/', function (req, res, next) {
+    //生徒はuploadいけないようにする．
+    //できない
     if (!req.cookies.isTeacher){
         res.redirect("/");
     }else{
