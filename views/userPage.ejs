@@ -75,42 +75,21 @@
             <th>木曜日</th>
             <th>金曜日</th>
         </tr>
+    <% for (let i=1; i<8; i++){ %>
         <tr>
-            <td><a href="/search/class/大学英語">大学英語</a></td>
-            <td></td>
-            <td></td>
-            <td></td>
+        <% for (let j=1; j<6; j++){ %>
+            <% schedule.forEach(function(sc){ %>
+                <% if(sc.day==j && sc.period==i){ %>
+                    <td><a href="/search/class/<%- sc.class_name %>"> <%- sc.class_name %></a></td>
+                    <% j++ %>
+                <% } %>
+            <% }); %>
+            <% if (i<8 && j<6) { %>    
+                <td></td>
+            <% } %>
+        <% }; %>
         </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-    </table>
-</div>
+    <% }; %>
 
 <p>&nbsp;</p>
 </body>

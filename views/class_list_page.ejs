@@ -50,13 +50,14 @@
     <!-- input for serching -->
     <div id="search_box">
         <h1><%- class_name %></h1>
-        <form action="">
+        <form >
             <input type="text" id="video_search" name="video_search" >
             <button type="button" id="button"><i class="fa fa-search"></i></button>
         </form>
     </div>
-    <button type="button">時間割に追加</button>
-
+    <form action="/search/class/add_schedule/<%- class_name %>" method="post">
+        <button type="submit">時間割に追加</button>
+    </form>
     <!-- class list-->
     <div class="class-list">
         <div class="class-video">
