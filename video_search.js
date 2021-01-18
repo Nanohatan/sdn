@@ -68,7 +68,7 @@ router.post('/class/add_schedule/:name', function(req, res){
   c_period = '';
   var query = {class_name: c_name};
   var dbo = db.db('movieInfo');
-  db.collection('movies').find(query).toArray(function(err, result){
+  dbo.collection('movies').find(query).toArray(function(err, result){
     if (err) throw err;
     db.close();
     result = JSON.stringify(result);
@@ -77,7 +77,7 @@ router.post('/class/add_schedule/:name', function(req, res){
   });
   console.log(c_period);
   var dbo = db.db('userInfo');
-  db.collection('users').update({"_id":user_id}, {$push: {"class":{"day":c_day, "period":c_period, "class_name": c_name}}});
+  dbo.collection('users').update({"_id":user_id}, {$push: {"class":{"day":c_day, "period":c_period, "class_name": c_name}}});
   redirect_path = '/class/'+c_name;
   res.redirect(redirect_path);
 });
