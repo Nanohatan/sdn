@@ -109,6 +109,7 @@
         console.log("これね！！！" + id);
         socket.emit("leave",socket.id)
         socket.join(id);
+        console.log(socket.rooms)
         // socket.emit('join', id);
         // socket.emit('join', id);
     });
