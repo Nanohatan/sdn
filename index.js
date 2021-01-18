@@ -79,37 +79,34 @@ app.get('/top', function (req, res) {
 });
 
 io.on('connection', (socket) => {
+    console.log('a user connected');
+
     var join_id;
-    socket.join('some room');
+    join_id = "some room"
+    socket.join(join_id);
     console.log(socket.rooms);
     socket.on('join', function(id) {
-        console.log(socket.rooms);
         socket.leave(socket.id);
         join_id = id;
         socket.join(join_id);
-        console.log("??");
-        console.log(socket.id);
-        console.log(socket.rooms);
-
     });
 
     socket.on("leave", (id) =>{
         socket.leave(id);
     });
 
-    console.log('a user connected');
     socket.on('chat message', (msg, reaction, id, isParent, shiori_time, nowTime) => {
         puid = new Puid();
         puid = puid.generate();
-        socket.emit("leave",join_id);
-        console.log(join_id);
-        console.log(socket.rooms);
-        socket.leave(join_id);
-        join_id = id;
-        socket.join(join_id);
-        console.log("きてうる！！！！！！！！！！！！！！！！！！！！");
-        console.log(join_id)
-        console.log(socket.rooms);
+        // socket.emit("leave",join_id);
+        // console.log(join_id);
+        // console.log(socket.rooms);
+        // socket.leave(join_id);
+        // join_id = id;
+        // socket.join(join_id);
+        // console.log("きてうる！！！！！！！！！！！！！！！！！！！！");
+        // console.log(join_id)
+        // console.log(socket.rooms);
         io.to(join_id).emit('chat message', msg, reaction, puid, isParent ,shiori_time, nowTime);
         MongoClient.connect(url, function (err, db) {
             if (err) throw err;
