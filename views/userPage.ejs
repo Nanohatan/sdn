@@ -124,8 +124,8 @@
     <% for (let i=1; i<6; i++){ %>
         <tr>
         <% for (let j=1; j<8; j++){ %>
-            <% schedule.forEach(function (sc) {%>
-                <% if (sc.day == i and sc.period == j) {contents = "<td><a href='/search/class/'"+sc.class_name+"><%- sc.class_name %></a></td>"} else {contents = "<td></td>"} %>
+            <% schedule.forEach(function (sc) { %>
+                <% if (sc.day == i and sc.period == j) {contents = "<td><a href='/search/class/'"+sc.class_name+"> "+sc.class_name+"</a></td>"} else {contents = "<td></td>"} %>
             <% }); %>
         <% }; %>
         </tr>
