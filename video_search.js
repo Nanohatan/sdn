@@ -49,6 +49,7 @@ router.get('/class/:name', function(req, res) {
   c_name = req.params.name;
   MongoClient.connect(url, function(err, db) {
     if (err) throw err;
+    //ここらへんでユーザー情報を取得したい．
     var dbo = db.db("movieInfo");
     var query = {class_name: c_name};
     dbo.collection("movies").find(query).toArray(function(err, result) {
