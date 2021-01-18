@@ -91,9 +91,9 @@ io.on('connection', (socket) => {
 
     });
 
-    socket.on("leave", id){
+    socket.on("leave", (id) =>{
         socket.leave(id);
-    }
+    });
 
     console.log('a user connected');
     socket.on('chat message', (msg, reaction, id, isParent, shiori_time, nowTime) => {
