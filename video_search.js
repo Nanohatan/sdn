@@ -80,7 +80,7 @@ router.post('/class/add_schedule/:name', function(req, res){
   MongoClient.connect(url, function(err, db) {
     console.log(c_period);
     var dbo = db.db('userInfo');
-    dbo.collection('users').updateOne({"_id":user_id}, {$push: {"class": {$each: [{"day":c_day, "period":c_period, "class_name": c_name}]}}});
+    dbo.collection('users').updateOne({"_id":user_id}, {$addToSet: {"class": {"day":c_day, "period":c_period, "class_name": c_name}}});
     db.close();
   });
   //科目のポータルサイトを表示するルーティングにリダイレクトしたいけどできん
