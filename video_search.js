@@ -80,10 +80,10 @@ router.post('/class/add_schedule/:name', function(req, res){
   MongoClient.connect(url, function(err, db) {
     console.log(c_period);
     var dbo = db.db('userInfo');
-    dbo.collection('users').updateOne({"_id":user_id}, {$push: {"class":{"day":c_day, "period":c_period, "class_name": c_name}}});
+    dbo.collection('users').updateOne({"_id":user_id}, {$push: {"class": {$each: [{"day":c_day, "period":c_period, "class_name": c_name}]}}});
     db.close();
   });
-  redirect_path = '/search/class/'+c_name;
-  res.redirect(redirect_path);
+  //科目のポータルサイトを表示するルーティングにリダイレクトしたいけどできん
+  res.redirect('/');
 });
 
