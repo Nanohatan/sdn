@@ -57,6 +57,9 @@ router.get('/class/:name', function(req, res) {
       //授業名をclass_nameで渡す． パラメータで渡された科目の講義の情報をjdで渡す．
       res.render("class_list_page", {"jd":result, "class_name":c_name, "role":req.cookies.isTeacher});
     });
-
   });
 });
+router.post('/class/add_schedule/:name', function(req, res){
+  
+});
+
