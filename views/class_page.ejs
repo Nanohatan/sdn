@@ -107,8 +107,9 @@
     sub.id = id
     window.addEventListener('DOMContentLoaded', function () {
         console.log("これね！！！" + id);
-        socket.emit('join', id);
-        socket.emit('join', id);
+        socket.join(id);
+        // socket.emit('join', id);
+        // socket.emit('join', id);
     });
 
 
