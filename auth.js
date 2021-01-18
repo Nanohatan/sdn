@@ -37,7 +37,7 @@ router.get('/login', function(req, res) {
           res.cookie("uid",i);
           console.log(result.name);
           db.close();
-          res.render("userPage.ejs", {"role": r,"userName":n, "schedule":result.class});
+          res.render("userPage", {"role": r,"userName":n, "schedule":result.class});
         }
       });
     });
