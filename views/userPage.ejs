@@ -111,6 +111,28 @@
         </tr>
     </table>
 </div>
+<div class="jikanwari_table">
+    <img src="http://192.168.98.25:8080/static/img/hibiscus.png" alt="flower">
+    <table id="schedule" >
+        <tr>
+            <th>月曜日</th>
+            <th>火曜日</th>
+            <th>水曜日</th>
+            <th>木曜日</th>
+            <th>金曜日</th>
+        </tr>
+    <% for (let i=1; i<6; i++){ %>
+        <tr>
+        <% for (let j=1; j<8; j++){ %>
+            <% schedule.forEach(function (sc) {%>
+                <% if (sc.day == i and sc.period == j) %>
+                    <td><a href="/search/class/<%- sc.class_name %>"><%- sc.class_name %></a></td>
+                <% else %>
+                    <td></td>
+            <% }); %>
+        <% }; %>
+        </tr>
+    <% }; %>
 
 <p>&nbsp;</p>
 </body>
