@@ -78,8 +78,9 @@ router.post('/class/add_schedule/:name', function(req, res){
   });
   MongoClient.connect(url, function(err, db) {
     var dbo = db.db('userInfo');
-    var query ={$addToSet: {"class": {"day":c_day, "period":c_period, "class_name": c_name}}}
-    dbo.collection('users').updateOne({"_id":user_id}, query,function(){
+    var query ={$addToSet: {"class": {"day":c_day, "period":c_period, "class_name": c_name}}};
+    // let data = await dbo.collection('users').updateOne({"_id":user_id}, query);
+    dbo.collection('users').updateOne({"uid":user_id}, query,function(){
       db.close();
     });
   });
