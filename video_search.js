@@ -74,17 +74,13 @@ router.post('/class/add_schedule/:name', function(req, res){
       if (err) throw err;
       c_day = result.day;
       c_period = result.period;
+      var dbi = db.db('userInfo');
+      var query_ = {$addToSet: {"class": {"day":c_day, "period":c_period, "class_name": c_name}}};
+      dbi.collection('users').updateOne({"uid":user_id}, query_,function(){
       db.close();
-      }));
-  });
-  MongoClient.connect(url, function(err, db) {
-    var dbo = db.db('userInfo');
-    var query ={$addToSet: {"class": {"day":c_day, "period":c_period, "class_name": c_name}}};
-    // let data = await dbo.collection('users').updateOne({"_id":user_id}, query);
-    dbo.collection('users').updateOne({"uid":user_id}, query,function(){
-      db.close();
-    });
-  });
+      });
+    }));
+  })
   //科目のポータルサイトを表示するルーティングにリダイレクトしたいけどできん
   res.redirect('/');
 });
