@@ -85,6 +85,6 @@ router.post('/class/add_schedule/:name', function(req, res){
     db.close();
   });
   //科目のポータルサイトを表示するルーティングにリダイレクトしたいけどできん
-  res.redirect('/');
+  res.redirect('/search');
 });
 
