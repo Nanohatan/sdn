@@ -65,25 +65,22 @@ router.get('/class/:name', function(req, res) {
 router.post('/class/add_schedule/:name', function(req, res){
   user_id = req.cookies.uid;
   c_name = req.params.name;
-  c_day = '';
-  c_period = '';
+  var c_day;
+  var c_period;
   MongoClient.connect(url, function(err, db) {
     var query = {class_name: c_name};
     var dbo = db.db('movieInfo');
     dbo.collection('movies').findOne(query, (function(err, result){
       if (err) throw err;
-      result = JSON.stringify(result);
       c_day = result.day;
       c_period = result.period;
+      var dbi = db.db('userInfo');
+      var query_ = {$addToSet: {"class": {"day":c_day, "period":c_period, "class_name": c_name}}};
+      dbi.collection('users').updateOne({"uid":user_id}, query_,function(){
       db.close();
-      }));
-  });
-  MongoClient.connect(url, function(err, db) {
-    console.log(c_period);
-    var dbo = db.db('userInfo');
-    dbo.collection('users').updateOne({"_id":user_id}, {$addToSet: {"class": {"day":c_day, "period":c_period, "class_name": c_name}}});
-    db.close();
-  });
+      });
+    }));
+  })
   //科目のポータルサイトを表示するルーティングにリダイレクトしたいけどできん
   res.redirect('/search');
 });
