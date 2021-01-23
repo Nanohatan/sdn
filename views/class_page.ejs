@@ -117,7 +117,6 @@
         var id = url_array[url_array.length - 1];
         sub.id = id;
 
-
         $.cookie("now_id", id);
         socket.emit('join', id);
         load_flag = false;
