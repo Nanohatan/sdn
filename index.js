@@ -85,23 +85,14 @@ io.on('connection', (socket) => {
 
     console.log(socket.rooms);
     socket.on('join', function(id) {
-        join_id = id;
-        $.ajax({
-            url: 'http://192.168.98.25:8080/cookie_check',
-            data: {"id": id},
-            type: 'GET',
-            success: function (data) {
-                console.log("call", data);
-            }
-        });
         console.log(id);
-        socket.join(join_id);
-        console.log("【いまのjoin_id】　"+join_id)
+        socket.join(id);
+        console.log("【いまのjoin_id】　"+id)
     });
 
-    socket.on("leave", () =>{
-        socket.leave(join_id);
-        console.log("【いまのjoin_id is leave】　"+join_id)
+    socket.on("leave", (id) =>{
+        socket.leave(id);
+        console.log("【いまのjoin_id is leave】　"+id)
     });
 
     socket.on('chat message', (msg, reaction, id, isParent, shiori_time, nowTime) => {
@@ -147,10 +138,6 @@ app.use('/upload/', function (req, res, next) {
     console.log("get upload");
 });
 
-app.get('/cookie_check', function (req, res) {
-    res.cookie("現在の動画",req.query.id)
-    console.log("きてる！！！！！！！！");
-});
 
 
 

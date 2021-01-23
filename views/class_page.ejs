@@ -97,8 +97,11 @@
             var fullTime = video.duration;
             var nowTime = video.currentTime;
             var shiori_time = (nowTime / fullTime) * 100 - 1.5;
-            socket.emit('leave');
+            var now_key = $.cookie("now_id");
+            socket.emit('leave', now_key);
             socket.emit('join', sub.id);
+            $.removeCookie("now_key");
+            $.cookie("now_id", sub.id);
             socket.emit('chat message', input.value, reaction.value, sub.id, isParent, shiori_time, nowTime);
             input.value = '';
         }
@@ -113,6 +116,8 @@
         var id = url_array[url_array.length - 1];
         sub.id = id;
 
+
+        $.cookie("now_id", id);
         socket.emit('join', id);
         load_flag = false;
         console.log("【読み込み完了】" );
