@@ -108,6 +108,7 @@
     var id = url_array[url_array.length - 1]
     sub.id = id
     window.addEventListener('DOMContentLoaded', function () {
+        console.log("【最初のよみこみ】")
         socket.emit('join', id);
     });
 
