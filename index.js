@@ -79,22 +79,20 @@ app.get('/top', function (req, res) {
     res.sendfile('static/top.html');
 });
 
+var join_id;
 io.on('connection', (socket) => {
     console.log('a user connected');
 
-    var join_id;
     console.log(socket.rooms);
     socket.on('join', function(id) {
         join_id = id;
         socket.join(join_id);
         console.log("【いまのjoin_id】　"+join_id)
-        console.log(socket.rooms);
     });
 
     socket.on("leave", () =>{
         socket.leave(join_id);
         console.log("【いまのjoin_id】　"+join_id)
-        console.log(socket.rooms);
     });
 
     socket.on('chat message', (msg, reaction, id, isParent, shiori_time, nowTime) => {
