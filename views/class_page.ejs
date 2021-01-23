@@ -130,8 +130,9 @@
 
     // 全体に向けて更新されたチャットを追加
     socket.on('chat message', function (msg, reaction, its_id, isParent, shiori_time, nowTime) {
+        console.log("【受け取ったroom】");
+        console.log(socket.rooms);
         createChatFromData(msg, reaction, its_id, isParent, shiori_time, nowTime);
-        console.log("ブラウザにきてるんだ……");
     });
 
     function createChatFromData(msg, reaction, its_id, isParent, shiori_time, nowTime) {
