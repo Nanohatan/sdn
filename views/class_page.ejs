@@ -228,7 +228,6 @@
             success: function (data) {
                 console.log("call", data);
                 createChatFromJsondata(data);
-                socket.emit('join', data.its_id);
             }
         });
     }
