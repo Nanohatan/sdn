@@ -99,7 +99,7 @@ io.on('connection', (socket) => {
     socket.on('chat message', (msg, reaction, id, isParent, shiori_time, nowTime) => {
         puid = new Puid();
         puid = puid.generate();
-        io.to(join_id).emit('chat message', msg, reaction, puid, isParent ,shiori_time, nowTime);
+        io.to(id).emit('chat message', msg, reaction, puid, isParent ,shiori_time, nowTime);
         MongoClient.connect(url, function (err, db) {
             if (err) throw err;
             var dbo = db.db("chatInfo");
