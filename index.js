@@ -87,10 +87,15 @@ io.on('connection', (socket) => {
     socket.on('join', function(id) {
         console.log(id);
         socket.join(id);
+        console.log("【参加した後のroom】")
+        console.log(socket.rooms)
     });
 
     socket.on("leave", (id) =>{
+        console.log(id);
         socket.leave(id);
+        console.log("【去った後のroom】")
+        console.log(socket.rooms)
     });
 
     socket.on('chat message', (msg, reaction, id, isParent, shiori_time, nowTime) => {

@@ -130,8 +130,6 @@
 
     // 全体に向けて更新されたチャットを追加
     socket.on('chat message', function (msg, reaction, its_id, isParent, shiori_time, nowTime) {
-        console.log("【受け取ったroom】");
-        console.log(socket.rooms);
         createChatFromData(msg, reaction, its_id, isParent, shiori_time, nowTime);
     });
 
@@ -153,7 +151,7 @@
                 socket.emit('leave', now_key);
                 socket.emit('join', newDiv.id);
                 $.removeCookie("now_key");
-                $.cookie("now_id", newDiv.id);
+                $.cookie("now_id", its_id);
             }, false);
             var node = document.createElement("img");
             node.src = "../static/aicon.png";
