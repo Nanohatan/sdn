@@ -83,25 +83,19 @@ io.on('connection', (socket) => {
     console.log('a user connected');
 
     var join_id;
-    join_id = "some room"
-    socket.join(join_id);
     console.log(socket.rooms);
     socket.on('join', function(id) {
         join_id = id;
         socket.join(join_id);
     });
 
-    socket.on("leave", (id) =>{
-        socket.leave(id);
+    socket.on("leave", () =>{
+        socket.leave(join_id);
     });
 
     socket.on('chat message', (msg, reaction, id, isParent, shiori_time, nowTime) => {
         puid = new Puid();
         puid = puid.generate();
-        socket.leave(join_id);
-        console.log(id)
-        join_id = id
-        socket.join(id);
         console.log(socket.rooms)
         io.to(join_id).emit('chat message', msg, reaction, puid, isParent ,shiori_time, nowTime);
         MongoClient.connect(url, function (err, db) {
