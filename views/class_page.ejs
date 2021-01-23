@@ -95,7 +95,7 @@
             var fullTime = video.duration;
             var nowTime = video.currentTime;
             var shiori_time = (nowTime / fullTime) * 100 - 1.5;
-            socket.leave('leave');
+            socket.emit('leave');
             socket.emit('join', sub.id);
             socket.emit('chat message', input.value, reaction.value, sub.id, isParent, shiori_time, nowTime);
             input.value = '';
