@@ -145,6 +145,11 @@
             newDiv.addEventListener("click", function () {
                 callChatInfoAndCreateChat(newDiv.id);
                 changeParentsID(newDiv.id, sub);
+                var now_key = $.cookie("now_id");
+                socket.emit('leave', now_key);
+                socket.emit('join', newDiv.id);
+                $.removeCookie("now_key");
+                $.cookie("now_id", newDiv.id);
             }, false);
             var node = document.createElement("img");
             node.src = "../static/aicon.png";
