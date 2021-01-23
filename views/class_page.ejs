@@ -220,6 +220,11 @@
         data.forEach(function (jd) {
             createChatFromData(jd.msg, jd.msg_type, jd.its_id, jd.isParent, jd.shiori_time, jd.video_time);
         })
+        var now_key = $.cookie("now_id");
+        socket.emit('leave', now_key);
+        socket.emit('join', data[0].its_id);
+        $.removeCookie("now_id");
+        $.cookie("now_id", data.its_id);
     }
 
     function callChatInfoAndCreateChat(id) {
@@ -232,11 +237,6 @@
             success: function (data) {
                 console.log("call", data);
                 createChatFromJsondata(data);
-                var now_key = $.cookie("now_id");
-                socket.emit('leave', now_key);
-                socket.emit('join', data.its_id);
-                $.removeCookie("now_id");
-                $.cookie("now_id", data.its_id);
             }
         });
     }
