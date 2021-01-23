@@ -86,6 +86,14 @@ io.on('connection', (socket) => {
     console.log(socket.rooms);
     socket.on('join', function(id) {
         join_id = id;
+        $.ajax({
+            url: 'http://192.168.98.25:8080/cookie_check',
+            data: {"id": id},
+            type: 'GET',
+            success: function (data) {
+                console.log("call", data);
+            }
+        });
         console.log(id);
         socket.join(join_id);
         console.log("【いまのjoin_id】　"+join_id)
@@ -137,6 +145,11 @@ app.use('/upload/', function (req, res, next) {
     // '<input name="movie" type="file"/>'+
     // '<input type="submit" name="sub_buttono" value="Upload">'+'</form>');
     console.log("get upload");
+});
+
+router.get('/cookie_check', function (req, res) {
+    res.cookie("現在の動画",req.query.id)
+    console.log("きてる！！！！！！！！");
 });
 
 
