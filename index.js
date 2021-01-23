@@ -86,6 +86,7 @@ io.on('connection', (socket) => {
     console.log(socket.rooms);
     socket.on('join', function(id) {
         join_id = id;
+        console.log(id);
         socket.join(join_id);
         console.log("【いまのjoin_id】　"+join_id)
     });
