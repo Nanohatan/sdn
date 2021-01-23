@@ -147,7 +147,7 @@ app.use('/upload/', function (req, res, next) {
     console.log("get upload");
 });
 
-router.get('/cookie_check', function (req, res) {
+app.get('/cookie_check', function (req, res) {
     res.cookie("現在の動画",req.query.id)
     console.log("きてる！！！！！！！！");
 });
