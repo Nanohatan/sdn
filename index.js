@@ -87,7 +87,6 @@ io.on('connection', (socket) => {
     socket.join(join_id);
     console.log(socket.rooms);
     socket.on('join', function(id) {
-        socket.leave(socket.id);
         join_id = id;
         socket.join(join_id);
     });
@@ -99,12 +98,12 @@ io.on('connection', (socket) => {
     socket.on('chat message', (msg, reaction, id, isParent, shiori_time, nowTime) => {
         puid = new Puid();
         puid = puid.generate();
+        socket.leave(join_id);
         console.log(id)
         join_id = id
         socket.join(id);
         console.log(socket.rooms)
         io.to(join_id).emit('chat message', msg, reaction, puid, isParent ,shiori_time, nowTime);
-        socket.leave(id);
         MongoClient.connect(url, function (err, db) {
             if (err) throw err;
             var dbo = db.db("chatInfo");
