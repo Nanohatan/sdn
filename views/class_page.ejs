@@ -28,6 +28,8 @@
         <script>function clickModoru(id) {
                 callChatInfoAndCreateChat(id);
                 changeParentsID(id);
+                socket.emit('leave');
+                socket.emit('join', id);
             }</script>
         <div class="chats" id="chats" style="height: 500px; border-style: solid; border-color:red; overflow: scroll;">
         </div>
