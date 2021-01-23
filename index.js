@@ -87,10 +87,12 @@ io.on('connection', (socket) => {
     socket.on('join', function(id) {
         join_id = id;
         socket.join(join_id);
+        console.log("【いまのjoin_id】　"+join_id)
     });
 
     socket.on("leave", () =>{
         socket.leave(join_id);
+        console.log("【いまのjoin_id】　"+join_id)
     });
 
     socket.on('chat message', (msg, reaction, id, isParent, shiori_time, nowTime) => {
