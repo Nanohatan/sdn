@@ -28,8 +28,11 @@
         <script>function clickModoru(id) {
                 callChatInfoAndCreateChat(id);
                 changeParentsID(id);
-                socket.emit('leave');
+                var now_key = $.cookie("now_id");
+                socket.emit('leave', now_key);
                 socket.emit('join', id);
+                $.removeCookie("now_key");
+                $.cookie("now_id", id);
             }</script>
         <div class="chats" id="chats" style="height: 500px; border-style: solid; border-color:red; overflow: scroll;">
         </div>
