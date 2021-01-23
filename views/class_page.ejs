@@ -103,14 +103,19 @@
     });
 
 
-    var url = window.location.href;
-    var url_array = url.split("/");
-    var id = url_array[url_array.length - 1]
-    sub.id = id
-    window.addEventListener('DOMContentLoaded', function () {
-        console.log("【最初のよみこみ】")
+    load_flag = true;
+
+    if (load_flag) {
+        var url = window.location.href;
+        var url_array = url.split("/");
+        var id = url_array[url_array.length - 1];
+        sub.id = id;
+
         socket.emit('join', id);
-    });
+        load_flag = false;
+        console.log("【読み込み完了】" );
+    }
+
 
 
     // 全体に向けて更新されたチャットを追加
