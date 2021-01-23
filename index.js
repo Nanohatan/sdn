@@ -100,6 +100,8 @@ io.on('connection', (socket) => {
         puid = new Puid();
         puid = puid.generate();
         console.log(id)
+        socket.join(id);
+        console.log(socket.rooms)
         io.to(join_id).emit('chat message', msg, reaction, puid, isParent ,shiori_time, nowTime);
         MongoClient.connect(url, function (err, db) {
             if (err) throw err;
