@@ -106,10 +106,9 @@
     var id = url_array[url_array.length - 1]
     sub.id = id
     window.addEventListener('DOMContentLoaded', function () {
-        console.log("これね！！！" + id);
-        socket.emit("leave",socket.id)
-        console.log(socket.rooms)
-        socket.emit('join', id);
+        // console.log("これね！！！" + id);
+        // socket.emit("leave",socket.id)
+        // console.log(socket.rooms)
         // socket.emit('join', id);
     });
 
@@ -224,6 +223,7 @@
             success: function (data) {
                 console.log("call", data);
                 createChatFromJsondata(data);
+                socket.emit('join', data.its_id);
             }
         });
     }

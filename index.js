@@ -99,15 +99,6 @@ io.on('connection', (socket) => {
     socket.on('chat message', (msg, reaction, id, isParent, shiori_time, nowTime) => {
         puid = new Puid();
         puid = puid.generate();
-        // socket.emit("leave",join_id);
-        // console.log(join_id);
-        // console.log(socket.rooms);
-        // socket.leave(join_id);
-        // join_id = id;
-        // socket.join(join_id);
-        // console.log("きてうる！！！！！！！！！！！！！！！！！！！！");
-        // console.log(join_id)
-        // console.log(socket.rooms);
         io.to(join_id).emit('chat message', msg, reaction, puid, isParent ,shiori_time, nowTime);
         MongoClient.connect(url, function (err, db) {
             if (err) throw err;
@@ -129,7 +120,6 @@ io.on('connection', (socket) => {
                 db.close();
             });
         });
-        socket.join(join_id);
     });
 });
 
