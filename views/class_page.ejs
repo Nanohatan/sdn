@@ -28,11 +28,6 @@
         <script>function clickModoru(id) {
                 callChatInfoAndCreateChat(id);
                 changeParentsID(id);
-                var now_key = $.cookie("now_id");
-                socket.emit('leave', now_key);
-                socket.emit('join', id);
-                $.removeCookie("now_key");
-                $.cookie("now_id", id);
             }</script>
         <div class="chats" id="chats" style="height: 500px; border-style: solid; border-color:red; overflow: scroll;">
         </div>
@@ -104,7 +99,7 @@
             var now_key = $.cookie("now_id");
             socket.emit('leave', now_key);
             socket.emit('join', sub.id);
-            $.removeCookie("now_key");
+            $.removeCookie("now_id");
             $.cookie("now_id", sub.id);
             socket.emit('chat message', input.value, reaction.value, sub.id, isParent, shiori_time, nowTime);
             input.value = '';
@@ -147,11 +142,6 @@
             newDiv.addEventListener("click", function () {
                 callChatInfoAndCreateChat(newDiv.id);
                 changeParentsID(newDiv.id, sub);
-                var now_key = $.cookie("now_id");
-                socket.emit('leave', now_key);
-                socket.emit('join', newDiv.id);
-                $.removeCookie("now_key");
-                $.cookie("now_id", its_id);
             }, false);
             var node = document.createElement("img");
             node.src = "../static/aicon.png";
@@ -242,6 +232,11 @@
             success: function (data) {
                 console.log("call", data);
                 createChatFromJsondata(data);
+                var now_key = $.cookie("now_id");
+                socket.emit('leave', now_key);
+                socket.emit('join', data.its_id);
+                $.removeCookie("now_id");
+                $.cookie("now_id", data.its_id);
             }
         });
     }
