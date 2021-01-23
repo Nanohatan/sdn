@@ -93,7 +93,7 @@ io.on('connection', (socket) => {
 
     socket.on("leave", () =>{
         socket.leave(join_id);
-        console.log("【いまのjoin_id】　"+join_id)
+        console.log("【いまのjoin_id is leave】　"+join_id)
     });
 
     socket.on('chat message', (msg, reaction, id, isParent, shiori_time, nowTime) => {
