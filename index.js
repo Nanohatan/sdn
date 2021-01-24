@@ -87,21 +87,30 @@ io.on('connection', (socket) => {
     socket.on('join', function(id) {
         console.log(id);
         socket.join(id);
-        console.log("【参加した後のroom】")
-        console.log(socket.rooms)
+        // console.log("【参加した後のroom】")
+        // console.log(socket.rooms)
     });
 
     socket.on("leave", (id) =>{
         console.log(id);
         socket.leave(id);
-        console.log("【去った後のroom】")
-        console.log(socket.rooms)
+        // console.log("【去った後のroom】")
+        // console.log(socket.rooms)
     });
+
+    socket.on("check", () =>{
+        console.log("【送られてきた奴らのrooms】")
+        console.log(socket.rooms);
+    });
+
 
     socket.on('chat message', (msg, reaction, id, isParent, shiori_time, nowTime) => {
         puid = new Puid();
         puid = puid.generate();
+        console.log("【現在のroom】")
         console.log(socket.rooms)
+        console.log("【送る先のid】")
+        console.log(id)
         io.to(id).emit('chat message', msg, reaction, puid, isParent ,shiori_time, nowTime);
         MongoClient.connect(url, function (err, db) {
             if (err) throw err;

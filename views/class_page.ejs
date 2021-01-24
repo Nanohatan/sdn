@@ -125,6 +125,7 @@
 
     // 全体に向けて更新されたチャットを追加
     socket.on('chat message', function (msg, reaction, its_id, isParent, shiori_time, nowTime) {
+        socket.emit('check');
         createChatFromData(msg, reaction, its_id, isParent, shiori_time, nowTime);
     });
 
