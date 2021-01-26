@@ -55,6 +55,7 @@
 </div>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 <script>
     // 動画のload場所（基本変更しない）
     var video = document.getElementById('video_play');
@@ -95,29 +96,37 @@
             var fullTime = video.duration;
             var nowTime = video.currentTime;
             var shiori_time = (nowTime / fullTime) * 100 - 1.5;
+            var now_key = $.cookie("now_id");
+            socket.emit('leave', now_key);
+            socket.emit('join', sub.id);
+            $.removeCookie("now_id");
+            $.cookie("now_id", sub.id);
             socket.emit('chat message', input.value, reaction.value, sub.id, isParent, shiori_time, nowTime);
             input.value = '';
         }
     });
 
 
-    var url = window.location.href;
-    var url_array = url.split("/");
-    var id = url_array[url_array.length - 1]
-    sub.id = id
-    window.addEventListener('DOMContentLoaded', function () {
-        console.log("これね！！！" + id);
-        socket.emit("leave",socket.id)
-        console.log(socket.rooms)
+    load_flag = true;
+
+    if (load_flag) {
+        var url = window.location.href;
+        var url_array = url.split("/");
+        var id = url_array[url_array.length - 1];
+        sub.id = id;
+
+        $.cookie("now_id", id);
         socket.emit('join', id);
-        // socket.emit('join', id);
-    });
+        load_flag = false;
+        console.log("【読み込み完了】" );
+    }
+
 
 
     // 全体に向けて更新されたチャットを追加
     socket.on('chat message', function (msg, reaction, its_id, isParent, shiori_time, nowTime) {
+        socket.emit('check');
         createChatFromData(msg, reaction, its_id, isParent, shiori_time, nowTime);
-        console.log("ブラウザにきてるんだ……");
     });
 
     function createChatFromData(msg, reaction, its_id, isParent, shiori_time, nowTime) {
@@ -224,6 +233,11 @@
             success: function (data) {
                 console.log("call", data);
                 createChatFromJsondata(data);
+                var now_key = $.cookie("now_id");
+                socket.emit('leave', now_key);
+                socket.emit('join', id);
+                $.removeCookie("now_id");
+                $.cookie("now_id", id);
             }
         });
     }

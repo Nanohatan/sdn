@@ -79,36 +79,39 @@ app.get('/top', function (req, res) {
     res.sendfile('static/top.html');
 });
 
+var join_id;
 io.on('connection', (socket) => {
     console.log('a user connected');
 
-    var join_id;
-    join_id = "some room"
-    socket.join(join_id);
     console.log(socket.rooms);
     socket.on('join', function(id) {
-        socket.leave(socket.id);
-        join_id = id;
-        socket.join(join_id);
+        console.log(id);
+        socket.join(id);
+        // console.log("【参加した後のroom】")
+        // console.log(socket.rooms)
     });
 
     socket.on("leave", (id) =>{
+        console.log(id);
         socket.leave(id);
+        // console.log("【去った後のroom】")
+        // console.log(socket.rooms)
     });
+
+    socket.on("check", () =>{
+        console.log("【送られてきた奴らのrooms】")
+        console.log(socket.rooms);
+    });
+
 
     socket.on('chat message', (msg, reaction, id, isParent, shiori_time, nowTime) => {
         puid = new Puid();
         puid = puid.generate();
-        // socket.emit("leave",join_id);
-        // console.log(join_id);
-        // console.log(socket.rooms);
-        // socket.leave(join_id);
-        // join_id = id;
-        // socket.join(join_id);
-        // console.log("きてうる！！！！！！！！！！！！！！！！！！！！");
-        // console.log(join_id)
-        // console.log(socket.rooms);
-        io.to(join_id).emit('chat message', msg, reaction, puid, isParent ,shiori_time, nowTime);
+        console.log("【現在のroom】")
+        console.log(socket.rooms)
+        console.log("【送る先のid】")
+        console.log(id)
+        io.to(id).emit('chat message', msg, reaction, puid, isParent ,shiori_time, nowTime);
         MongoClient.connect(url, function (err, db) {
             if (err) throw err;
             var dbo = db.db("chatInfo");
@@ -129,7 +132,6 @@ io.on('connection', (socket) => {
                 db.close();
             });
         });
-        socket.join(join_id);
     });
 });
 
@@ -147,6 +149,7 @@ app.use('/upload/', function (req, res, next) {
     // '<input type="submit" name="sub_buttono" value="Upload">'+'</form>');
     console.log("get upload");
 });
+
 
 
 
