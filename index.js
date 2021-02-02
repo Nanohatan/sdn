@@ -5,11 +5,25 @@ var fs = require('fs');
 var server = require("http").createServer(app);
 var io = require("socket.io").listen(server);
 
-const multer = require('multer');
-var busboy = require("connect-busboy");
-const path = require("path");
-const {chdir} = require('process');
-let execSync = require('child_process').execSync;
+//ssetion関連
+var session = require('express-session')
+const app = express();
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 30 * 60 * 1000
+  }
+}));
+var sessionCheck = function(req, res, next) {
+  if (req.session.user) {
+    next();
+  } else {
+    res.redirect('/auth/login');
+  }
+};
+app.use('/user', sessionCheck, require('./user.js'));
 
 //using auth
 const cookieParser = require('cookie-parser');
@@ -19,6 +33,7 @@ var auth = require('./auth.js')
 app.use('/auth', auth);
 app.use('/search', require('./video_search.js'))
 app.use('/movie_upload', require('./movie_upload.js'))
+
 
 var Puid = require('puid');
 var puid;
