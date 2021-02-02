@@ -58,7 +58,9 @@ router.post('/login', urlencodedParser, function (req, res) {
         }else {
           console.log(result);
           db.close();
-          res.render("userPage", {"role": false,"userName":"user name", "schedule":"スケジュール"});
+          req.session.user = result;
+          res.redirect('/user')
+          //res.render("userPage", {"role": result.isTeacher,"userName":result., "schedule":"スケジュール"});
         }
       });
     });
