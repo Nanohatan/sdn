@@ -12,13 +12,29 @@ var jsonParser = bodyParser.json()
 // create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
-
+//消す予定↓
 router.get('/', function(req, res) {
   res.sendfile('static/auth.html');
 });
 
-router.get('/login', function(req, res) {
-  if (req.cookies.uid==null){
+router.get('/login',urlencodedParser, function(req, res) {
+  res.render("login", {message:""});
+  MongoClient.connect(url, function(err, db) {
+    console.log(req.body);
+    if (err) throw err;
+    var dbo = db.db("userInfo");
+    dbo.collection("users").findOne({email:req.body.email, password:req.body.password}, function(err, result) {
+      if (err) throw err;
+        if (result==undefined){
+          res.render("login", {message:"メールアドレス、パスワードが間違っています。"});
+        }else {
+          console.log(result);
+          db.close();
+          res.render("userPage", {"role": false,"userName":"user name", "schedule":"スケジュール"});
+        }
+      });
+    });
+/*   if (req.cookies.uid==null){
     res.redirect('/auth')
   }else{
     var n,r;
@@ -42,7 +58,7 @@ router.get('/login', function(req, res) {
       });
     });
     //res.render("userPage.ejs", {"role": r,"userName":n})
-  }
+  } */
 });
 
 router.post('/post', urlencodedParser, function (req, res) {

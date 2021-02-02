@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  </head>
+  <style>
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+  </style>
+  <body>
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">琉球犬</a>
+        </div>
+    </nav>
+
+
+    <form action="/login" method="POST">
+      <div class="container" >
+        <h2>ログイン</h2>
+        <div class="mb-3">
+          <label for="user_email" class="form-label">メールアドレス</label>
+          <input type="text" class="form-control" id="email" name="email" placeholder="メールアドレス">
+        </div>
+        <div class="mb-3">
+          <label for="user_password" class="form-label">パスワード</label>
+          <input type="password" class="form-control" id="password" name="password" placeholder="パスワード">
+        </div>
+        <p ><%= message %></p>
+        <button type="submit" class="btn btn-primary">送信</button>
+
+    </form>
+
+  </body>
+</html>
