@@ -13,7 +13,11 @@ var jsonParser = bodyParser.json()
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 router.get('/login', function(req, res) {
-  res.render("login", {message:""});
+  if (req.session.user){
+    res.redirect("/user")
+  }else{
+    res.render("login", {message:""});
+  }
 });
 router.post('/login', urlencodedParser, function (req, res) {
   MongoClient.connect(url, function(err, db) {
