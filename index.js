@@ -50,12 +50,7 @@ memeConnections = []; //connections array
 server.listen(process.env.PORT || 8080);
 
 app.get('/', function (req, res) {
-    //res.render('index');
     res.sendfile('static/home.html');
-});
-
-app.get('/test', function (req, res) {
-    res.sendfile('static/test.html');
 });
 
 app.get('/video/:id', function (req, res) {
