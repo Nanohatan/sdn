@@ -1,17 +1,19 @@
-
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <title>user page</title>
-    <link rel="stylesheet" href="http://192.168.98.25:8080/static/css/navibar.css">
+    <!-- javascript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+
 </head>
 <style>
-    body{
-        margin: 0;
-        background-color: #f3b707;
-    }
-    
     #schedule{
         background-color: #fae092;
         font-family: Arial, Helvetica, sans-serif;
@@ -33,30 +35,13 @@
         padding: 30px; 
         width: 80%;
     }
-    .jikanwari_table img{
-        position: absolute;
-        top: -20px;
-        left: 0px;
-        width: 20%;
-        transform: rotate(180deg)
-    }
-    tr {
-        text-align: center;
-    }
     tr td a {
         position: relative;
     }
 
 </style>
 <body>
-    <div class="navbar">
-        <a href="#" >時間割</a>
-        <a href="/search">授業検索</a>
-        <% if (role) { %>
-            <a href="/upload/?class_name=None">アップロード</a>
-        <% } %>
-    </div>
-    
+<%- include('./header', {role:role}) %>
 <h1 > <%= userName %> &nbsp;<span style="color: #2b2301;">の時間割</span></h1>
 <% if (role) { %>
     <h5 >教師としてログインしています</h5>
@@ -66,7 +51,6 @@
 
 <p>&nbsp;</p>
 <div class="jikanwari_table">
-    <img src="http://192.168.98.25:8080/static/img/hibiscus.png" alt="flower">
     <table id="schedule" >
         <tr>
             <th>月曜日</th>

@@ -12,37 +12,30 @@ var jsonParser = bodyParser.json()
 // create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
-
-router.get('/', function(req, res) {
-  res.sendfile('static/auth.html');
-});
-
 router.get('/login', function(req, res) {
-  if (req.cookies.uid==null){
-    res.redirect('/auth')
+  if (req.session.user){
+    res.redirect("/user")
   }else{
-    var n,r;
-    MongoClient.connect(url, function(err, db) {
+    res.render("login", {message:""});
+  }
+});
+router.post('/login', urlencodedParser, function (req, res) {
+  MongoClient.connect(url, function(err, db) {
+    console.log(req.body);
+    if (err) throw err;
+    var dbo = db.db("userInfo");
+    dbo.collection("users").findOne({email:req.body.email, password:req.body.password}, function(err, result) {
       if (err) throw err;
-      var dbo = db.db("userInfo");
-      dbo.collection("users").findOne({uid:req.cookies.uid}, function(err, result) {
-	      if (err) throw err;
         if (result==undefined){
-          res.redirect('/auth')
+          res.render("login", {message:"メールアドレス、パスワードが間違っています。"});
         }else {
-          n=result.name;
-          r=result.isTeacher;
-          i=result.uid;
-          res.cookie("isTeacher",r);
-          res.cookie("uid",i);
-          console.log(result.name);
+          console.log(result);
           db.close();
-          res.render("userPage", {"role": r,"userName":n, "schedule":result.class});
+          req.session.user = result;
+          res.redirect('/user')
         }
       });
     });
-    //res.render("userPage.ejs", {"role": r,"userName":n})
-  }
 });
 
 router.post('/post', urlencodedParser, function (req, res) {

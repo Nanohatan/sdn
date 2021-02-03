@@ -43,28 +43,10 @@
         <h2 style="color: #FF7E2A;">同じ講義をとっている人と気軽にコミュニケーション！</h2>
         <h2 style="color: #FF7E2A;">先生に質問をするとこもできる！！</h2>
         <p>&nbsp;</p>
-        <a onclick="postData()"  href="#" class="button">新規登録</a>
-        <a href="/auth" class="button">ログイン</a>
+        <a href="#" class="button">新規登録</a>
+        <a href="/auth/login" class="button">ログイン</a>
     </div>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-<script>
-  function postData(){
-    $.ajax({
-        url : 'http://192.168.98.25:8080/auth/signup',
-        data:{isTeacher:true,
-            name: "山田太郎",
-            email: "yamada@ie.u-ryukyu.ac.jp",
-            password:"12345678"
-        },
-        type: 'POST',
 
-        success: function(data){
-          console.log("call",data);
-
-        }
-    });
-  }
-</script>
 </body>
 </html>
