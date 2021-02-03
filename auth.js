@@ -38,6 +38,11 @@ router.post('/login', urlencodedParser, function (req, res) {
     });
 });
 
+router.get('/logout', function(req, res) {
+  req.session.destroy();
+  res.redirect('/')
+});
+
 router.post('/post', urlencodedParser, function (req, res) {
 //crate user account
  console.log(req.body)
