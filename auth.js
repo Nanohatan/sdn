@@ -12,39 +12,8 @@ var jsonParser = bodyParser.json()
 // create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
-//消す予定↓
-router.get('/', function(req, res) {
-  res.sendfile('static/auth.html');
-});
-
 router.get('/login', function(req, res) {
   res.render("login", {message:""});
-  
-/*   if (req.cookies.uid==null){
-    res.redirect('/auth')
-  }else{
-    var n,r;
-    MongoClient.connect(url, function(err, db) {
-      if (err) throw err;
-      var dbo = db.db("userInfo");
-      dbo.collection("users").findOne({uid:req.cookies.uid}, function(err, result) {
-	      if (err) throw err;
-        if (result==undefined){
-          res.redirect('/auth')
-        }else {
-          n=result.name;
-          r=result.isTeacher;
-          i=result.uid;
-          res.cookie("isTeacher",r);
-          res.cookie("uid",i);
-          console.log(result.name);
-          db.close();
-          res.render("userPage", {"role": r,"userName":n, "schedule":result.class});
-        }
-      });
-    });
-    //res.render("userPage.ejs", {"role": r,"userName":n})
-  } */
 });
 router.post('/login', urlencodedParser, function (req, res) {
   MongoClient.connect(url, function(err, db) {
@@ -60,7 +29,6 @@ router.post('/login', urlencodedParser, function (req, res) {
           db.close();
           req.session.user = result;
           res.redirect('/user')
-          //res.render("userPage", {"role": result.isTeacher,"userName":result., "schedule":"スケジュール"});
         }
       });
     });
