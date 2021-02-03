@@ -48,8 +48,16 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/";
 
+router.get('/',function(req, res,next) {
+  var user=req.session.user
+  if (user && user.isTeacher){
+    res.render('uploads', {"class_name":req.query.class_name});
+  }else{
+    res.redirect("/user")
+  }
+});
+
 router.post('/', upload.single('movie'),function(req, res,next) {
-  res.sendfile('static/upload.html');
  // console.log(req.body,req.file);
   MongoClient.connect(url, function(err, db) {
     if (err) throw err;

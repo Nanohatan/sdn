@@ -50,12 +50,7 @@ memeConnections = []; //connections array
 server.listen(process.env.PORT || 8080);
 
 app.get('/', function (req, res) {
-    //res.render('index');
     res.sendfile('static/home.html');
-});
-
-app.get('/test', function (req, res) {
-    res.sendfile('static/test.html');
 });
 
 app.get('/video/:id', function (req, res) {
@@ -143,19 +138,6 @@ io.on('connection', (socket) => {
 });
 
 
-app.use('/upload/', function (req, res, next) {
-    //生徒はuploadいけないようにする．
-    //できない
-    if (!req.cookies.isTeacher){
-        res.redirect("/");
-    }else{
-        res.render('uploads', {"class_name":req.query.class_name}); // the uploaded file object
-    }
-    // res.send('<form action="/upload" method="POST" enctype="multipart/form-data">'+
-    // '<input name="movie" type="file"/>'+
-    // '<input type="submit" name="sub_buttono" value="Upload">'+'</form>');
-    console.log("get upload");
-});
 
 
 
