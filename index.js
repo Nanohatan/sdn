@@ -7,7 +7,6 @@ var io = require("socket.io").listen(server);
 
 //ssetion関連
 var session = require('express-session')
-const app = express();
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
@@ -16,14 +15,7 @@ app.use(session({
     maxAge: 30 * 60 * 1000
   }
 }));
-var sessionCheck = function(req, res, next) {
-  if (req.session.user) {
-    next();
-  } else {
-    res.redirect('/auth/login');
-  }
-};
-app.use('/user', sessionCheck, require('./user.js'));
+app.use('/user', require('./user.js'));
 
 //using auth
 const cookieParser = require('cookie-parser');
