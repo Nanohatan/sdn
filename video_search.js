@@ -21,10 +21,6 @@ router.get('/', function (req, res) {
     });
 });
 
-router.get('/testGet', function (req, res) {
-    res.send("hallo");
-});
-
 router.get('/chats', function (req, res) {
     const chat_id = req.query.id;
     const isWatchByTeacher = (req.cookies.isTeacher == 'true');
