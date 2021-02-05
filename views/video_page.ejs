@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script> 
+
+    </script> 
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- javascript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>動画</title>
+</head>
+<body>
+ <%- include('./header', {role:role}) %>
+ <h2><%= className %></h2>
+    <div class="row">
+        <h2><%= videoNumber %> <%= videoTitle %></h2>
+        <div class="col-md-6 border" style="height: 500px; border-style: dotted; ">
+            video
+        </div>
+        <div class="col-md-6 pre-scrollable" style="height: 500px; border-style: dotted; "> 
+            <% jsonAry.forEach(function(json) { %>
+                <div class="col-md-6 border" style="height: 100px; width: 100%; margin-top: 10px; border-style: dotted; ">
+                    <%= json.msg %>
+                    <div onclick="favo(this,'<%= json.msg %>')"><span class="glyphicon glyphicon-thumbs-up"> <%= json.likes %></span></div> 
+                </div>
+            <% }); %>
+
+        </div>
+    </div>
+
+    <script>
+      function favo(element,id){
+        fetch("/api/likes/"+id)
+          .then((response) => response.json())
+          .then((data) => {
+            if (isInc){
+              var n = element.getElementsByTagName("span")[0].innerHTML;
+              n++;
+              element.getElementsByTagName("span")[0].innerHTML=n;
+            }
+          });
+      }
+    </script>
+  </body>
+</html>
