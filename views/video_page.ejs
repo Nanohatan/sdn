@@ -19,9 +19,9 @@
 </head>
 <body>
  <%- include('./header', {role:role}) %>
- <h2><%= className %></h2>
+ <h3><%= className %></h3>
     <div class="row">
-        <h2><%= videoNumber %> <%= videoTitle %></h2>
+        <h3>第<%= videoNumber %></h3><h4><%= videoNumber %> <%= videoTitle %></h4>
         <div class="col-md-6 border" style="height: 500px; border-style: dotted; ">
             video
         </div>
@@ -29,7 +29,7 @@
             <% jsonAry.forEach(function(json) { %>
                 <div class="col-md-6 border" style="height: 100px; width: 100%; margin-top: 10px; border-style: dotted; ">
                     <%= json.msg %>
-                    <div onclick="favo(this,'<%= json.msg %>')"><span class="glyphicon glyphicon-thumbs-up"> <%= json.likes %></span></div> 
+                    <div onclick="favo(this,'<%= json._id %>')"><span class="glyphicon glyphicon-thumbs-up"> <%= json.likes %></span></div> 
                 </div>
             <% }); %>
 
