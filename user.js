@@ -20,10 +20,18 @@ router.get('/video/:id', async function (req, res) {
     try {
       await client.connect();
       var sorce_url = "/uploads/" + req.params.id + "/playlist.m3u8";
-      const m_database = client.db('movieInfo');
+      
       const c_database = client.db('chatInfo');
-      const m_collection = m_database.collection('movies');
+      const c_collection = c_database.collection('chats');
+      
       const query = { movie_id:req.params.id };
+      var chats = await c_collection.aggregate([
+        { $match: query }
+      ]);
+      chats = await chats.toArray();
+
+      const m_database = client.db('movieInfo');
+      const m_collection = m_database.collection('movies');
       const cursor = await m_collection.aggregate([
         { $match: query }
       ]);
@@ -35,7 +43,8 @@ router.get('/video/:id', async function (req, res) {
         videoTitle: movie[0].lecture_name,
         videoNumber: movie[0].lecture_time,
         place: sorce_url,
-        movie_id: req.params.id
+        movie_id: req.params.id,
+        jsonAry:chats
       });
     }catch(err) {
       console.log(err);
