@@ -18,6 +18,7 @@ router.get('/video/:id', async function (req, res) {
   var  sess = req.session.user;
   if (sess){
     try {
+      await client.connect();
       var sorce_url = "/uploads/" + req.params.id + "/playlist.m3u8";
       const m_database = client.db('movieInfo');
       const c_database = client.db('chatInfo');
@@ -30,7 +31,7 @@ router.get('/video/:id', async function (req, res) {
       
       res.render('video_page', 
       {role:req.session.user.isTeacher, 
-        className: movie[0].lecture_name,
+        className: movie[0].class_name,
         videoTitle: movie[0].lecture_name,
         videoNumber: movie[0].lecture_time,
         place: sorce_url,
