@@ -1,5 +1,7 @@
 var express = require('express')
 var router = express.Router()
+const { MongoClient } = require("mongodb");
+const uri = 'mongodb://localhost:27017' ;
 
 // define the home page route
 router.get('/', function (req, res) {
@@ -10,5 +12,40 @@ router.get('/', function (req, res) {
     res.redirect('/auth/login');
   }
 })
+
+router.get('/video/:id', async function (req, res) {
+  var  sess = req.session.user;
+  if (sess){
+    try {
+      var sorce_url = "/uploads/" + req.params.id + "/playlist.m3u8";
+      const m_database = client.db('movieInfo');
+      const c_database = client.db('chatInfo');
+      const m_collection = m_database.collection('movies');
+      const query = { movie_id:req.params.id };
+      const cursor = await m_collection.aggregate([
+        { $match: query }
+      ]);
+      const movie = await cursor.toArray();
+      
+      res.render('video_page', 
+      {role:req.session.user.isTeacher, 
+        className: movie[0].lecture_name,
+        videoTitle: movie[0].lecture_name,
+        videoNumber: movie[0].lecture_time,
+        place: sorce_url,
+        movie_id: req.params.id
+      });
+    }catch(err) {
+      console.log(err);
+    }
+    finally {
+      // Ensures that the client will close when you finish/error
+      await client.close();
+    }
+  }else{
+    res.redirect('/auth/login');
+  }
+})
+
 
 module.exports = router
