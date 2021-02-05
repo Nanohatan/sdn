@@ -37,7 +37,7 @@
     }
     tr td a {
         position: relative;
-    }
+    } 
 
 </style>
 <body>
@@ -50,6 +50,34 @@
 <% } %>  
 
 <p>&nbsp;</p>
+<div class="container">
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <tr>
+                <th>月曜日</th>
+                <th>火曜日</th>
+                <th>水曜日</th>
+                <th>木曜日</th>
+                <th>金曜日</th>
+            </tr>
+        <% for (let i=1; i<8; i++){ %>
+            <tr>
+            <% for (let j=1; j<6; j++){ %>
+                <% schedule.forEach(function(sc){ %>
+                    <% if(sc.day==j.toString() && sc.period==i.toString()){ %>
+                        <td><a href="/search/class/<%- sc.class_name %>"> <%- sc.class_name %></a></td>
+                        <% j++ %>
+                    <% } %>
+                <% }); %>
+                <% if (i<8 && j<6) { %>    
+                    <td></td>
+                <% } %>
+            <% }; %>
+            </tr>
+        <% }; %>
+        </table>
+    </div>
+</div>
 <div class="jikanwari_table">
     <table id="schedule" >
         <tr>
