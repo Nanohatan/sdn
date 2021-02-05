@@ -77,11 +77,7 @@ app.get('/video/:id', function (req, res) {
     });
 });
 
-app.get('/top', function (req, res) {
-    res.sendfile('static/top.html');
-});
 
-var join_id;
 io.on('connection', (socket) => {
     console.log('a user connected');
 
