@@ -14,6 +14,7 @@ router.get('/', function (req, res) {
 })
 
 router.get('/video/:id', async function (req, res) {
+  const client = new MongoClient(uri, { useUnifiedTopology: true });
   var  sess = req.session.user;
   if (sess){
     try {
