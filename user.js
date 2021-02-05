@@ -24,14 +24,14 @@ router.get('/video/:id', async function (req, res) {
       const c_database = client.db('chatInfo');
       const c_collection = c_database.collection('chats');
       
-      const query = { movie_id:req.params.id };
       var chats = await c_collection.aggregate([
-        { $match: query }
+        { $match: {parent_id:req.params.id } }
       ]);
       chats = await chats.toArray();
 
       const m_database = client.db('movieInfo');
       const m_collection = m_database.collection('movies');
+      const query = { movie_id:req.params.id };
       const cursor = await m_collection.aggregate([
         { $match: query }
       ]);
