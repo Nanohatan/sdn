@@ -30,7 +30,7 @@
             <% jsonAry.forEach(function(json) { %>
                 <div class="col-md-6 border" style="height: 100px; width: 100%; margin-top: 10px; border-style: dotted; ">
                     <%= json.msg %>
-                    <div onclick="favo(this,'<%= json._id %>')"><span class="glyphicon glyphicon-thumbs-up"> <%= json.rating %></span></div> 
+                    <div onclick="favo(this,'<%= json._id %>')"><span class="glyphicon glyphicon-thumbs-up"><%= json.rating %></span></div> 
                 </div>
             <% }); %>
 
@@ -42,7 +42,7 @@
         fetch("/api/likes/"+id)
           .then((response) => response.json())
           .then((data) => {
-            if (isInc){
+            if (data.isInc){
               var n = element.getElementsByTagName("span")[0].innerHTML;
               n++;
               element.getElementsByTagName("span")[0].innerHTML=n;
