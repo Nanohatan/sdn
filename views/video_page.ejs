@@ -25,7 +25,8 @@
 
   <div class="col-md-12">
   <!-- ビデオゾーン -->
-  <div class="col-md-6 border" style="height: 600px; border-style: dotted; ">
+  <div class="col-md-6 embed-responsive" style="height: 600px; border-style: dotted; ">
+    <video class="col-md-12 embed-responsive-item" id="video_play" controls preload="none"></video>
   </div>
   <!--チャットゾーン -->
     <div id="chat_place" class="col-md-6 pre-scrollable" style="height: 500px; border-style: dotted; ">
@@ -69,5 +70,16 @@
   </div>
 
 <script src="http://192.168.98.25:8080/static/js/video_page_api.js"></script>
+<script>
+  var video = document.getElementById('video_play');
+    if (Hls.isSupported()) {
+        var hls = new Hls();
+        hls.loadSource(" <%= place %> ");
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MANIFEST_PARSED, function () {
+            video.play();
+        });
+    }
+</script>
 </body>
 </html>
