@@ -20,7 +20,7 @@
 <body>
  <%- include('./header', {role:role}) %>
  <h3><%= className %></h3>
- <h4>　第<%= videoNumber %>回 <%= videoNumber %> <%= videoTitle %></h4>
+ <h4>　第<%= videoNumber %>回 <%= videoTitle %></h4>
     <div class="row">
         
         <div class="col-md-6 border" style="height: 500px; border-style: dotted; ">
@@ -36,19 +36,6 @@
 
         </div>
     </div>
-
-    <script>
-      function favo(element,id){
-        fetch("/api/likes/"+id)
-          .then((response) => response.json())
-          .then((data) => {
-            if (data.isInc){
-              var n = element.getElementsByTagName("span")[0].innerHTML;
-              n++;
-              element.getElementsByTagName("span")[0].innerHTML=n;
-            }
-          });
-      }
-    </script>
-  </body>
+<script src="js/video_page_api.js"></script>
+</body>
 </html>
