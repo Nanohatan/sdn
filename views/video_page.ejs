@@ -37,7 +37,7 @@
             <div onclick="favo(this,'<%= json._id %>')" class="col-md-1"><span class="glyphicon glyphicon-thumbs-up"><%= json.likes %></span></div>
             <div class="col-md-1"><p class="glyphicon glyphicon-eye-close"></p></div>
             <% if(json.type=="shiori"){ %>
-              <div class="col-md-8"><p  onclick="goThread('<%= json._id %>')">議論を表示する→</p></div>
+              <div class="col-md-8"><p  onclick="goThread('<%= json.its_id %>')">しおり内を表示する→</p></div>
             <% } %>
           </div>
         </div>
