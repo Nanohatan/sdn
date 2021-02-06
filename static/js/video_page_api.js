@@ -18,3 +18,12 @@ function goThread(id){
         chat_place.innerHTML=data
       });
 }
+function backThread(id){
+  const chat_place=document.getElementById("chat_place")
+  chat_place.innerHTML = '';
+  fetch("/api/back-thread/"+id)
+    .then((response) => response.text())
+    .then((data) => {
+      chat_place.innerHTML=data
+    });
+}
