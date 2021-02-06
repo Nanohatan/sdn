@@ -25,6 +25,7 @@ var auth = require('./auth.js')
 app.use('/auth', auth);
 app.use('/search', require('./video_search.js'))
 app.use('/movie_upload', require('./movie_upload.js'))
+app.use('/api', require('./chat_api.js'))
 
 
 var Puid = require('puid');

@@ -3,7 +3,7 @@ var router = express.Router()
 const { MongoClient } = require("mongodb");
 const uri = 'mongodb://localhost:27017' ;
 
-router.get('/api/get-thread/:id', async function (req, res) {
+router.get('/get-thread/:id', async function (req, res) {
   const client = new MongoClient(uri, { useUnifiedTopology: true });
   var  sess = req.session.user;
   if (sess){
