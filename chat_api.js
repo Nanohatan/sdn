@@ -48,7 +48,7 @@ router.get('/back-thread/:id', async function (req, res) {
           { $match: {parent_id:req.params.id } }
         ]);
         chats = await chats.toArray();
-        res.render('chat_body/thread',{jsonAry:chats})
+        res.render('chat_body/main_thread',{jsonAry:chats})
   
       }catch(err) {
         console.log(err);
