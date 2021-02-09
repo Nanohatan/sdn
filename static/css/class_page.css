@@ -1,3 +1,8 @@
+.point img:hover{
+    transform: scale(1.1);	/*画像の拡大率*/
+    transition-duration: 0.3s;	/*変化に掛かる時間*/
+}
+
 .row {
     display: flex;
 }
@@ -172,7 +177,3 @@ input {
     border-color: #aaa;
 }
 
-.class img:hover{
-    transform: scale(1.1);	/*画像の拡大率*/
-    transition-duration: 0.3s;	/*変化に掛かる時間*/
-}
