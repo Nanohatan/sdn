@@ -171,3 +171,8 @@ input {
 .select-css:disabled:hover, .select-css[aria-disabled=true] {
     border-color: #aaa;
 }
+
+.class:hover {
+    transform: scale(1.1);	/*画像の拡大率*/
+    transition-duration: 0.3s;	/*変化に掛かる時間*/
+}
