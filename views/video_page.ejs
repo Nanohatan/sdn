@@ -100,8 +100,9 @@
         <div class="modal-body">
           <p>表示設定を変更できます。</p>
         </div>
-        <div class="modal-response">
-          <p></p>
+        <div >
+          <p id="switch_botton">切り替えボタン</p>
+          <p class="modal-response"></p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
@@ -118,10 +119,13 @@
   // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
   var modal = $(this)
   var url='http://192.168.98.25:8080/switch_isWatchByTeacher'+recipient
-  $.post(url)
+  $( "#switch_botton" ).click(function() {
+    $.post(url)
     .done(function(response){
       modal.find('.modal-response').text("閲覧状況を変えました。")
     });
+  });
+
   })
 </script>
 </body>
