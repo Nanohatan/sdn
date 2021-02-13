@@ -70,12 +70,12 @@ router.get('/back-thread/:id', async function (req, res) {
       const collection = database.collection('chats');
       const doc = collection.findOne({its_id:req.params.id});
       //its_idまたはparent_idが一致するものの閲覧状況を変更する。
-      await collection.updateMany([
-        {$match:{ $or: [ {its_id:req.params.id } , {parent_id:req.params.id }] }},
+      await collection.updateMany(
+        {$or : [ {its_id:req.params.id } , {parent_id:req.params.id }] },
         {$set: {isWatchByTeacher: !doc.isWatchByTeacher}}
-      ])
+      )
+      console.log(doc)
       
-      chats = await chats.toArray();
       res.send(!doc.isWatchByTeacher)
     }catch(err) {
       console.log(err);
