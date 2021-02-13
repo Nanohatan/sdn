@@ -62,5 +62,27 @@ router.get('/back-thread/:id', async function (req, res) {
     }
   })
 
+  router.post('/switch_isWatchByTeacher/:id', async function (req, res) {
+    const client = new MongoClient(uri, { useUnifiedTopology: true });
+    try {
+      await client.connect();
+      const database = client.db('chatInfo');
+      const collection = database.collection('chats');
+      var chats = await collection.aggregate([
+        { $match: {parent_id:req.params.id } }
+      ]);
+      chats = await chats.toArray();
+      res.send("sucess")
+    }catch(err) {
+      console.log(err);
+    }
+    finally {
+      // Ensures that the client will close when you finish/error
+      await client.close();
+    }
+
+
+})
+
 
 module.exports = router
