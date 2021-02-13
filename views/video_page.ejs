@@ -112,21 +112,22 @@
     </div>
   </div>
 <script>
-  $('#closeEyes').on('show.bs.modal', function (event) {
+$('#closeEyes').on('show.bs.modal', function (event) {
+  modal.find('.modal-response').text("")
   var button = $(event.relatedTarget) // Button that triggered the modal
   var recipient = button.data('whatever') // Extract info from data-* attributes
   // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
   // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
   var modal = $(this)
   var url='http://192.168.98.25:8080/api/switch_isWatchByTeacher/'+recipient
-  $( "#switch_botton" ).click(function() {
+  modal.find('#switch_botton').click(function() {
     $.post(url)
     .done(function(response){
       modal.find('.modal-response').text("閲覧状況を変えました。")
     });
   });
 
-  })
+})
 </script>
 </body>
 </html>
