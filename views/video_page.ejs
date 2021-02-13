@@ -99,10 +99,10 @@
         </div>
         <div class="modal-body">
           <p>表示設定を変更できます。</p>
-        </div>
-        <div >
-          <p id="switch_botton">切り替えボタン</p>
-          <p class="modal-response"></p>
+          <div >
+            <p id="switch_botton">切り替えボタン</p>
+            <p class="modal-response"></p>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
@@ -118,7 +118,7 @@
   // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
   // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
   var modal = $(this)
-  var url='http://192.168.98.25:8080/switch_isWatchByTeacher'+recipient
+  var url='http://192.168.98.25:8080/api/switch_isWatchByTeacher/'+recipient
   $( "#switch_botton" ).click(function() {
     $.post(url)
     .done(function(response){
