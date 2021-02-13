@@ -37,7 +37,7 @@
           <%= json.msg %>
           <div class="row" style="position:absolute; bottom:0">
             <div onclick="favo(this,'<%= json._id %>')" class="col-md-1"><span class="glyphicon glyphicon-thumbs-up"><%= json.rating %></span></div>
-            <div class="col-md-1"><p class="glyphicon glyphicon-eye-close" data-toggle="modal" data-target="#closeEyes"></p></div>
+            <div class="col-md-1"><p class="glyphicon glyphicon-eye-close" data-toggle="modal" data-target="#closeEyes" data-whatever="123456"></p></div>
             <% if(json.msg_type=="shiori"){ %>
               <div class="col-md-8"><p  onclick="goThread('<%= json.its_id %>')">しおり内を表示する→</p></div>
             <% } %>
@@ -103,6 +103,16 @@
       
     </div>
   </div>
-
+<script>
+  $('#closeEyes').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var recipient = button.data('whatever') // Extract info from data-* attributes
+  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+  var modal = $(this)
+  modal.find('.modal-title').text('New message to ' + recipient)
+  modal.find('.modal-body input').val(recipient)
+})
+</script>
 </body>
 </html>
