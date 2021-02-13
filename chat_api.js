@@ -38,7 +38,7 @@ router.get('/get-thread/:id', async function (req, res) {
 router.get('/back-thread/:id', async function (req, res) {
     const client = new MongoClient(uri, { useUnifiedTopology: true });
     var  sess = req.session.user;
-    if (sess){
+    if (sess && !sess.isTeacher){
       try {
         await client.connect();
         const database = client.db('chatInfo');
@@ -57,10 +57,54 @@ router.get('/back-thread/:id', async function (req, res) {
         // Ensures that the client will close when you finish/error
         await client.close();
       }
+    }else if (sess && sess.isTeacher){
+      try {
+        await client.connect();
+        const database = client.db('chatInfo');
+        const collection = database.collection('chats');
+        
+        var chats = await collection.aggregate([
+          { $match: {parent_id:req.params.id ,isWatchByTeacher:true} }
+        ]);
+        chats = await chats.toArray();
+        res.render('chat_body/main_thread',{jsonAry:chats})
+      }catch(err) {
+        console.log(err);
+      }
+      finally {
+        // Ensures that the client will close when you finish/error
+        await client.close();
+      }
     }else{
       res.redirect('/auth/login');
     }
   })
+
+  router.post('/switch_isWatchByTeacher/:id', async function (req, res) {
+    const client = new MongoClient(uri, { useUnifiedTopology: true });
+    try {
+      await client.connect();
+      const database = client.db('chatInfo');
+      const collection = database.collection('chats');
+      const doc = collection.findOne({its_id:req.params.id});
+      //its_idまたはparent_idが一致するものの閲覧状況を変更する。
+      await collection.updateMany(
+        {$or : [ {its_id:req.params.id } , {parent_id:req.params.id }] },
+        {$set: {isWatchByTeacher: !doc.isWatchByTeacher}}
+      )
+      console.log(doc)
+      
+      res.send(!doc.isWatchByTeacher)
+    }catch(err) {
+      console.log(err);
+    }
+    finally {
+      // Ensures that the client will close when you finish/error
+      await client.close();
+    }
+
+
+})
 
 
 module.exports = router
