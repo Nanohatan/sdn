@@ -155,6 +155,7 @@
             node.style.cssText = "left:" + shiori_time + "%";
             node.alt = nowTime;
             node.className = 'point '+its_id;
+            node.id = "point_"+its_id;
             document.getElementById("pointbox").appendChild(node);
         }
         ;
@@ -252,7 +253,7 @@
     }
 
     function HoverAction(its_id){
-        hover_point = document.getElementsByClassName("point "+its_id);
+        hover_point = document.getElementById("point_"+its_id);
         console.log(hover_point)
         hover_point.style.backgroundColor="#4040FF";
         hover_point.style.transform = "scale(1.1)";
