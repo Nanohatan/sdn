@@ -145,8 +145,12 @@
                 changeParentsID(newDiv.id, sub);
             }, false);
             newDiv.addEventListener('mouseover', function () {
-                test = document.getElementsByClassName("point "+its_id);
-                console.log(test);
+                hover_point = document.getElementsByClassName("point "+its_id);
+                hover_point.style.transform = scale(1.1);
+                hover_point.style.transition-duration = 0.3;
+                hover_point.style.cursor = "pointer";
+
+
             }, false);
             newDiv.addEventListener('mouseleave', function () {
                 console.log("離れた！")
@@ -156,7 +160,6 @@
             node.style.cssText = "left:" + shiori_time + "%";
             node.alt = nowTime;
             node.className = 'point '+its_id;
-            node.id = its_id;
             document.getElementById("pointbox").appendChild(node);
         }
         ;
