@@ -16,7 +16,12 @@ router.get('/', function (req, res) {
                 console.log(err);
             }
             ;
-            res.render('video_search', {"class_name": result, role:req.session.user.isTeacher});
+            var  sess = req.session.user;
+            if (sess) {
+                res.render('video_search', {"class_name": result, role: req.session.user.isTeacher});
+            }else{
+                res.redirect('/auth/login');
+            }
         });
     });
 });
