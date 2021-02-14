@@ -145,7 +145,7 @@
                 changeParentsID(newDiv.id, sub);
             }, false);
             newDiv.addEventListener('mouseover', function () {
-                test = document.getElementsByClassName("topic");
+                test = document.getElementsByClassName("point "+its_id);
                 console.log(test);
             }, false);
             newDiv.addEventListener('mouseleave', function () {
@@ -155,7 +155,7 @@
             node.src = "../static/aicon.png";
             node.style.cssText = "left:" + shiori_time + "%";
             node.alt = nowTime;
-            node.className = 'point';
+            node.className = 'point '+its_id;
             node.id = its_id;
             document.getElementById("pointbox").appendChild(node);
         }
