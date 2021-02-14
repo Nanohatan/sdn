@@ -11,7 +11,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
-    
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
@@ -26,5 +26,76 @@
     </form>
 </div>
 
+<script>
+    var classes = <%- JSON.stringify(class_name) %>
+        console.log(classes);
+    create_list(classes);
+
+
+    //検索ボタンがクリックされたら文字列を含む講義名のみ表示する．
+    //document.getElementById("button").onclick = function() {
+    $('#button').on('click', function(){
+        $('.class-list').empty();
+        str = document.getElementById("video_search").value;
+        jobj = [];
+        classes.forEach(function(cl){
+            console.log(cl);
+            console.log(str);
+            if ( cl.includes(str)) {
+                jobj.push(cl);
+            };
+        });
+        create_list(jobj);
+    });
+
+    function create_list(jobj){
+        jobj.forEach(function(jd){
+            let currentDiv=document.getElementsByClassName("class-list")[0];
+            let newDiv=document.createElement('div');
+            let newa=document.createElement('a');
+            let newh2=document.createElement('h2');
+            let newPara=document.createElement('p');
+            newDiv.className ="class-video";
+
+            currentDiv.appendChild(newDiv);
+            newa.href="/search/class/"+jd;
+            newDiv.appendChild(newa);
+            newPara.textContent=jd;
+            newa.appendChild(newh2);
+            newa.appendChild(newPara);
+        });
+    }
+</script>
+
+
 </body>
+<style>
+    #search_box{
+        text-align: center;
+    }
+
+    input {
+        width: 50%;
+        padding: 10px 20px;
+        margin: 10px 0;
+        box-sizing: border-box;
+        font-size: 15px;
+    }
+    button {
+        font-size: 30px;
+    }
+    .class-list{
+        border-style: dashed;
+        border-color: black;
+    }
+
+    .class-video{
+        margin: 10px;
+        height: 20%;
+        border-style: dashed;
+        border-color: green;
+        background-color: #E6F2FF;
+    }
+
+</style>
 </html>
