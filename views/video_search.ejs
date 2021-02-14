@@ -15,18 +15,12 @@
 </head>
 <body>
 <%- include('./header', {role:role}) %>
-<div class="container">
-    <div class="table-responsive">
-        <table class="table table-striped table-bordered">
-            <tr>
-                <th>月曜日</th>
-                <th>火曜日</th>
-                <th>水曜日</th>
-                <th>木曜日</th>
-                <th>金曜日</th>
-            </tr>
-        </table>
-    </div>
+<div id="search_box">
+    <h1>講義検索</h1>
+    <form >
+        <input type="text" id="video_search" name="video_search" >
+        <button type="button" id="button"><i class="fa fa-search"></i></button>
+    </form>
 </div>
 
 </body>
