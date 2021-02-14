@@ -146,13 +146,14 @@
             }, false);
             newDiv.addEventListener('mouseover', function () {
                 hover_point = document.getElementsByClassName("point "+its_id);
-                hover_point.id = "hover_true"
-                document.getElementById("pointbox").appendChild(hover_point);
-                console.log(hover_point);
+                hover_point.style.transform = 1.1;
+                // hover_point.style.transition-duration = 0.3;
+                hover_point.style.cursor = "pointer";
+
+
             }, false);
             newDiv.addEventListener('mouseleave', function () {
-                hover_point = document.getElementsByClassName("point "+its_id);
-                hover_point.id = "";
+                console.log("離れた！")
             }, false);
             var node = document.createElement("img");
             node.src = "../static/aicon.png";
