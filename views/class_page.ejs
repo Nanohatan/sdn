@@ -144,6 +144,12 @@
                 callChatInfoAndCreateChat(newDiv.id);
                 changeParentsID(newDiv.id, sub);
             }, false);
+            newDiv.addEventListener('mouseover', function () {
+                console.log("保バッタ！")
+            }, false);
+            newDiv.addEventListener('mouseleave', function () {
+                console.log("離れた！")
+            }, false);
             var node = document.createElement("img");
             node.src = "../static/aicon.png";
             node.style.cssText = "left:" + shiori_time + "%";
