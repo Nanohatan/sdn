@@ -86,7 +86,7 @@
     transition-duration: 0.3s;
 }
 
-#pointbox img .hover_true{
+#pointbox img:hover{
     position:absolute;
     bottom: 1px;
     width: 40px;
