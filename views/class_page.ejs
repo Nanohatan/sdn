@@ -146,14 +146,11 @@
             }, false);
             newDiv.addEventListener('mouseover', function () {
                 hover_point = document.getElementsByClassName("point "+its_id);
-                hover_point.style.transform = scale(1.1);
-                // hover_point.style.transition-duration = 0.3;
-                hover_point.style.cursor = "pointer";
-
-
+                hover_point.id = "hover_true"
             }, false);
             newDiv.addEventListener('mouseleave', function () {
-                console.log("離れた！")
+                hover_point = document.getElementsByClassName("point "+its_id);
+                hover_point.id = "";
             }, false);
             var node = document.createElement("img");
             node.src = "../static/aicon.png";
