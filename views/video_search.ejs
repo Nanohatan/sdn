@@ -1,121 +1,56 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8" />
-  <title>動画検索</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="http://192.168.98.25:8080/static/css/navibar.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <meta charset="utf-8" />
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <title>user page</title>
+    <!-- javascript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+
 </head>
-<style>
-    #search_box{
-      text-align: center;
-    }
-
-    input {
-      width: 50%;
-      padding: 10px 20px;
-      margin: 10px 0;
-      box-sizing: border-box;
-      font-size: 15px;
-      }
-      button {
-        font-size: 30px;
-      }
-  .class-list{
-    border-style: dashed;
-    border-color: black;
-}
-
-.class-video{
-    margin: 10px;
-    height: 20%;
-    border-style: dashed;
-    border-color: green;
-    background-color: #E6F2FF;
-}
-</style>
-
 <body>
+<%- include('./header', {role:role}) %>
+<h1 > <%= userName %> &nbsp;<span style="color: #2b2301;">の時間割</span></h1>
+<% if (role) { %>
+    <h5 >教師としてログインしています</h5>
+<% } else { %>
+    <h5 >生徒としてログインしています</h5>
+<% } %>
 
-<!-- navigation bar -->
-<div class="navbar">
-  <a href="/auth/login" >時間割</a>
-  <a href="/search/">授業検索</a>
+<p>&nbsp;</p>
+<div class="container">
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <tr>
+                <th>月曜日</th>
+                <th>火曜日</th>
+                <th>水曜日</th>
+                <th>木曜日</th>
+                <th>金曜日</th>
+            </tr>
+            <% for (let i=1; i<8; i++){ %>
+                <tr>
+                    <% for (let j=1; j<6; j++){ %>
+                        <% schedule.forEach(function(sc){ %>
+                            <% if(sc.day==j.toString() && sc.period==i.toString()){ %>
+                                <td><a href="/search/class/<%- sc.class_name %>"> <%- sc.class_name %></a></td>
+                                <% j++ %>
+                            <% } %>
+                        <% }); %>
+                        <% if (i<8 && j<6) { %>
+                            <td></td>
+                        <% } %>
+                    <% }; %>
+                </tr>
+            <% }; %>
+        </table>
+    </div>
 </div>
-
-<!-- input for serching -->
-<div id="search_box">
-  <h1>講義検索</h1>
-  <form >
-    <input type="text" id="video_search" name="video_search" >
-    <button type="button" id="button"><i class="fa fa-search"></i></button>
-  </form>
-</div>
-<div class="class-list">
-
-
-<style>
-  .class-list{
-    border-style: dashed;
-    border-color: black;
-}
-
-.class-video{
-    margin: 10px;
-    height: 20%;
-    border-style: dashed;
-    border-color: green;
-    background-color: #E6F2FF;
-}
-</style>
-
-</div>
-
-
-<script>
-var classes = <%- JSON.stringify(class_name) %>
-console.log(classes);
-create_list(classes);
-
-
-//検索ボタンがクリックされたら文字列を含む講義名のみ表示する．
-//document.getElementById("button").onclick = function() {
-$('#button').on('click', function(){
-  $('.class-list').empty();  
-  str = document.getElementById("video_search").value;
-  jobj = [];
-  classes.forEach(function(cl){
-    console.log(cl);
-    console.log(str);
-    if ( cl.includes(str)) {
-      jobj.push(cl);
-    };
-  });
-  create_list(jobj);
-});
-
-function create_list(jobj){
-  jobj.forEach(function(jd){
-    let currentDiv=document.getElementsByClassName("class-list")[0];
-    let newDiv=document.createElement('div');
-    let newa=document.createElement('a');
-    let newh2=document.createElement('h2');
-    let newPara=document.createElement('p');
-    newDiv.className ="class-video";
-
-    currentDiv.appendChild(newDiv);
-    newa.href="/search/class/"+jd;
-    newDiv.appendChild(newa);
-    newPara.textContent=jd;
-    newa.appendChild(newh2);
-    newa.appendChild(newPara);
-  });
-}
-</script>
-
-
 
 </body>
 </html>
-
