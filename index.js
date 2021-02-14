@@ -25,6 +25,7 @@ var auth = require('./auth.js')
 app.use('/auth', auth);
 app.use('/search', require('./video_search.js'))
 app.use('/movie_upload', require('./movie_upload.js'))
+app.use('/api', require('./chat_api.js'))
 
 
 var Puid = require('puid');
@@ -77,11 +78,7 @@ app.get('/video/:id', function (req, res) {
     });
 });
 
-app.get('/top', function (req, res) {
-    res.sendfile('static/top.html');
-});
 
-var join_id;
 io.on('connection', (socket) => {
     console.log('a user connected');
 
@@ -138,8 +135,56 @@ io.on('connection', (socket) => {
 });
 
 
-
-
+var ObjectId = require('mongodb').ObjectID;
+app.get("/api/likes/:id", async function (req, res) {
+    //セッションからユーザーをとる
+    const user=req.session.user
+    const id=req.params.id
+    const client = new MongoClient(url, { useUnifiedTopology: true });
+  
+    try {
+      await client.connect();
+  
+      const database = client.db('chatInfo');
+      const likes_collection = database.collection('likes');
+      const chats_collection = database.collection('chats')
+  
+      const query = { chat_id:id,user:user._id };
+      console.log(query)
+      const cursor = await likes_collection.aggregate([
+        { $match: query }
+      ]);
+      const like = await cursor.toArray();
+      console.log(like)
+      if (like.length==0){//初回
+          //2.chatsのlikesを増やす
+        await chats_collection.findOneAndUpdate(
+          {_id:ObjectId(id)},
+          { $inc: { rating: 1 } }
+        )
+        //likesにユーザー名とチャット名のデータをいれるf
+        await likes_collection.insertOne({
+          chat_id:id,
+          user:user._id
+        })
+  
+        res.send({msg:"exist",isInc:true})
+      }else{
+        //すでに押してる場合は、今回は変化せない。
+        res.send({msg:"not exist",isInc:false})
+      }
+  
+    } catch(err) {
+      console.log(err);
+    }
+    finally {
+      // Ensures that the client will close when you finish/error
+      await client.close();
+    }
+  
+  
+  
+  });
 
 
 

@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script> 
+
+    </script> 
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap javascript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- hls  -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <title>動画</title>
+</head>
+<body>
+ <%- include('./header', {role:role}) %>
+ <h3><%= className %></h3>
+ <h4>　第<%= videoNumber %>回 <%= videoTitle %></h4>
+ <div class="row">
+
+  <div class="col-md-12">
+  <!-- ビデオゾーン -->
+  <div class="col-md-6 embed-responsive" style="height: 600px; border-style: dotted; ">
+    <video class="col-md-12 embed-responsive-item" id="video_play" controls preload="none"></video>
+  </div>
+  <!--チャットゾーン -->
+    <div id="chat_place" class="col-md-6 pre-scrollable" style="height: 500px; border-style: dotted; ">
+      <% jsonAry.forEach(function(json) { %>
+    <!--   チャット一つ作る -->
+        <div class="col-md-6 border" style="height: 80px; width: 100%; margin-top: 10px; border-style: dotted; ">
+          <%= json.msg %>
+          <div class="row" style="position:absolute; bottom:0">
+            <div onclick="favo(this,'<%= json._id %>')" class="col-md-1"><span class="glyphicon glyphicon-thumbs-up"><%= json.rating %></span></div>
+            <% if(json.isWatchByTeacher){ %>
+              <div class="col-md-1"><p class="glyphicon glyphicon-eye-open" data-toggle="modal" data-target="#openEyes" data-whatever="<%= json.its_id %>"></p></div>
+            <% } else {%>
+              <div class="col-md-1"><p class="glyphicon glyphicon-eye-close" data-toggle="modal" data-target="#closeEyes" data-whatever="<%= json.its_id %>"></p></div>
+            <% } %>
+            <% if(json.msg_type=="shiori"){ %>
+              <div class="col-md-8"><p  onclick="goThread('<%= json.its_id %>')">しおり内を表示する→</p></div>
+            <% } %>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+    <div class="row" style=" border-style: dotted;"> 
+      <div class="col-md-6" style="height:auto; border-style: dotted; ">
+        <form >
+          <div class="form-group">
+            <label for="exampleInputName2">名前</label>
+            <input type="text" class="form-control" id="exampleInputName2" name="student_name" placeholder="匿名学生">
+          </div>
+          <div class="form-group">
+            <select class="form-control">
+              <option>コメント</option>
+              <option>しおり</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <textarea class="form-control" rows="3"></textarea>
+          </div>
+          <button type="submit" class="btn btn-default">送信</button>
+        </form>
+      </div>
+    </div>
+  
+  </div>
+
+  </div>
+
+<script src="http://192.168.98.25:8080/static/js/video_page_api.js"></script>
+<script>
+  var video = document.getElementById('video_play');
+    if (Hls.isSupported()) {
+        var hls = new Hls();
+        hls.loadSource(" <%= place %> ");
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MANIFEST_PARSED, function () {
+            video.play();
+        });
+    }
+</script>
+
+  <!-- Modal -->
+  <div class="modal fade" id="closeEyes" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">現在このチャットは教員から見えない設定になっています。</h4>
+        </div>
+        <div class="modal-body">
+          <p>表示設定を変更できます。</p>
+          <div >
+            <p class="switch_botton">切り替えボタン</p>
+            <p class="modal-response"></p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+<script>
+$('#closeEyes').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var recipient = button.data('whatever') // Extract info from data-* attributes
+  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+  var modal = $(this)
+  modal.find('.modal-response').text("")
+  var url='http://192.168.98.25:8080/api/switch_isWatchByTeacher/'+recipient
+  modal.find('.switch_botton').click(function() {
+    $.post(url)
+    .done(function(response){
+      modal.find('.modal-response').text("閲覧状況を変えました。")
+    });
+  });
+
+})
+</script>
+</body>
+</html>
