@@ -145,12 +145,7 @@
                 changeParentsID(newDiv.id, sub);
             }, false);
             newDiv.addEventListener('mouseover', function () {
-                hover_point = document.getElementsByClassName("point "+its_id);
-                hover_point.style.transform = "scale(1.1)";
-                // hover_point.style.transition-duration = 0.3;
-                hover_point.style.cursor = "pointer";
-
-
+                HoverAction(its_id)
             }, false);
             newDiv.addEventListener('mouseleave', function () {
                 console.log("離れた！")
@@ -175,6 +170,13 @@
         msgDiv.appendChild(msgPara);
         newDiv.appendChild(msgDiv);
     }
+
+    function HoverAction(its_id){
+        hover_point = document.getElementsByClassName("point "+its_id);
+        hover_point.style.transform = "scale(1.1)";
+        // hover_point.style.transition-duration = 0.3;
+        hover_point.style.cursor = "pointer";
+    };
 
 
     var url = window.location.href;
