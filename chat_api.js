@@ -94,7 +94,7 @@ router.get('/back-thread/:id', async function (req, res) {
       )
       console.log(doc)
       
-      res.send(!doc.isWatchByTeacher)
+      res.json({isWatchByTeacher:doc.isWatchByTeacher})
     }catch(err) {
       console.log(err);
     }
