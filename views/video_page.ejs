@@ -119,9 +119,11 @@ $('#switch_isWatch_modal').on('show.bs.modal', function (event) {
   var modal = $(this)
   if (isWatch){
     modal.find('.modal-title').text("現在このチャットは教員から見える設定になっています。")
-    modal.find( ".modal-body" ).remove();
+    modal.find( ".modal-body" ).hide();
+    modal.find( ".modal-footer" ).hide();
   }else{
     modal.find('.modal-title').text("現在このチャットは教員から見えない設定になっています。")
+    modal.find( ".modal-body" ).show();
   }
   // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
   // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
