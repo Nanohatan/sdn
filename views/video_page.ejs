@@ -38,9 +38,9 @@
           <div class="row" style="position:absolute; bottom:0">
             <div onclick="favo(this,'<%= json._id %>')" class="col-md-1"><span class="glyphicon glyphicon-thumbs-up"><%= json.rating %></span></div>
             <% if(json.isWatchByTeacher){ %>
-              <div class="col-md-1"><p class="glyphicon glyphicon-eye-open" data-toggle="modal" data-target="#switch_isWatch_modal" data-whatever="<%= json.its_id %>" data-isWatch="true"></p></div>
+              <div class="col-md-1"><p class="glyphicon glyphicon-eye-open" data-toggle="modal" data-target="#switch_isWatch_modal" data-whatever="<%= json.its_id %>" data-iswatch="true"></p></div>
             <% } else {%>
-              <div class="col-md-1"><p class="glyphicon glyphicon-eye-close" data-toggle="modal" data-target="#switch_isWatch_modal" data-whatever="<%= json.its_id %>" data-isWatch="false"></p></div>
+              <div class="col-md-1"><p class="glyphicon glyphicon-eye-close" data-toggle="modal" data-target="#switch_isWatch_modal" data-whatever="<%= json.its_id %>" data-iswatch="false"></p></div>
             <% } %>
             <% if(json.msg_type=="shiori"){ %>
               <div class="col-md-8"><p  onclick="goThread('<%= json.its_id %>')">しおり内を表示する→</p></div>
@@ -115,9 +115,9 @@
 $('#switch_isWatch_modal').on('show.bs.modal', function (event) {
   var button = $(event.relatedTarget) // Button that triggered the modal
   var recipient = button.data('whatever') // Extract info from data-* attributes
-  var isWatch = button.data('isWatch')
+  var isWatch = button.data('iswatch')
   var modal = $(this)
-  if (isWatch=="true"){
+  if (isWatch){
     modal.find('.modal-title').text("現在このチャットは教員から見える設定になっています。")
   }else{
     modal.find('.modal-title').text("現在このチャットは教員から見えない設定になっています。")
@@ -130,6 +130,7 @@ $('#switch_isWatch_modal').on('show.bs.modal', function (event) {
   modal.find('.switch_botton').click(function() {
     $.post(url)
     .done(function(response){
+      console.log(response)
       modal.find('.modal-response').text("閲覧状況を変えました。")
     });
   });
