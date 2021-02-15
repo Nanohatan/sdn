@@ -100,7 +100,7 @@
         <div class="modal-body">
           <p>表示設定を変更できます。</p>
           <div >
-            <p class="switch_botton">切り替えボタン</p>
+            <p class="switch_botton btn btn-primary">切り替える</p>
             <p class="modal-response"></p>
           </div>
         </div>
@@ -124,6 +124,7 @@ $('#switch_isWatch_modal').on('show.bs.modal', function (event) {
   }else{
     modal.find('.modal-title').text("現在このチャットは教員から見えない設定になっています。")
     modal.find( ".modal-body" ).show();
+    modal.find( ".modal-footer" ).show();
   }
   // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
   // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
