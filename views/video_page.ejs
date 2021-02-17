@@ -72,6 +72,29 @@
     }
 </script>
 
+<!-- 動画のプログレスバー -->
+<div class="container-fluid">
+  <div class="video-progress" style="background-color: azure;">
+    <div id="progress" style="background-color: aqua;"></div>
+    <div id="pointbox"></div>
+  </div>
+</div>
+<script>
+  const video = document.getElementById('video_play');
+  video.ontimeupdate = function () {
+    var percentage = (video.currentTime / video.duration) * 100;
+    $("#progress").css("width", percentage + "%");
+  };
+  $("#progress").on("click", function (e) {
+    var offset = $(this).offset();
+    var left = (e.pageX - offset.left);
+    var totalWidth = $("#progress").width();
+    var percentage = (left / totalWidth);
+    var vidTime = video.duration * percentage;
+    video.currentTime = vidTime;
+  });
+</script>
+
   <!-- Modal -->
   <div class="modal fade" id="switch_isWatch_modal" role="dialog">
     <div class="modal-dialog">
