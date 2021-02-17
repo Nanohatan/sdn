@@ -32,23 +32,7 @@
   </div>
   <!--チャットゾーン -->
     <div id="chat_place" class="col-md-6 pre-scrollable" style="height: 500px; border-style: dotted; ">
-      <% jsonAry.forEach(function(json) { %>
-    <!--   チャット一つ作る -->
-        <div class="col-md-6 border" style="height: 80px; width: 100%; margin-top: 10px; border-style: dotted; ">
-          <%= json.msg %>
-          <div class="row" style="position:absolute; bottom:0">
-            <div onclick="favo(this,'<%= json._id %>')" class="col-md-1"><span class="glyphicon glyphicon-thumbs-up"><%= json.rating %></span></div>
-            <% if(json.isWatchByTeacher){ %>
-              <div class="col-md-1"><p class="glyphicon glyphicon-eye-open" data-toggle="modal" data-target="#switch_isWatch_modal" data-whatever="<%= json.its_id %>" data-iswatch="true"></p></div>
-            <% } else {%>
-              <div class="col-md-1"><p class="glyphicon glyphicon-eye-close" data-toggle="modal" data-target="#switch_isWatch_modal" data-whatever="<%= json.its_id %>" data-iswatch="false"></p></div>
-            <% } %>
-            <% if(json.msg_type=="shiori"){ %>
-              <div class="col-md-8"><p  onclick="goThread('<%= json.its_id %>')">しおり内を表示する→</p></div>
-            <% } %>
-          </div>
-        </div>
-      <% }); %>
+      <%- include('./chat_body/main_thread', {jsonAry:jsonAry}) %>
     </div>
     <div class="row" style=" border-style: dotted;"> 
       <div class="col-md-6" style="height:auto; border-style: dotted; ">
