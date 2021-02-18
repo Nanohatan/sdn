@@ -2,6 +2,8 @@ var express = require('express')
 var router = express.Router()
 const { MongoClient } = require("mongodb");
 const uri = 'mongodb://localhost:27017' ;
+var bodyParser = require('body-parser')
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 router.get('/get-thread/:id', async function (req, res) {
   const client = new MongoClient(uri, { useUnifiedTopology: true });
@@ -106,8 +108,8 @@ router.get('/back-thread/:id', async function (req, res) {
 
 })
 
-router.post('/add_chat/:id', async function (req, res) {
-  console.log(req)
-  res.json(req)
+router.post('/add_chat/:id',urlencodedParser, async function (req, res) {
+  console.log(req.body)
+  res.send({test:test})
 })
 module.exports = router
