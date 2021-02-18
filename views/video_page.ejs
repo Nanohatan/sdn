@@ -37,7 +37,7 @@
     <div class="row" style=" border-style: dotted;"> 
       <div class="col-md-6" style="height:auto; border-style: dotted; ">
   <!-- チャット送信フォーム -->
-        <form action="http://192.168.98.25:8080/api/add_chat" method="GET">
+        <form action="http://192.168.98.25:8080/api/add_chat" method="GET" id="chatForm">
           <div class="form-group form-inline">
             <label for="authorName">名前</label>
             <input type="text" class="form-control" id="authorName" name="author_name" placeholder="匿名">
@@ -49,6 +49,7 @@
           <div class="form-group">
             <textarea class="form-control" name="msg" rows="3"></textarea>
           </div>
+          <input class="btn btn-default" type="button" onclick="submitChat()" value="送信">
           <button type="submit" class="btn btn-default">送信</button>
         </form>
       </div>

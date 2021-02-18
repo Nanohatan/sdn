@@ -31,6 +31,9 @@ function backThread(id){
 function submitChat() {
   var form = document.getElementById("chatForm")
   var percentage = (video.currentTime / video.duration) * 100;
-  form.append("shiori_time",percentage)
+  var input = $("<input>")
+               .attr("type", "hidden")
+               .attr("shiori_time", percentage).val("bla");
+  $('#chatForm').append(input);
   form.submit();
 }
