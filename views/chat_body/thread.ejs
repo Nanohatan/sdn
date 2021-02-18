@@ -3,9 +3,9 @@
     <div class="row" style="position:absolute; bottom:0">
         <div onclick="favo(this,'<%= main.its_id %>')" class="col-md-1"><span class="glyphicon glyphicon-thumbs-up"><%= main.rating %></span></div>
         <% if(main.isWatchByTeacher){ %>
-          <div class="col-md-1"><p class="glyphicon glyphicon-eye-open" data-toggle="modal" data-target="#switch_isWatch_modal" data-whatever="<%= main.its_id %>"></p></div>
+          <div class="col-md-1"><p class="glyphicon glyphicon-eye-open" data-toggle="modal" data-target="#switch_isWatch_modal" data-whatever="<%= main.its_id %>" data-iswatch="true"></p></div>
         <% } else {%>
-          <div class="col-md-1"><p class="glyphicon glyphicon-eye-close" data-toggle="modal" data-target="#switch_isWatch_modal" data-whatever="<%= main.its_id %>"></p></div>
+          <div class="col-md-1"><p class="glyphicon glyphicon-eye-close" data-toggle="modal" data-target="#switch_isWatch_modal" data-whatever="<%= main.its_id %>" data-iswatch="false"></p></div>
         <% } %>
         <div class="col-md-8"><p  onclick="backThread('<%= main.parent_id %>')">←メインに戻る</p></div>
     </div>
