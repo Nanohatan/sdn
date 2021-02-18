@@ -58,10 +58,10 @@
               msg_type: $('[name=msg_type]').val(), 
               author: $('[name=author_name]').val(),
               msg : $('[name=msg]').val(),
-              shiori_time:(video.currentTime / video.duration) * 10,
+              shiori_time:(video.currentTime / video.duration) * 100,
             })
               .done(function( data ) {
-                alert(data);
+                alert("リロードしてください.");
               });
             event.preventDefault();
           });
