@@ -110,6 +110,32 @@ router.get('/back-thread/:id', async function (req, res) {
 
 router.post('/add_chat/:id',urlencodedParser, async function (req, res) {
   console.log(req.body)
-  res.send({test:test})
+  //DBに入れる
+  const client = new MongoClient(uri, { useUnifiedTopology: true });
+    try {
+      await client.connect();
+      const database = client.db('chatInfo');
+      const collection = database.collection('chats');
+      //子チャットの場合は閲覧範囲は親チャットと同じになるので、処理を言えれる。
+      const doc = collection.findOne({its_id:req.params.id});
+      //its_idまたはparent_idが一致するものの閲覧状況を変更する。
+      await collection.insertOne({
+        msg_type: req.body.msg_type,
+        author: req.body.msg_type.auther,
+        msg: req.body.msg,
+        shiori_time: req.body.msg_type.shiori_time,
+        rating:0,
+        isWatchByTeacher:false
+      })
+      console.log(doc)
+      
+      res.json(res.send({test:"test"}))
+    }catch(err) {
+      console.log(err);
+    }
+    finally {
+      // Ensures that the client will close when you finish/error
+      await client.close();
+    }
 })
 module.exports = router

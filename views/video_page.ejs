@@ -49,7 +49,6 @@
           <div class="form-group">
             <textarea class="form-control" name="msg" rows="3"></textarea>
           </div>
-          <input class="btn btn-default" type="button" onclick="submitChat()" value="送信">
           <button type="submit" class="btn btn-default">送信</button>
         </form>
         <script>
@@ -62,7 +61,7 @@
               shiori_time:(video.currentTime / video.duration) * 10,
             })
               .done(function( data ) {
-                alert( "Data Loaded: " + data );
+                alert(data);
               });
             event.preventDefault();
           });
