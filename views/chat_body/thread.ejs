@@ -1,5 +1,8 @@
 <div class="col-md-6 border" style="height: 80px; width: 100%; margin-top: 10px; border-style: dotted; ">
-    <%= main.msg %>
+    <div class="row">
+        <%= main.author %>
+    </div>
+    <div class="col-md-12 col-md-offset-1"><%= main.msg %></div>
     <div class="row" style="position:absolute; bottom:0">
         <div onclick="favo(this,'<%= main.its_id %>')" class="col-md-1"><span class="glyphicon glyphicon-thumbs-up"><%= main.rating %></span></div>
         <% if(main.isWatchByTeacher){ %>
