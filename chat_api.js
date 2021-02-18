@@ -106,5 +106,8 @@ router.get('/back-thread/:id', async function (req, res) {
 
 })
 
-
+router.post('/add_chat/:id', async function (req, res) {
+  console.log(req)
+  res.json(req)
+})
 module.exports = router
