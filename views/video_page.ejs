@@ -59,6 +59,7 @@
               author: $('[name=author_name]').val(),
               msg : $('[name=msg]').val(),
               shiori_time:(video.currentTime / video.duration) * 100,
+              video_time:video.currentTime
             })
               .done(function( data ) {
                 alert("リロードしてください.");
