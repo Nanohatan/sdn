@@ -46,7 +46,7 @@ module.exports = router;
 
 router.get('/class/:name', function (req, res) {
     c_name = req.params.name;
-    const isWatchByTeacher = (req.cookies.isTeacher == 'true');
+    const isWatchByTeacher = req.session.user.isTeacher
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         //ここらへんでユーザー情報を取得したい．

@@ -2,6 +2,9 @@ var express = require('express')
 var router = express.Router()
 const { MongoClient } = require("mongodb");
 const uri = 'mongodb://localhost:27017' ;
+var bodyParser = require('body-parser');
+const Puid = require('puid/lib/puid');
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 router.get('/get-thread/:id', async function (req, res) {
   const client = new MongoClient(uri, { useUnifiedTopology: true });
@@ -48,6 +51,7 @@ router.get('/back-thread/:id', async function (req, res) {
           { $match: {parent_id:req.params.id } }
         ]);
         chats = await chats.toArray();
+        console.log(chats)
         res.render('chat_body/main_thread',{jsonAry:chats})
   
       }catch(err) {
@@ -106,5 +110,42 @@ router.get('/back-thread/:id', async function (req, res) {
 
 })
 
-
+router.post('/add_chat/:id',urlencodedParser, async function (req, res) {
+  console.log(req.body)
+  //DBに入れる
+  const client = new MongoClient(uri, { useUnifiedTopology: true });
+    try {
+      await client.connect();
+      const database = client.db('chatInfo');
+      const collection = database.collection('chats');
+      //子チャットの場合は閲覧範囲は親チャットと同じになるので、処理を入れる。
+      const doc = collection.findOne({its_id:req.params.id});
+      if (req.body.author==""){
+        req.body.author="匿名"
+      }
+      //its_idまたはparent_idが一致するものの閲覧状況を変更する。
+      var puid = new Puid();
+      puid = puid.generate();
+      await collection.insertOne({
+        parent_id:req.params.id,
+        its_id:puid,
+        msg_type: req.body.msg_type,
+        author: req.body.author,
+        msg: req.body.msg,
+        shiori_time: req.body.shiori_time,
+        video_time:req.body.video_time,
+        rating:0,
+        isWatchByTeacher:false
+      })
+      console.log(doc)
+      
+      res.send({test:"test"})
+    }catch(err) {
+      console.log(err);
+    }
+    finally {
+      // Ensures that the client will close when you finish/error
+      await client.close();
+    }
+})
 module.exports = router

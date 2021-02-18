@@ -49,9 +49,24 @@
           <div class="form-group">
             <textarea class="form-control" name="msg" rows="3"></textarea>
           </div>
-          <input class="btn btn-default" type="button" onclick="submitChat()" value="送信">
           <button type="submit" class="btn btn-default">送信</button>
         </form>
+        <script>
+          $( "#chatForm" ).submit(function( event ) {
+            $.post( "http://192.168.98.25:8080/api/add_chat/<%= video_id %>", 
+            { 
+              msg_type: $('[name=msg_type]').val(), 
+              author: $('[name=author_name]').val(),
+              msg : $('[name=msg]').val(),
+              shiori_time:(video.currentTime / video.duration) * 100,
+              video_time:video.currentTime
+            })
+              .done(function( data ) {
+                alert("リロードしてください.");
+              });
+            event.preventDefault();
+          });
+        </script>
       </div>
     </div>
   
