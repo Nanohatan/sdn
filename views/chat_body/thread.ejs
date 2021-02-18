@@ -23,16 +23,3 @@
     </div>
 </div>
 <% }); %>  
-<script>
-    $( "#chatForm" ).submit(function( event ) {
-      $.post( "http://192.168.98.25:8080/api/add_chat/<%= chat_id %>", 
-      {  
-        author: $('[name=author_name]').val(),
-        msg : $('[name=msg]').val(),
-      })
-        .done(function( data ) {
-          alert("リロードしてください.");
-        });
-      event.preventDefault();
-    });
-</script>
