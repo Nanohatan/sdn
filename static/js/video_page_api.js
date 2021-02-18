@@ -12,6 +12,7 @@ function favo(element,id){
 function goThread(id){
     const chat_place=document.getElementById("chat_place")
     chat_place.innerHTML = '';
+    parent_id=id;
     fetch("/api/get-thread/"+id)
       .then((response) => response.text())
       .then((data) => {
@@ -19,6 +20,7 @@ function goThread(id){
       });
 }
 function backThread(id){
+  parent_id=id;
   const chat_place=document.getElementById("chat_place")
   chat_place.innerHTML = '';
   fetch("/api/back-thread/"+id)

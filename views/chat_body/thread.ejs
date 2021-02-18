@@ -17,9 +17,15 @@
 <% jsonAry.forEach(function(json) { %>
 <!--   チャット一つ作る -->
 <div class="col-md-6 border" style="height: 80px; width: 100%; margin-top: 10px; border-style: dotted; ">
-    <%= json.msg %>
+    <div class="row">
+        <%= json.author %>
+    </div>
+    <div class="col-md-12 col-md-offset-1"><%= json.msg %></div>
     <div class="row" style="position:absolute; bottom:0">
     <div onclick="favo(this,'<%= json._id %>')" class="col-md-1"><span class="glyphicon glyphicon-thumbs-up"><%= json.rating %></span></div>
     </div>
 </div>
 <% }); %>  
+<script>
+
+</script>
