@@ -17,13 +17,13 @@
 <% }); %>
 <script>
 function HoverAction(_id){
-    hover_point = document.getElementById(_id);
+    var hover_point = document.getElementById(_id);
     console.log(hover_point)
     hover_point.style.transform = "scale(1.5)";
     hover_point.style.cursor = "pointer";
 };
 function LeaveAction(_id) {
-    hover_point = document.getElementById(_id);
+    var hover_point = document.getElementById(_id);
     hover_point.style.transform = "scale(1.2)";
 }
 </script>
