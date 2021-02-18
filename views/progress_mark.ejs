@@ -1,8 +1,13 @@
 <% jsonAry.forEach(function(json) { %>
   <% if(json.msg_type=="shiori"){ %>
-    <img src="../../static/aicon.png" style="left: <%= json.shiori_time %>%;" alt="point" id="<%= json._id %>">
+    <img src="../../static/aicon.png" style="left: <%= json.shiori_time %>%;" alt="point" id="<%= json._id %>" onclick="setTime('<%= json.video_time %>')">
   <% } %>
 <% }); %>
+<script>
+function setTime(video_time){
+    video.currentTime = video_time;
+}
+</script>
 <style>
 #pointbox img{
     position:absolute;
