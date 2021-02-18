@@ -1,6 +1,6 @@
 <% jsonAry.forEach(function(json) { %>
 <!--   チャット一つ作る -->
-<div class="col-md-6 border" style="height: 80px; width: 100%; margin-top: 10px; border-style: dotted; ">
+<div class="col-md-6 border" style="height: 80px; width: 100%; margin-top: 10px; border-style: dotted; " onmouseover="HoverAction('<%= json._id %>')" onmouseleave="LeaveAction('<%= json._id %>')" >
     <%= json.msg %>
       <div class="row" style="position:absolute; bottom:0">
         <div onclick="favo(this,'<%= json._id %>')" class="col-md-1"><span class="glyphicon glyphicon-thumbs-up"><%= json.rating %></span></div>
@@ -15,3 +15,15 @@
     </div>
 </div>
 <% }); %>
+<script>
+function HoverAction(_id){
+    hover_point = document.getElementById(_id);
+    console.log(hover_point)
+    hover_point.style.transform = "scale(1.5)";
+    hover_point.style.cursor = "pointer";
+};
+function LeaveAction(_id) {
+    hover_point = document.getElementById(_id);
+    hover_point.style.transform = "scale(1.2)";
+}
+</script>
