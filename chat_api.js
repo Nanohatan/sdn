@@ -130,9 +130,9 @@ router.post('/add_chat/:id',urlencodedParser, async function (req, res) {
         parent_id:req.params.id,
         its_id:puid,
         msg_type: req.body.msg_type,
-        author: req.body.msg_type.auther,
+        author: req.body.auther,
         msg: req.body.msg,
-        shiori_time: req.body.msg_type.shiori_time,
+        shiori_time: req.body.shiori_time,
         rating:0,
         isWatchByTeacher:false
       })
