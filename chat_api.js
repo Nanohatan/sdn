@@ -51,6 +51,7 @@ router.get('/back-thread/:id', async function (req, res) {
           { $match: {parent_id:req.params.id } }
         ]);
         chats = await chats.toArray();
+        console.log(chats)
         res.render('chat_body/main_thread',{jsonAry:chats})
   
       }catch(err) {
@@ -119,6 +120,9 @@ router.post('/add_chat/:id',urlencodedParser, async function (req, res) {
       const collection = database.collection('chats');
       //子チャットの場合は閲覧範囲は親チャットと同じになるので、処理を入れる。
       const doc = collection.findOne({its_id:req.params.id});
+      if (req.body.msg_type.auther==""){
+        req.body.msg_type.auther="匿名"
+      }
       //its_idまたはparent_idが一致するものの閲覧状況を変更する。
       var puid = new Puid();
       puid = puid.generate();
