@@ -2,7 +2,8 @@ var express = require('express')
 var router = express.Router()
 const { MongoClient } = require("mongodb");
 const uri = 'mongodb://localhost:27017' ;
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
+const Puid = require('puid/lib/puid');
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 router.get('/get-thread/:id', async function (req, res) {
@@ -116,10 +117,14 @@ router.post('/add_chat/:id',urlencodedParser, async function (req, res) {
       await client.connect();
       const database = client.db('chatInfo');
       const collection = database.collection('chats');
-      //子チャットの場合は閲覧範囲は親チャットと同じになるので、処理を言えれる。
+      //子チャットの場合は閲覧範囲は親チャットと同じになるので、処理を入れる。
       const doc = collection.findOne({its_id:req.params.id});
       //its_idまたはparent_idが一致するものの閲覧状況を変更する。
+      var puid = new Puid();
+      puid = puid.generate();
       await collection.insertOne({
+        parent_id:req.params.id,
+        its_id:puid,
         msg_type: req.body.msg_type,
         author: req.body.msg_type.auther,
         msg: req.body.msg,
@@ -129,7 +134,7 @@ router.post('/add_chat/:id',urlencodedParser, async function (req, res) {
       })
       console.log(doc)
       
-      res.json(res.send({test:"test"}))
+      res.send({test:"test"})
     }catch(err) {
       console.log(err);
     }
