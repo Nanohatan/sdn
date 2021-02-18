@@ -1,6 +1,11 @@
 <% jsonAry.forEach(function(json) { %>
 <!--   チャット一つ作る -->
-<div class="col-md-6 border" style="height: 80px; width: 100%; margin-top: 10px; border-style: dotted; " onmouseover="HoverAction('<%= json._id %>')" onmouseleave="LeaveAction('<%= json._id %>')" >
+<div class="col-md-6 border" style="height: 80px; width: 100%; margin-top: 10px; border-style: dotted; " 
+<% if(json.msg_type=="shiori"){ %>
+onmouseover="HoverAction('<%= json._id %>')" onmouseleave="LeaveAction('<%= json._id %>')" 
+<% } %>
+>
+console.log(<%= json %>)
     <div class="row">
         <%= json.author %>
     </div>
