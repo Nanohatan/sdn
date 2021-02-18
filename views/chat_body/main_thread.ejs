@@ -10,7 +10,7 @@
           <div class="col-md-1"><p class="glyphicon glyphicon-eye-close" data-toggle="modal" data-target="#switch_isWatch_modal" data-whatever="<%= json.its_id %>" data-iswatch="false"></p></div>
         <% } %>
         <% if(json.msg_type=="shiori"){ %>
-          <div class="col-md-8"><p  onclick="goThread('<%= json.its_id %>')">しおり内を表示する→</p></div>
+          <div class="col-md-8"><p  onclick="goThread('<%= json.its_id %>')" style="cursor: pointer;">しおり内を表示する→</p></div>
         <% } %>
     </div>
 </div>
