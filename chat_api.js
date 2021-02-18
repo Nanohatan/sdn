@@ -24,7 +24,7 @@ router.get('/get-thread/:id', async function (req, res) {
       child_chats = await child_chats.toArray();
       parent_chat = await parent_chat.toArray();
 
-      res.render('chat_body/thread',{main:parent_chat[0],jsonAry:child_chats})
+      res.render('chat_body/thread',{main:parent_chat[0],jsonAry:child_chats,chat_id:req.params.id})
 
     }catch(err) {
       console.log(err);

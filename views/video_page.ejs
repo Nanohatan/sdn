@@ -32,7 +32,7 @@
   </div>
   <!--チャットゾーン -->
     <div id="chat_place" class="col-md-6 pre-scrollable" style="height: 500px; border-style: dotted; ">
-      <%- include('./chat_body/main_thread', {jsonAry:jsonAry,video_id:video_id}) %>
+      <%- include('./chat_body/main_thread', {jsonAry:jsonAry,video_id:movie_id}) %>
     </div>
     <div class="row" style=" border-style: dotted;"> 
       <div class="col-md-6" style="height:auto; border-style: dotted; ">
@@ -51,6 +51,22 @@
           </div>
           <button type="submit" class="btn btn-default">送信</button>
         </form>
+        <script>
+          $( "#chatForm" ).submit(function( event ) {
+            $.post( "http://192.168.98.25:8080/api/add_chat/<%= movie_id %>", 
+            { 
+              msg_type: $('[name=msg_type]').val(), 
+              author: $('[name=author_name]').val(),
+              msg : $('[name=msg]').val(),
+              shiori_time:(video.currentTime / video.duration) * 100,
+              video_time:video.currentTime
+            })
+              .done(function( data ) {
+                alert("リロードしてください.");
+              });
+            event.preventDefault();
+          });
+        </script>
       </div>
     </div>
   
