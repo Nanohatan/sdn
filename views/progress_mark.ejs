@@ -1,5 +1,5 @@
 <% jsonAry.forEach(function(json) { %>
-  <% if(json.msg_type==shiori){ %>
-    <img src="../static/aicon.png" style="left: <%= json.shiori_time %> %;" alt="point">
-  <% }
+  <% if(json.msg_type=="shiori"){ %>
+    <img src="../../static/aicon.png" style="left: <%= json.shiori_time %>%;" alt="point">
+  <% } %>
 <% }); %>
