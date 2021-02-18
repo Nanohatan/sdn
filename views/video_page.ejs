@@ -38,11 +38,9 @@
       <div class="col-md-6" style="height:auto; border-style: dotted; ">
   <!-- チャット送信フォーム -->
         <form action="http://192.168.98.25:8080/api/add_chat" method="GET">
-          <div class="form-group">
+          <div class="form-group form-inline">
             <label for="authorName">名前</label>
             <input type="text" class="form-control" id="authorName" name="author_name" placeholder="匿名">
-          </div>
-          <div class="form-group">
             <select class="form-control" name="msg_type">
               <option value="other" selected="selected">コメント</option>
               <option value="shiori">しおり</option>
