@@ -44,7 +44,8 @@ router.get('/video/:id', async function (req, res) {
         videoNumber: movie[0].lecture_time,
         place: sorce_url,
         movie_id: req.params.id,
-        jsonAry:chats
+        jsonAry:chats,
+        video_id:req.params.id
       });
     }catch(err) {
       console.log(err);

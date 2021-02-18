@@ -53,7 +53,7 @@
         </form>
         <script>
           $( "#chatForm" ).submit(function( event ) {
-            $.post( "http://192.168.98.25:8080/api/add_chat/testID", 
+            $.post( "http://192.168.98.25:8080/api/add_chat/<%= video_id %>", 
             { 
               msg_type: $('[name=msg_type]').val(), 
               author: $('[name=author_name]').val(),
