@@ -1,0 +1,22 @@
+<% jsonAry.forEach(function(json) { %>
+  <% if(json.msg_type=="shiori"){ %>
+    <img src="../../static/aicon.png" style="left: <%= json.shiori_time %>%;" alt="point" id="<%= json._id %>">
+  <% } %>
+<% }); %>
+<style>
+#pointbox img{
+    position:absolute;
+    bottom: 1px;
+    width: 40px;
+    transition-duration: 0.3s;
+}
+
+#pointbox img:hover{
+    position:absolute;
+    bottom: 1px;
+    width: 40px;
+    transform: scale(1.1);	/*画像の拡大率*/
+    transition-duration: 0.3s; /*変化に掛かる時間*/
+    cursor: pointer;
+}
+</style>
