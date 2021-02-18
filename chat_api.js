@@ -41,6 +41,7 @@ router.get('/get-thread/:id', async function (req, res) {
 router.get('/back-thread/:id', async function (req, res) {
     const client = new MongoClient(uri, { useUnifiedTopology: true });
     var  sess = req.session.user;
+    var video_id=req.params.id
     if (sess && !sess.isTeacher){
       try {
         await client.connect();
@@ -52,7 +53,7 @@ router.get('/back-thread/:id', async function (req, res) {
         ]);
         chats = await chats.toArray();
         console.log(chats)
-        res.render('chat_body/main_thread',{jsonAry:chats})
+        res.render('chat_body/main_thread',{jsonAry:chats,video_id:video_id})
   
       }catch(err) {
         console.log(err);
@@ -71,7 +72,7 @@ router.get('/back-thread/:id', async function (req, res) {
           { $match: {parent_id:req.params.id ,isWatchByTeacher:true} }
         ]);
         chats = await chats.toArray();
-        res.render('chat_body/main_thread',{jsonAry:chats})
+        res.render('chat_body/main_thread',{jsonAry:chats,video_id:video_id})
       }catch(err) {
         console.log(err);
       }
