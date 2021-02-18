@@ -27,13 +27,3 @@ function backThread(id){
       chat_place.innerHTML=data
     });
 }
-
-function submitChat() {
-  var form = document.getElementById("chatForm")
-  var percentage = (video.currentTime / video.duration) * 100;
-  var input = $("<input>")
-               .attr("type", "hidden")
-               .attr("shiori_time", percentage).val("bla");
-  $('#chatForm').append(input);
-  form.submit();
-}
