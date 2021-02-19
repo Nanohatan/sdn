@@ -1,52 +1,89 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <title>Ryukyudog!!</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
 </head>
 <style>
     body {
-        background:no-repeat fixed center url("static/img/seesaa.jpg");
-        background-size: cover;  
+        background: no-repeat fixed center url("static/img/seesaa.jpg");
+        background-size: cover;
     }
+
     .center {
         text-align: center;
     }
+
     .button {
-	box-shadow:inset 0px 1px 0px 0px #d9fbbe;
-	background:linear-gradient(to bottom, #b8e356 5%, #a5cc52 100%);
-	background-color:#b8e356;
-	border-radius:6px;
-	border:1px solid #83c41a;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:15px;
-	font-weight:bold;
-	padding:12px 24px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #86ae47;
-}
-.button:hover {
-	background:linear-gradient(to bottom, #a5cc52 5%, #b8e356 100%);
-	background-color:#a5cc52;
-}
-.button:active {
-	position:relative;
-	top:1px;
-}
+        box-shadow: inset 0px 1px 0px 0px #d9fbbe;
+        background: linear-gradient(to bottom, #b8e356 5%, #a5cc52 100%);
+        background-color: #b8e356;
+        border-radius: 6px;
+        border: 1px solid #83c41a;
+        display: inline-block;
+        cursor: pointer;
+        color: #ffffff;
+        font-family: Arial;
+        font-size: 15px;
+        font-weight: bold;
+        padding: 12px 24px;
+        text-decoration: none;
+        text-shadow: 0px 1px 0px #86ae47;
+    }
+
+    .button:hover {
+        background: linear-gradient(to bottom, #a5cc52 5%, #b8e356 100%);
+        background-color: #a5cc52;
+    }
+
+    .button:active {
+        position: relative;
+        top: 1px;
+    }
+
+    .navbar {
+        margin-bottom: 0;
+        border-radius: 0;
+    }
+
 </style>
 <body>
-    <div class="center">
-        <img src="static/guide_logo.png">
-        <h1 style="color: #FFDD35;">授業動画を中心にコミュニケーション!!</h1>
-        <h2 style="color: #FF7E2A;">同じ講義をとっている人と気軽にコミュニケーション！</h2>
-        <h2 style="color: #FF7E2A;">先生に質問をするとこもできる！！</h2>
-        <p>&nbsp;</p>
-        <a href="#" class="button">新規登録</a>
-        <a href="/auth/login" class="button">ログイン</a>
-    </div>
+<div class="center">
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">琉球犬</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="/user">マイページ</a></li>
+                    <li><a href="/search">検索</a></li>
+                    <% if (role) { %>
+                    <li><a href="/movie_upload/?class_name=None">アップロード</a></li>
+                    <% } %>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/auth/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <img src="static/guide_logo.png">
+    <h1 style="color: #FFDD35;">授業動画を中心にコミュニケーション!!</h1>
+    <h2 style="color: #FF7E2A;">同じ講義をとっている人と気軽にコミュニケーション！</h2>
+    <h2 style="color: #FF7E2A;">先生に質問をするとこもできる！！</h2>
+    <p>&nbsp;</p>
+    <a href="#" class="button">新規登録</a>
+    <a href="/auth/login" class="button">ログイン</a>
+</div>
 
 
 </body>
