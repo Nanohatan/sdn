@@ -149,7 +149,7 @@ router.post('/add_chat/:id',urlencodedParser, async function (req, res) {
       })
       console.log(doc)
       
-      res.send({test:puid})
+      res.send({test:req.params.id})
     }catch(err) {
       console.log(err);
     }
