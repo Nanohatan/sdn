@@ -18,7 +18,7 @@ router.get('/', function (req, res) {
                 console.log(err);
             }
             ;
-            res.render('video_search', {"class_name": result});
+            res.render('video_search', {"class_name": result,role:req.session.user.isTeacher});
         });
     });
 });

@@ -63,7 +63,11 @@
               video_time:video.currentTime
             })
               .done(function( data ) {
-                  backThread(parent_id);
+                if(parent_id == "<%= movie_id %>"){
+                      backThread(parent_id);
+                  }else{
+                      goThread(parent_id);
+                  }
               });
             event.preventDefault();
           });

@@ -24,23 +24,7 @@ onmouseover="HoverAction('<%= json._id %>')" onmouseleave="LeaveAction('<%= json
     </div>
 </div>
 <% }); %>
-<script>
 
-  $( "#chatForm" ).submit(function( event ) {
-    $.post( "http://192.168.98.25:8080/api/add_chat/<%= video_id %>", 
-    { 
-      msg_type: $('[name=msg_type]').val(), 
-      author: $('[name=author_name]').val(),
-      msg : $('[name=msg]').val(),
-      shiori_time:(video.currentTime / video.duration) * 100,
-      video_time:video.currentTime
-    })
-      .done(function( data ) {
-        alert("リロードしてください.");
-      });
-    event.preventDefault();
-  });
-</script>
 
 <!-- 関数 -->
 <script>
