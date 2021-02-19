@@ -25,6 +25,7 @@ onmouseover="HoverAction('<%= json._id %>')" onmouseleave="LeaveAction('<%= json
 </div>
 <% }); %>
 <script>
+
   $( "#chatForm" ).submit(function( event ) {
     $.post( "http://192.168.98.25:8080/api/add_chat/<%= video_id %>", 
     { 

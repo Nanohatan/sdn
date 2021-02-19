@@ -63,6 +63,7 @@
               video_time:video.currentTime
             })
               .done(function( data ) {
+                  backThread(video_id);
                 alert("リロードしてください.");
               });
             event.preventDefault();
