@@ -55,7 +55,9 @@
         animation-iteration-count: infinite;
         animation-direction: alternate;
         animation-duration: 1.5s;
-        animation: fadeIn 0.2s ease 0.3s 1 normal;
+
+        width: 50%;
+        height: auto;
     }
     @keyframes logo_move {
         0% {
@@ -67,13 +69,6 @@
         }
     }
 
-    @keyframes fadeIn { /*animetion-nameで設定した値を書く*/
-
-        0% {opacity: 0} /*アニメーション開始時は不透明度0%*/
-
-        100% {opacity: 1} /*アニメーション終了時は不透明度100%*/
-
-    }
 
 </style>
 <body>
