@@ -64,7 +64,7 @@ router.get('/class/:name', function (req, res) {
 });
 
 router.post('/class/add_schedule/:name', function (req, res) {
-    user_id = new o_id('"'+req.session.user._id+'"');
+    user_id = new o_id(req.session.user._id);
     console.log(user_id);
     c_name = req.params.name;
     var c_day;
