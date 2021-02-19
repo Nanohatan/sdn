@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <title><%- class_name %>講義一覧</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="http://192.168.98.25:8080/static/css/navibar.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <style>
@@ -37,16 +37,7 @@
 </style>
 <body>
     <!-- navigation bar -->
-    <div class="navbar">
-        <a href="/auth/login" >時間割</a>
-        <a href="/search/">授業検索</a>
-        
-        <% if (role) { %>
-            <a href="/upload/?class_name=<%- class_name %>">アップロード</a>
-        <% console.log(role)} %> 
-        　
-    </div>
-
+    <%- include('./header', {role:role}) %>
     <!-- input for serching -->
     <div id="search_box">
         <h1><%- class_name %></h1>
