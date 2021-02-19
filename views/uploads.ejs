@@ -15,7 +15,7 @@
 
 
     <div class="container" style="margin-top: 100px;">
-        <h3>動画アップロード</h3>
+        <h3 style="font-weight: bold">動画アップロード</h3>
         <form action="/movie_upload" method="POST" enctype="multipart/form-data">
             <label for="class_name">科目名</label>
             <input required type="text" name="class_name" id="class_name" value="<% if (class_name != 'None'){ %><%- class_name%><% }else{%><%-'授業名を入力してください'%><%}%>" placeholder="科目名を入力してください．">
