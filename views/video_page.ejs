@@ -69,13 +69,15 @@
                       goThread(parent_id);
                   };
                 if($('[name=msg_type]').val()=="shiori"){
+                    var video_time = video.currentTime;
+                    var shiori = (video.currentTime / video.duration) * 100;
                     var shiori_form = document.getElementsById("pointbox")
                     var new_shiori = document.createElement('img');
                     new_shiori.src = "../../static/aicon.png";
-                    new_shiori.style = "left: <%= (video.currentTime / video.duration) * 100 %>%;"
+                    new_shiori.style = "left: "+ shiori +"%;"
                     new_shiori.alt = "point";
                     <!--new_shiori.id = "<%= json._id %>";-->
-                    new_shiori.onclick="setTime('<%= video.currentTime %>')";
+                    new_shiori.onclick="setTime("+video_time+")";
 
                     shiori_form.appendChild(new_shiori);
                 }
