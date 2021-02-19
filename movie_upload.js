@@ -68,6 +68,7 @@ router.post('/', upload.single('movie'),function(req, res,next) {
       if (err) throw err;
       console.log("1 document inserted");
       db.close();
+      res.render("class_list_page", {"jd": obj, "class_name": req.body.class_name, "role": req.session.user.isTeacher});
     });
     createSegments(__dirname, req);
   });
