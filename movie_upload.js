@@ -51,7 +51,7 @@ var url = "mongodb://localhost:27017/";
 router.get('/',function(req, res,next) {
   var user=req.session.user
   if (user && user.isTeacher){
-    res.render('uploads', {"class_name":req.query.class_name});
+    res.render('uploads', {"class_name":req.query.class_name,role:user.isTeacher});
   }else{
     res.redirect("/user")
   }
