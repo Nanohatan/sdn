@@ -81,26 +81,14 @@
         to { opacity: 1; }
     }
 
-    .ripple {
-        position: absolute;
-        top: 50%;
-        left: 0;
-        right: 0;
-        margin: 0 auto;
-        width: 100px;
-        height: 100px;
-        background: #FF0000;
-        border-radius: 50%;
-    }
-
     .ripple::before {
         position: absolute;
         content: "";
         display: block;
         top: -1px;
         left: -1px;
-        width: 100px;
-        height: 100px;
+        width: 30%;
+        height: auto;
         border: 1px solid #FF0000;
         border-radius: 50%;
         animation: ripple 2.5s ease-out infinite;
