@@ -70,6 +70,7 @@ router.post('/', upload.single('movie'),function(req, res,next) {
       db.close();
     });
     createSegments(__dirname, req);
+    res.redirect("/user")
   });
 });
 
