@@ -81,38 +81,6 @@
         to { opacity: 1; }
     }
 
-    .ripple::before {
-        position: absolute;
-        content: "";
-        display: block;
-        top: 80px;
-        left: 230px;
-        width: 200px;
-        height: 200px;
-        border: 1px solid #fff918;
-        border-radius: 50%;
-        animation: ripple 2s ease-out infinite;
-    }
-
-    @keyframes ripple {
-        0% {
-            opacity: 0;
-            transform: scale(1,1);
-        }
-        25% {
-            opacity: 0.25;
-        }
-        50% {
-            opacity: 0.5;
-        }
-        75% {
-            opacity: 0.75;
-        }
-        100% {
-            opacity: 0;
-            transform: scale(1.2,1.2);
-        }
-    }
 
 
 </style>
@@ -132,7 +100,6 @@
     </nav>
     <p>&nbsp;</p>
     <div class="main_contant">
-        <div class="ripple"></div>
         <img src="static/logo_guide.png" class="logo">
         <p>&nbsp;</p>
         <a href="#" class="button">新規登録</a>
