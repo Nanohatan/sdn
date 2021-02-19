@@ -79,6 +79,12 @@
                     new_shiori.addEventListener("click", function () {
                         setTime(video_time)
                     });
+                    new_shiori.addEventListener('mouseover', function () {
+                        HoverAction(data.test)
+                    }, false);
+                    new_shiori.addEventListener('mouseleave', function () {
+                        LeaveAction(data.test)
+                    }, false);
                     new_shiori.id = data.test;
                     shiori_form.appendChild(new_shiori);
                 }
