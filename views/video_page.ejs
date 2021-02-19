@@ -67,7 +67,10 @@
                       backThread(parent_id);
                   }else{
                       goThread(parent_id);
-                  }
+                  };
+                if($('[name=msg_type]').val()=="shiori"){
+                    console.log("こいつしおりっすよ")
+                }
               });
             event.preventDefault();
           });
