@@ -69,7 +69,15 @@
                       goThread(parent_id);
                   };
                 if($('[name=msg_type]').val()=="shiori"){
-                    console.log("こいつしおりっすよ")
+                    var shiori_form = document.getElementsById("pointbox")
+                    var new_shiori = document.createElement('img');
+                    new_shiori.src = "../../static/aicon.png";
+                    new_shiori.style = "left: <%= json.shiori_time %>%;"
+                    new_shiori.alt = "point";
+                    new_shiori.id = "<%= json._id %>";
+                    new_shiori.onclick="setTime('<%= json.video_time %>')";
+
+                    shiori_form.appendChild(new_shiori);
                 }
               });
             event.preventDefault();
