@@ -17,13 +17,13 @@
     <div class="container" style="margin-top: 100px;">
         <h3 style="font-weight: bold">動画アップロード</h3>
         <form action="/movie_upload" method="POST" enctype="multipart/form-data">
-            <label for="class_name">科目名</label>
+            <label for="class_name" style="background-color: white">科目名</label>
             <input required type="text" name="class_name" id="class_name" value="<% if (class_name != 'None'){ %><%- class_name%><% }else{%><%-'授業名を入力してください'%><%}%>" placeholder="科目名を入力してください．">
 
-            <label for="lecture_name">今日の内容:</label>
+            <label for="lecture_name" style="background-color: white">今日の内容:</label>
             <input required type="text" name="lecture_name" id="lecture_name">
     
-            <label for="lecture_time">講義回次 (1-15):</label>
+            <label for="lecture_time" style="background-color: white">講義回次 (1-15):</label>
             <input required type="number" name="lecture_time" id="lecture_time" min="1" max="15"  value="1">
 
             <span>
@@ -47,7 +47,7 @@
             </span>
             
             <br>
-            <label for="movie">アップロードする動画を選択してください</label>
+            <label for="movie" style="background-color: white">アップロードする動画を選択してください</label>
             <input required name="movie" type="file" id="movie" accept="video/mp4,video/x-m4v,video/*"/>
             <input type="submit">
         </form>
