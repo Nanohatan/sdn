@@ -127,7 +127,15 @@ router.post('/add_chat/:id',urlencodedParser, async function (req, res) {
       //its_idまたはparent_idが一致するものの閲覧状況を変更する。
       var puid = new Puid();
       puid = puid.generate();
-      const isTeacher = req.session.user.isTeacher
+      var isTeacher = req.session.user.isTeacher
+      var isWatchByTeacher;
+      if (isTeacher) {
+        isWatchByTeacher=true;
+      }else if (doc.isWatchByTeacher){
+        isWatchByTeacher=true;
+      }else{
+        isWatchByTeacher=false;
+      }
       await collection.insertOne({
         parent_id:req.params.id,
         its_id:puid,
@@ -137,7 +145,7 @@ router.post('/add_chat/:id',urlencodedParser, async function (req, res) {
         shiori_time: req.body.shiori_time,
         video_time:req.body.video_time,
         rating:0,
-        isWatchByTeacher: isTeacher
+        isWatchByTeacher: isWatchByTeacher
       })
       console.log(doc)
       
