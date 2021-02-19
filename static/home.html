@@ -60,14 +60,25 @@
         height: auto;
 
     }
+
     @keyframes logo_move {
         0% {
-            transform: translate(0,0px);
+            transform: translate(0, 0px);
         }
 
         100% {
-            transform: translate(0,-15px)
+            transform: translate(0, -15px)
         }
+    }
+
+    .main_contant{
+        opacity: 0; /* ←初期値を変更。透明に。*/
+        animation: 1s fadeIn forwards; /* ←追加 */
+    }
+
+    @keyframes fadeIn { /* ←追加 */
+        from { opacity: 0; }
+        to { opacity: 0.5; }
     }
 
 
@@ -87,10 +98,12 @@
         </div>
     </nav>
     <p>&nbsp;</p>
-    <img src="static/logo_guide.png" class="logo">
-    <p>&nbsp;</p>
-    <a href="#" class="button">新規登録</a>
-    <a href="/auth/login" class="button">ログイン</a>
+    <div class="main_contant">
+        <img src="static/logo_guide.png" class="logo">
+        <p>&nbsp;</p>
+        <a href="#" class="button">新規登録</a>
+        <a href="/auth/login" class="button">ログイン</a>
+    </div>
 </div>
 
 
