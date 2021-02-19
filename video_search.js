@@ -5,6 +5,8 @@ var router = express.Router()
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/";
 
+var o_id = require('mongodb').ObjectID;
+
 router.get('/', function (req, res) {
     //res.sendfile('static/video_search.html');
     MongoClient.connect(url, function (err, db) {
@@ -62,7 +64,8 @@ router.get('/class/:name', function (req, res) {
 });
 
 router.post('/class/add_schedule/:name', function (req, res) {
-    user_id = req.session.user.id;
+    user_id = new o_id('"'+req.session.user._id+'"');
+    console.log(user_id);
     c_name = req.params.name;
     var c_day;
     var c_period;
@@ -75,7 +78,7 @@ router.post('/class/add_schedule/:name', function (req, res) {
             c_period = result.period;
             var dbi = db.db('userInfo');
             var query_ = {$addToSet: {"class": {"day": c_day, "period": c_period, "class_name": c_name}}};
-            dbi.collection('users').updateOne({"uid": user_id}, query_, function () {
+            dbi.collection('users').updateOne({"_id": user_id}, query_, function () {
                 db.close();
             });
         }));
