@@ -41,7 +41,7 @@
     <%- include('./header', {role:role}) %>
     <!-- input for serching -->
     <div id="search_box">
-        <h1><%- class_name %></h1>
+        <h1 style="border-bottom: solid 10px #b8e356"><%- class_name %></h1>
         <form >
             <input type="text" id="video_search" name="video_search" >
             <button type="button" id="button"><i class="fa fa-search"></i></button>
@@ -67,6 +67,8 @@
             border-bottom: solid 5px #86ae47;
             margin:0 auto;
             width: 442px;
+            margin-top: 20px;
+
         }
         .class-video p {
             margin: 0;
