@@ -151,7 +151,7 @@ router.post('/add_chat/:id',urlencodedParser, async function (req, res) {
 
       const get_id = collection.findOne({its_id:puid});
       
-      res.send({test:get_id})
+      res.send({test:get_id._id})
     }catch(err) {
       console.log(err);
     }
