@@ -148,8 +148,10 @@ router.post('/add_chat/:id',urlencodedParser, async function (req, res) {
         isWatchByTeacher: isWatchByTeacher
       })
       console.log(doc)
+
+      const get_id = collection.findOne({its_id:puid});
       
-      res.send({test:puid})
+      res.send({test:get_id})
     }catch(err) {
       console.log(err);
     }
