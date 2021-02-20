@@ -149,7 +149,9 @@ router.post('/add_chat/:id',urlencodedParser, async function (req, res) {
       })
       console.log(doc)
 
-      const get_id = collection.findOne({its_id:puid});
+      const data = client.db('chatInfo');
+      const colle = data.collection('chats');
+      const get_id = colle.findOne({its_id:puid});
       console.log("さぁば")
       console.log(get_id);
       
