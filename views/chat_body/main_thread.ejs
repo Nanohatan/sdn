@@ -2,7 +2,7 @@
 <!--   チャット一つ作る -->
 <div class="col-md-6 border" style="height: 80px; width: 100%; margin-top: 10px; border-style: dotted; " 
 <% if(json.msg_type=="shiori"){ %>
-onmouseover="HoverAction('<%= json._id %>')" onmouseleave="LeaveAction('<%= json._id %>')" 
+onmouseover="HoverAction('<%= json._id %>')" onmouseleave="LeaveAction('<%= json._id %>')"  id="shiori"
 <% } %>
 >
     <div class="row">
@@ -39,3 +39,9 @@ function LeaveAction(_id) {
     hover_point.style.transform = "scale(1.0)";
 }
 </script>
+
+<style>
+    #shiori {
+        background-color: #b8e356;
+    }
+</style>
